@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_sale_recurring_orders_agreement","sale.recurring_orders.agreement","model_sale_recurring_orders_agreement","base.group_sale_salesman",1,1,1,1
+"access_sale_recurring_orders_agreement_line","sale.recurring_orders.agreement.line","model_sale_recurring_orders_agreement_line","base.group_sale_salesman",1,1,1,1
+"access_sale_recurring_orders_agreement_order","sale.recurring_orders.agreement.order","model_sale_recurring_orders_agreement_order","base.group_sale_salesman",1,1,1,1
+"access_sale_recurring_orders_agreement_renewal","sale.recurring_orders.agreement.renewal","model_sale_recurring_orders_agreement_renewal","base.group_sale_salesman",1,1,1,1
