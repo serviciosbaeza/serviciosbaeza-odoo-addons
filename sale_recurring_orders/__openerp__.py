@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012 Pedro Manuel Baeza Romero All Rights Reserved.
+#    Copyright (c) 2012 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com) All Rights Reserved.
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -32,6 +33,7 @@
     * Ordering intervals for each product
     """,
     'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
+    'website' : 'http://www.serviciosbaeza.com',
     'depends': ['sale'],
     'init_xml': [],
     'update_xml': [

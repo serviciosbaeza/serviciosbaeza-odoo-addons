@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012 Pedro Manuel Baeza Romero All Rights Reserved.
+#    Copyright (c) 2012 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com) All Rights Reserved.
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -74,11 +75,10 @@ class agreement(osv.osv):
         'name': fields.char('Name', size=100, select=1, required=True, help='Name that helps to identify the agreement'),
         'number': fields.char('Agreement number', select=1, size=32, help="Number of agreement. Keep empty to get the number assigned by a sequence."),
         'active': fields.boolean('Active', help='Unchecking this field, quotas are not generated'),
-        'partner_id': fields.many2one('res.partner', 'Partner', select=1, change_default=True, required=True, help="Partner you are making the agreement with"),
-        'contact_id': fields.many2one('res.partner.contact', 'Contact', required=True, help="Contact of the partner that is going to be notified of expirations"),
+        'partner_id': fields.many2one('res.partner', 'Customer', select=1, change_default=True, required=True, help="Customer you are making the agreement with"),
         'company_id': fields.many2one('res.company', 'Company', required=True, help="Company that signs the agreement"),
         'start_date': fields.date('Start date', select=1, help="Beginning of the agreement. Keep empty to use the current date"),
-        'prolong': fields.selection([('recurrent','Renewable fixed term'),('unlimited','Unlimited term'),('fixed','Fixed term')], 'Prolongation', help="Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew.", required=True),
+        'prolong': fields.selection([('recurre nt','Renewable fixed term'),('unlimited','Unlimited term'),('fixed','Fixed term')], 'Prolongation', help="Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew.", required=True),
         'end_date': fields.date('End date', help="End date of the agreement"),
         'prolong_interval': fields.integer('Interval', help="Interval in time units to prolong the agreement until new renewable (that is automatic for unlimited term, manual for renewable fixed term)."),
         'prolong_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Interval unit', help='Time unit for the prolongation interval'),
@@ -87,7 +87,6 @@ class agreement(osv.osv):
         'renewal_line': fields.one2many('sale.recurring_orders.agreement.renewal', 'agreement_id', 'Renewal lines', readonly=True),
         'last_renovation_date': fields.date('Last renovation date', help="Last date when agreement was renewed (same as start date if not renewed)"),
         'next_expiration_date': fields.function(__get_next_expiration_date, string='Next expiration date', type='date', method=True, store=True),
-        'user_id': fields.many2one('res.users', 'User', help='User in charge of this agreement', required=True),
         'state': fields.selection([('empty', 'Without orders'), ('first', 'First order created'), ('orders', 'With orders')], 'State', readonly=True),
         'renewal_state': fields.selection([('not_renewed', 'Agreement not renewed'), ('renewed', 'Agreement renewed')], 'Renewal state', readonly=True),
         'notes': fields.text('Notes'),
@@ -100,7 +99,6 @@ class agreement(osv.osv):
         'prolong': lambda *a: 'unlimited',
         'prolong_interval': lambda *a: 1,
         'prolong_unit': lambda *a: 'years',
-        'user_id': lambda s, cr, u, c: u,
         'state': lambda *a: 'empty',
         'renewal_state': lambda *a: 'not_renewed',
     }
@@ -156,19 +154,6 @@ class agreement(osv.osv):
         })
         return super(agreement, self).copy(cr, uid, orig_id, default, context)
     
-    def onchange_partner_id(self, cr, uid, ids, partner_id=False):
-        """
-        It fills default partner data (contact)
-        @rtype: dictionary
-        @return: field contact_id with default partner data
-        """
-        if not partner_id: return {}
-        result = {}
-        contact_ids = self.pool.get('res.partner.contact').search(cr, uid, [('partner_id', '=', partner_id), ('active', '=', True)], limit=1)
-        if len(contact_ids):
-            result['value'] = { 'contact_id': contact_ids[0] }
-        return result
-
     def onchange_start_date(self, cr, uid, ids, start_date=False):
         """
         It changes last renovation date to the new start date.
@@ -218,7 +203,7 @@ class agreement(osv.osv):
             'company_id': agreement.company_id.id,
         }
         # Get other order values from agreement partner
-        order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, agreement.user_id.id, [], agreement.partner_id.id)['value'])                   
+        order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, agreement.partner_id.user_id.id, [], agreement.partner_id.id)['value'])                   
         order['user_id'] = agreement.partner_id.user_id.id
         order_id = order_obj.create(cr, uid, order, context=context)
         # Create order lines objects
@@ -231,14 +216,14 @@ class agreement(osv.osv):
                 'discount': agreement_line.discount,
             }
             # get other order line values from agreement line product
-            order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, agreement.user_id.id, [], order['pricelist_id'], \
+            order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, agreement.partner_id.user_id.id, [], order['pricelist_id'], \
                 product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=order['fiscal_position'])['value'])
             if agreement_line.price > 0: order_line['price_unit'] = agreement_line.price
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
             # Put custom description
             order_line['name'] = '[%s] %s' % (agreement_line.product_id.default_code, agreement_line.name) 
-            order_line_obj.create(cr, agreement.user_id.id, order_line, context=context)
+            order_line_obj.create(cr, agreement.partner_id.user_id.id, order_line, context=context)
             agreement_lines_ids.append(agreement_line.id)
         # Update last order date for lines
         self.pool.get('sale.recurring_orders.agreement.line').write(cr, uid, agreement_lines_ids, {'last_order_date': date.strftime('%Y-%m-%d')} ,context=context)

@@ -111,10 +111,8 @@
 						<field name="number"/>
 						<field name="active"/>
 					</group>
-					<field name="partner_id" on_change="onchange_partner_id(partner_id)" domain="[('customer','=',True)]"/>
-					<field name="contact_id" domain="[('partner_id', '=', partner_id)]"/>
+					<field name="partner_id" domain="[('customer','=',True)]"/>
 					<field name="company_id"/>
-					<field name="user_id"/>					
 					<field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
 					<field name="prolong" attrs="{'readonly':[('renewal_state','!=','not_renewed')]}"/>
 					<group colspan="4" col="8">	
@@ -160,7 +158,7 @@
 			<field name="res_model">sale.recurring_orders.agreement</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
-			<field name="help">Agreements are the way you define the commercial relation with your partners which specify certain products/services that you are providing them that requires a recurring order.</field>
+			<field name="help">Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a recurring order.</field>
 		</record>
 	
 		<!-- Windows actions views -->

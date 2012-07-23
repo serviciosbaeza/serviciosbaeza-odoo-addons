@@ -32,11 +32,6 @@ msgid "Agreement orders"
 msgstr "Pedidos del contrato"
 
 #. module: sale_recurring_orders
-#: help:sale.recurring_orders.agreement,user_id:0
-msgid "User in charge of this agreement"
-msgstr "Usuario al cargo de este contrato"
-
-#. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement.line,quantity:0
 msgid "Quantity of the product"
 msgstr "Cantidad del producto"
@@ -137,8 +132,8 @@ msgstr "Nº contrato"
 
 #. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement,partner_id:0
-msgid "Partner"
-msgstr "Empresa"
+msgid "Customer"
+msgstr "Cliente"
 
 #. module: sale_recurring_orders
 #: view:sale.recurring_orders.agreement:0
@@ -187,8 +182,8 @@ msgstr "Unidad de tiempo para el intervalo de prolongación del contrato"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,partner_id:0
-msgid "Partner you are making the agreement with"
-msgstr "Empresa con la que está firmando el contrato"
+msgid "Customer you are making the agreement with"
+msgstr "Cliente con el que está firmando el contrato"
 
 #. module: sale_recurring_orders
 #: selection:sale.recurring_orders.agreement,prolong:0
@@ -224,16 +219,6 @@ msgstr "Plazo ilimitado"
 #: field:sale.recurring_orders.agreement.line,quantity:0
 msgid "Product quantity"
 msgstr "Cantidad del producto"
-
-#. module: sale_recurring_orders
-#: field:sale.recurring_orders.agreement,contact_id:0
-msgid "Contact"
-msgstr "Contacto"
-
-#. module: sale_recurring_orders
-#: help:sale.recurring_orders.agreement,contact_id:0
-msgid "Contact of the partner that is going to be notified of expirations"
-msgstr "Contacto de la empresa que va a ser notificado sobre las expiraciones"
 
 #. module: sale_recurring_orders
 #: view:sale.recurring_orders.agreement:0
@@ -303,11 +288,6 @@ msgstr "Última fecha de renovación"
 #: field:sale.recurring_orders.agreement,prolong_unit:0
 msgid "Interval unit"
 msgstr "Unidad de tiempo"
-
-#. module: sale_recurring_orders
-#: field:sale.recurring_orders.agreement,user_id:0
-msgid "User"
-msgstr "Usuario"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,prolong:0
@@ -428,7 +408,7 @@ msgstr "Nombre"
 
 #. module: sale_recurring_orders
 #: model:ir.actions.act_window,help:sale_recurring_orders.action_sale_recurring_orders_agreement
-msgid "Agreements are the way you define the commercial relation with your partners which specify certain products/services that you are providing them that requires a recurring order."
+msgid "Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a recurring order."
 msgstr "Los contratos son la forma de definir la relación comercial con sus clientes que especifica que ciertos productos/servicios que les está proveyendo requieren un pedido periódico."
 
 #. module: sale_recurring_orders
