@@ -1,0 +1,468 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sale_recurring_orders
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2012-07-20 10:47+0000\n"
+"PO-Revision-Date: 2012-07-20 10:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.line,price:0
+msgid "Specific price for this product. Keep empty to use the current price while generating order"
+msgstr "Precio específico para este producto. Déjelo en blanco para usar el que haya en el momento de generar el pedido"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.renewal,comments:0
+#: field:sale.recurring_orders.renew_wizard,comments:0
+msgid "Comments"
+msgstr "Comentarios"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement.order:0
+msgid "Agreement orders"
+msgstr "Pedidos del contrato"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.line,quantity:0
+msgid "Quantity of the product"
+msgstr "Cantidad del producto"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,state:0
+msgid "With orders"
+msgstr "Con pedidos"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,last_renovation_date:0
+msgid "Last date when agreement was renewed (same as start date if not renewed)"
+msgstr "Última fecha en la que el contrato fue renovado (igual a la fecha de inicio si no ha habido ninguna renovación)"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,last_order_date:0
+msgid "Last order date"
+msgstr "Última fecha de pedido"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement.order:0
+msgid "View order"
+msgstr "Ver pedido"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.order,date:0
+msgid "Order date"
+msgstr "Fecha del pedido"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong_unit:0
+#: selection:sale.recurring_orders.agreement.line,ordering_unit:0
+msgid "weeks"
+msgstr "semanas"
+
+#. module: sale_recurring_orders
+#: constraint:sale.recurring_orders.agreement:0
+msgid "Agreement end date must be greater than start date"
+msgstr "La fecha de finalización del contrato debe ser mayor que la de inicio"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,end_date:0
+msgid "End date"
+msgstr "Fecha de finalización"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+#: field:sale.recurring_orders.agreement,notes:0
+#: field:sale.recurring_orders.agreement.line,notes:0
+msgid "Notes"
+msgstr "Notas"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,ordering_unit:0
+msgid "Ordering interval unit"
+msgstr "Unidad del intervalo para los pedidos"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Generate initial order"
+msgstr "Generar pedido inicial"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong_unit:0
+#: selection:sale.recurring_orders.agreement.line,ordering_unit:0
+msgid "years"
+msgstr "años"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement.line:0
+msgid "Agreement line"
+msgstr "Línea del contrato"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.renew_wizard:0
+msgid "Set renewal agreement data"
+msgstr "Establezca los datos para la renovación del contrato:"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,prolong_interval:0
+msgid "Interval in time units to prolong the agreement until new renewable (that is automatic for unlimited term, manual for renewable fixed term)."
+msgstr "Intervalo en unidades de tiempo para prolongar el contrato hasta la siguiente renovación (que es automática si se ha definido plazo ilimitado, y manual si se ha seleccionado plazo fijo renovable)."
+
+#. module: sale_recurring_orders
+#: sql_constraint:sale.recurring_orders.agreement:0
+msgid "Agreement number must be unique !"
+msgstr "¡El nº de contrato deber ser único!"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,number:0
+msgid "Agreement number"
+msgstr "Nº contrato"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Renewals"
+msgstr "Renovaciones"
+
+#. module: sale_recurring_orders
+#: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_agreement_line
+msgid "sale.recurring_orders.agreement.line"
+msgstr "sale.recurring_orders.agreement.line"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.order,confirmed:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,renewal_line:0
+msgid "Renewal lines"
+msgstr "Renovaciones"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,renewal_state:0
+msgid "Agreement not renewed"
+msgstr "Contrato no renovado"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.line,name:0
+msgid "Product description"
+msgstr "Descripción del producto"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,ordering_interval:0
+msgid "Order interval"
+msgstr "Intervalo de los pedidos"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,prolong_unit:0
+msgid "Time unit for the prolongation interval"
+msgstr "Unidad de tiempo para el intervalo de prolongación del contrato"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,partner_id:0
+msgid "Customer you are making the agreement with"
+msgstr "Cliente con el que está firmando el contrato"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong:0
+msgid "Renewable fixed term"
+msgstr "Plazo fijo renovable"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Agreement"
+msgstr "Contrato"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.line,ordering_interval:0
+msgid "Interval in time units for making and order of this product"
+msgstr "Intervalo en unidades de tiempo para hacer un pedido de este producto"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,active:0
+msgid "Unchecking this field, quotas are not generated"
+msgstr "Desmarcando este campo, no se generan pedidos ni avisos"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,company_id:0
+msgid "Company that signs the agreement"
+msgstr "La compañía que firma el contrato"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong:0
+msgid "Unlimited term"
+msgstr "Plazo ilimitado"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,quantity:0
+msgid "Product quantity"
+msgstr "Cantidad del producto"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+#: view:sale.recurring_orders.renew_wizard:0
+msgid "Renew agreement"
+msgstr "Renovar contrato"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,discount:0
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,price:0
+msgid "Product price"
+msgstr "Precio del producto"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong_unit:0
+#: selection:sale.recurring_orders.agreement.line,ordering_unit:0
+msgid "months"
+msgstr "meses"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong_unit:0
+#: selection:sale.recurring_orders.agreement.line,ordering_unit:0
+msgid "days"
+msgstr "días"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.renew_wizard,date:0
+msgid "Renewal date"
+msgstr "Fecha de renovación"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,number:0
+msgid "Number of agreement. Keep empty to get the number assigned by a sequence."
+msgstr "Número de contrato. Déjelo en blanco para que se le asigne un número automático."
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,next_expiration_date:0
+msgid "Next expiration date"
+msgstr "Próxima fecha de expiración"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,state:0
+msgid "Without orders"
+msgstr "Sin pedidos"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement.renewal:0
+msgid "Agreement renewals"
+msgstr "Renovaciones de contrato"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,agreement_line:0
+#: view:sale.recurring_orders.agreement.line:0
+msgid "Agreement lines"
+msgstr "Líneas de contrato"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,last_renovation_date:0
+msgid "Last renovation date"
+msgstr "Última fecha de renovación"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,prolong_unit:0
+msgid "Interval unit"
+msgstr "Unidad de tiempo"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,prolong:0
+msgid "Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew."
+msgstr "Establece el plazo del contrato. 'Plazo fijo renovable': Establece un plazo fijo, pero con posibilidad de renovación manual; 'Plazo ilimitado': La renovación se realiza automáticamente; 'Plazo fijo': El plazo está fijado y no hay posibilidad de renovación."
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.renewal,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,start_date:0
+msgid "Beginning of the agreement. Keep empty to use the current date"
+msgstr "Comienzo del contrato. Déjelo en blanco para usar la fecha actual"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.renewal,date:0
+msgid "Date of the renewal"
+msgstr "Fecha de renovación"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,prolong:0
+msgid "Prolongation"
+msgstr "Prolongación"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,prolong_interval:0
+msgid "Interval"
+msgstr "Intervalo"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,active:0
+#: field:sale.recurring_orders.agreement.line,active_chk:0
+msgid "Active"
+msgstr "Activo"
+
+#. module: sale_recurring_orders
+#: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_agreement_order
+msgid "sale.recurring_orders.agreement.order"
+msgstr "sale.recurring_orders.agreement.order"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.renewal,comments:0
+#: help:sale.recurring_orders.renew_wizard,comments:0
+msgid "Renewal comments"
+msgstr "Comentarios sobre la renovación"
+
+#. module: sale_recurring_orders
+#: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_agreement_renewal
+msgid "sale.recurring_orders.agreement.renewal"
+msgstr "sale.recurring_orders.agreement.renewal"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.renew_wizard,date:0
+msgid "Effective date of the renewal. This date is the one taken into account in the next renewal"
+msgstr "Fecha efectiva de renovación. Esta fecha es la que se tendrá en cuenta para la próxima renovación"
+
+#. module: sale_recurring_orders
+#: model:ir.actions.act_window,name:sale_recurring_orders.action_sale_recurring_orders_agreement
+#: model:ir.ui.menu,name:sale_recurring_orders.menu_recurring_orders_agreements
+#: view:sale.recurring_orders.agreement:0
+msgid "Recurring orders agreements"
+msgstr "Pedidos de ventas periódicos (Contratos)"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.renew_wizard:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,order_line:0
+msgid "Order lines"
+msgstr "Líneas de pedido"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,prolong:0
+msgid "Fixed term"
+msgstr "Plazo fijo"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,agreement_id:0
+#: field:sale.recurring_orders.agreement.order,agreement_id:0
+#: field:sale.recurring_orders.agreement.renewal,agreement_id:0
+msgid "Agreement reference"
+msgstr "Referencia del contrato"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,start_date:0
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.line,name:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: sale_recurring_orders
+#: model:ir.actions.act_window,name:sale_recurring_orders.action_sale_recurring_orders_renew_wizard
+#: view:sale.recurring_orders.renew_wizard:0
+msgid "Renew agreement wizard"
+msgstr "Asistente de renovación de contrato"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Generate next year orders"
+msgstr "Generar pedidos para el siguiente año"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: sale_recurring_orders
+#: model:ir.actions.act_window,help:sale_recurring_orders.action_sale_recurring_orders_agreement
+msgid "Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a recurring order."
+msgstr "Los contratos son la forma de definir la relación comercial con sus clientes que especifica que ciertos productos/servicios que les está proveyendo requieren un pedido periódico."
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement.line,active_chk:0
+msgid "Unchecking this field, this quota is not generated"
+msgstr "Desmarcando este cuadro, no se genera esta cuota"
+
+#. module: sale_recurring_orders
+#: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_renew_wizard
+msgid "sale.recurring_orders.renew_wizard"
+msgstr "sale.recurring_orders.renew_wizard"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,renewal_state:0
+msgid "Agreement renewed"
+msgstr "Contrato renovado"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement,renewal_state:0
+msgid "Renewal state"
+msgstr "Estado de renovación"
+
+#. module: sale_recurring_orders
+#: field:sale.recurring_orders.agreement.order,order_id:0
+msgid "Order"
+msgstr "Pedido"
+
+#. module: sale_recurring_orders
+#: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_agreement
+msgid "sale.recurring_orders.agreement"
+msgstr "sale.recurring_orders.agreement"
+
+#. module: sale_recurring_orders
+#: selection:sale.recurring_orders.agreement,state:0
+msgid "First order created"
+msgstr "Primer pedido creado"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,name:0
+msgid "Name that helps to identify the agreement"
+msgstr "Nombre que ayuda a identificar el contrato"
+
+#. module: sale_recurring_orders
+#: help:sale.recurring_orders.agreement,end_date:0
+msgid "End date of the agreement"
+msgstr "Fecha de finalización del contrato"
+
+#. module: sale_recurring_orders
+#: view:sale.recurring_orders.agreement:0
+msgid "Orders"
+msgstr "Pedidos"
+
