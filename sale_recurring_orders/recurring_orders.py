@@ -203,7 +203,7 @@ class agreement(osv.osv):
             'company_id': agreement.company_id.id,
         }
         # Get other order values from agreement partner
-        order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, agreement.partner_id.user_id.id, [], agreement.partner_id.id)['value'])                   
+        order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, uid, [], agreement.partner_id.id)['value'])                   
         order['user_id'] = agreement.partner_id.user_id.id
         order_id = order_obj.create(cr, uid, order, context=context)
         # Create order lines objects
@@ -216,14 +216,14 @@ class agreement(osv.osv):
                 'discount': agreement_line.discount,
             }
             # get other order line values from agreement line product
-            order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, agreement.partner_id.user_id.id, [], order['pricelist_id'], \
+            order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, uid, [], order['pricelist_id'], \
                 product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=order['fiscal_position'])['value'])
             if agreement_line.price > 0: order_line['price_unit'] = agreement_line.price
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
             # Put custom description
             order_line['name'] = '[%s] %s' % (agreement_line.product_id.default_code, agreement_line.name) 
-            order_line_obj.create(cr, agreement.partner_id.user_id.id, order_line, context=context)
+            order_line_obj.create(cr, uid, order_line, context=context)
             agreement_lines_ids.append(agreement_line.id)
         # Update last order date for lines
         self.pool.get('sale.recurring_orders.agreement.line').write(cr, uid, agreement_lines_ids, {'last_order_date': date.strftime('%Y-%m-%d')} ,context=context)
