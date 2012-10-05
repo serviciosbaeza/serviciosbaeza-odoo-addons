@@ -313,9 +313,8 @@ class agreement(osv.osv):
         agreement_lines = []
         # Add only active lines
         for line in agreement.agreement_line:
-            if line.active_chk:
-                agreement_lines.append(line)
-        order_id = self.create_order(cr, uid, agreement, datetime.strptime(agreement.start_date, '%Y-%m-%d'), agreement.agreement_line, True, context=context)
+            if line.active_chk: agreement_lines.append(line)
+        order_id = self.create_order(cr, uid, agreement, datetime.strptime(agreement.start_date, '%Y-%m-%d'), agreement_lines, True, context=context)
         # Update agreement state
         self.write(cr, uid, agreement.id, { 'state': 'first' }, context=context)
         # Confirm order
