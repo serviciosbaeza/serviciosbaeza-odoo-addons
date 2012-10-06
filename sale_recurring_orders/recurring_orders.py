@@ -78,7 +78,7 @@ class agreement(osv.osv):
         'partner_id': fields.many2one('res.partner', 'Customer', select=1, change_default=True, required=True, help="Customer you are making the agreement with"),
         'company_id': fields.many2one('res.company', 'Company', required=True, help="Company that signs the agreement"),
         'start_date': fields.date('Start date', select=1, help="Beginning of the agreement. Keep empty to use the current date"),
-        'prolong': fields.selection([('recurre nt','Renewable fixed term'),('unlimited','Unlimited term'),('fixed','Fixed term')], 'Prolongation', help="Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew.", required=True),
+        'prolong': fields.selection([('recurrent','Renewable fixed term'),('unlimited','Unlimited term'),('fixed','Fixed term')], 'Prolongation', help="Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew.", required=True),
         'end_date': fields.date('End date', help="End date of the agreement"),
         'prolong_interval': fields.integer('Interval', help="Interval in time units to prolong the agreement until new renewable (that is automatic for unlimited term, manual for renewable fixed term)."),
         'prolong_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Interval unit', help='Time unit for the prolongation interval'),
