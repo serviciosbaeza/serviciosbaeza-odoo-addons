@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<openerp>
+	<data noupdate="1">
+	
+		<!-- Sequence type for agreement -->
+		<record model="ir.sequence.type" id="seq_type_agreement">
+			<field name="name">Agreement sequence</field>
+			<field name="code">account.agreement.sequence</field>
+		</record>
+
+		<!--Sequence for agreement -->
+		<record model="ir.sequence" id="seq_agreement">
+			<field name="name">Agreement sequence</field>
+			<field name="code">account.agreement.sequence</field>
+			<field name="padding" eval="4"/>
+			<field name="prefix">AG-%(y)s-</field>
+		</record>
+
+		<!--cron jobs -->
+		<record model="ir.cron" id="cron_periodical_invoicing_make_invoices">
+			<field name="name">Make invoices from periodical invoicing agreements</field>
+			<field name="interval_number">1</field>
+			<field name="priority">10</field>
+			<field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+			<field name="model" eval="'account.periodical_invoicing.agreement'"/>
+			<field name="function" eval="'make_invoices_planned'"/>
+			<field name="args" eval="'()'"/>
+		</record>
+		
+	</data>
+</openerp>
