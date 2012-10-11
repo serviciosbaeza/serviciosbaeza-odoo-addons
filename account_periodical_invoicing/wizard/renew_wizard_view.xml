@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_periodical_invoicing_renew_wizard" model="ir.ui.view">
+            <field name="name">Renew agreement wizard</field>
+            <field name="model">account.periodical_invoicing.renew_wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+               	<form string="Renew agreement wizard">
+               		<label string="Set renewal agreement data" colspan="4"/>
+                    <newline/>
+					<field name="date"/>
+                    <newline/>
+					<field name="comments" default_focus="1"/>
+                    <separator string="" colspan="4" />
+                    <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                    <button name="create_renewal" string="Renew agreement" type="object" icon="gtk-ok"/>
+               	</form>
+            </field>
+        </record>
+		
+        <act_window name="Renew agreement wizard"
+            res_model="account.periodical_invoicing.renew_wizard"
+            src_model="account.periodical_invoicing.agreement"
+            view_mode="form"
+            target="new"
+            multi="True"
+            key2="client_action_multi"
+            id="action_account_periodical_invoicing_renew_wizard"/>
+
+	</data>
+</openerp>
