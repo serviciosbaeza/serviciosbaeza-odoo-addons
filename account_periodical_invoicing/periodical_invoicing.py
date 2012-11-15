@@ -255,7 +255,7 @@ class agreement(osv.osv):
             'user_id': agreement.partner_id.user_id.id,
         }
         # Get other invoice values from agreement partner
-        invoice.update(account.account_invoice.account_invoice.onchange_partner_id(invoice_obj, cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id, context=context)['value'])                   
+        invoice.update(account.account_invoice.account_invoice.onchange_partner_id(invoice_obj, cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id)['value'])                   
         invoice_id = invoice_obj.create(cr, uid, invoice, context=context)
         # Create invoice lines objects
         agreement_lines_ids = []
