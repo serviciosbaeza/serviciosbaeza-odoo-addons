@@ -378,7 +378,7 @@ class agreement_invoice(osv.osv):
     _columns = {
         'agreement_id': fields.many2one('account.periodical_invoicing.agreement', 'Agreement reference', ondelete='cascade'),
         'date': fields.related('invoice_id', 'date_invoice', type='date', relation='account.invoice', string="Date of invoice creation", store=False),
-        'invoice_id': fields.many2one('account.invoice', 'Invoice'),
+        'invoice_id': fields.many2one('account.invoice', 'Invoice', ondelete='cascade'),
     }
 
     def view_invoice(self, cr, uid, ids, context={}):

@@ -438,7 +438,7 @@ class agreement_order(osv.osv):
     _name = 'sale.recurring_orders.agreement.order'
     _columns = {
         'agreement_id': fields.many2one('sale.recurring_orders.agreement', 'Agreement reference', ondelete='cascade'),
-        'order_id': fields.many2one('sale.order', 'Order'),
+        'order_id': fields.many2one('sale.order', 'Order', ondelete='cascade'),
         'date': fields.related('order_id', 'date_order', type='date', relation='sale.order', string="Order date", store=False),
         'confirmed': fields.function(__get_confirm_state, string='Confirmed', type='boolean', method=True, store=False),
     }
