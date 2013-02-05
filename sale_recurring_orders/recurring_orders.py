@@ -233,9 +233,8 @@ class agreement(osv.osv):
         # Create order agreement record
         agreement_order = {
             'agreement_id': agreement.id,
-            'date': date.strftime('%Y-%m-%d'),
             'order_id': order_id,
-            'confirmed': confirmed_flag,
+            #'confirmed': confirmed_flag,
         }
         self.pool.get('sale.recurring_orders.agreement.order').create(cr, uid, agreement_order, context=context)
         
@@ -424,12 +423,24 @@ class agreement_order(osv.osv):
     """
     Class for recording each order created for each line of the agreement. It keeps only reference to the agreement, not to the line.
     """
+    
+    def __get_confirm_state(self, cr, uid, ids, field_name, arg, context=None):
+        """
+        Get confirmed state of the order.
+        """
+        if not ids: return {}
+        res = {}
+        for agreement_order in self.browse(cr, uid, ids):
+            if agreement_order.order_id:
+				res[agreement_order.id] = (agreement_order.order_id.state != 'draft')
+        return res
+
     _name = 'sale.recurring_orders.agreement.order'
     _columns = {
         'agreement_id': fields.many2one('sale.recurring_orders.agreement', 'Agreement reference', ondelete='cascade'),
-        'date': fields.date('Order date'),
         'order_id': fields.many2one('sale.order', 'Order'),
-        'confirmed': fields.boolean('Confirmed'),
+        'date': fields.related('order_id', 'date_order', type='date', relation='sale.order', string="Order date", store=False),
+        'confirmed': fields.function(__get_confirm_state, string='Confirmed', type='boolean', method=True, store=False),
     }
 
     def view_order(self, cr, uid, ids, context={}):
