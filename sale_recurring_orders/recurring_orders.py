@@ -22,7 +22,7 @@
 ##############################################################################
 
 from osv import osv, fields
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import decimal_precision as dp
 import sale
@@ -40,9 +40,9 @@ class agreement(osv.osv):
         @return: The date incremented in 'interval' units of 'unit'.    
         """
         if unit == 'days':
-            return date + datetime.timedelta(days=interval)
+            return date + timedelta(days=interval)
         elif unit == 'weeks':
-            return date + datetime.timedelta(weeks=interval)
+            return date + timedelta(weeks=interval)
         elif unit == 'months':
             return date + relativedelta(months=interval)
         elif unit == 'years':
