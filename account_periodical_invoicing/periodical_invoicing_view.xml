@@ -1,59 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
-	
 		<!-- Views -->
-	    <record model="ir.ui.view" id="view_account_periodical_invocing_agreement_line_tree">
-	        <field name="name">account.periodical_invoicing.agreement.line.tree</field>
-	        <field name="model">account.periodical_invoicing.agreement.line</field>
-	        <field name="type">tree</field>
-	        <field name="priority" eval="6"/>
-	        <field name="arch" type="xml">
-	            <tree string="Agreement lines">
-					<field name="active_chk"/>
-	                <field name="product_id"/>
-					<field name="name"/>
-					<field name="quantity"/>
-	                <field name="price"/>
-					<field name="discount"/>
-	                <field name="invoicing_interval"/>
-	                <field name="invoicing_unit"/>
-					<field name="last_invoice_date" readonly="True"/>
-					<field name="notes"/>
-	            </tree>
-	        </field>
-		</record>
-
-	    <record model="ir.ui.view" id="view_account_periodical_invocing_agreement_line_form">
-	        <field name="name">account.periodical_invoicing.agreement.line.form</field>
-	        <field name="model">account.periodical_invoicing.agreement.line</field>
-	        <field name="type">form</field>
-	        <field name="priority" eval="6"/>
-	        <field name="arch" type="xml">
-	            <form string="Agreement line">
-	                <group colspan="3" col="2">
-	                    <field name="product_id" on_change="onchange_product_id(product_id)"/>
-					</group>
-					<group colspan="1" col="2">
-						<field name="active_chk"/>
-					</group>
-	                <group colspan="4" col="2">
-						<field name="name"/>
-					</group>
-	                <group colspan="4" col="6">
-						<field name="quantity"/>
-						<field name="price"/>
-						<field name="discount"/>
-					</group>
-	                <field name="invoicing_interval"/>
-	                <field name="invoicing_unit"/>
-	                <group colspan="4" col="2">
-						<field name="notes"/>
-					</group>
-	            </form>
-	        </field>
-		</record>
-
 	    <record model="ir.ui.view" id="view_account_periodical_invocing_agreement_invoice_tree">
 	        <field name="name">account.periodical_invoicing.agreement.invoice.tree</field>
 	        <field name="model">account.periodical_invoicing.agreement.invoice</field>
@@ -104,52 +52,72 @@
 			<field name="type">form</field>
 			<field name="priority" eval="6"/>
 			<field name="arch" type="xml">
-				<form string="Agreement">
-	                <group colspan="3" col="2">
-	                    <field name="name"/>
-					</group>
-					<group colspan="1" col="4">
-						<field name="number"/>
-						<field name="active"/>
-					</group>
-					<field name="partner_id"/>
-					<field name="company_id"/>
-					<group colspan="4" col="8">	
-						<field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
-						<field name="period_type"/>
-						<field name="prolong" attrs="{'readonly':[('renewal_state','!=','not_renewed')]}"/>
-					</group>
-					<group colspan="4" col="8">	
-						<group attrs="{'invisible': [('prolong','!=', 'fixed')]}" colspan="4" col="2"> 
-							<field name="end_date" attrs="{'required': [('prolong', '=', 'fixed')]}"/>
-						</group>
-						<group attrs="{'invisible': [('prolong','=', 'fixed')]}" colspan="4" col="4">
-							<field name="prolong_interval" attrs="{'required': [('prolong', '!=', 'fixed')]}"/>
-							<field name="prolong_unit" attrs="{'required': [('prolong', '!=', 'fixed')]}"/>
-						</group>
-					</group>
-					<notebook colspan="4">
-						<page string="Lines">
-							<field colspan="4" mode="tree" name="agreement_line" widget="one2many_list" nolabel="1"/>
-						</page>
-						<page string="Invoices">
-							<field colspan="4" mode="tree" name="invoice_line" widget="one2many_list" nolabel="1"/>
-						</page>
-						<page string="Renewals" attrs="{'invisible': [('prolong','!=', 'recurrent')]}">
-							<field colspan="4" mode="tree" name="renewal_line" widget="one2many_list" nolabel="1"/>
-						</page>
-						<page string="Notes">
-							<field colspan="4" name="notes" nolabel="1"/>
-						</page>
-					</notebook>
-					<group colspan="4" col="8">
-						<field name="last_renovation_date" readonly="1"/>
-						<field name="next_expiration_date"/>
-						<button name="make_initial_invoice" string="Make initial invoice" type="object" icon="gtk-execute" attrs="{'invisible': ['|', ('period_type','=', 'post-paid'), ('state','!=','empty')]}"/>
+				<form string="Agreement" version="7.0">
+                    <header>
+						<button name="make_initial_invoice" string="Make initial invoice" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('period_type','=', 'post-paid'), ('state','!=','empty')]}"/>
 	                    <button name="%(action_account_periodical_invoicing_renew_wizard)d" type="action" string="Renew agreement"  attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>
-						<field name="state" invisible="1"/>
-						<field name="renewal_state" invisible="1"/>
-					</group>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="number"/>
+                                <field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
+                                <field name="period_type"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="prolong" attrs="{'readonly':[('renewal_state','!=','not_renewed')]}"/>
+                                <field name="next_expiration_date" readonly="1"/>
+                                <field name="last_renovation_date" readonly="1" attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>
+                                <field name="state" invisible="1"/>
+                                <field name="renewal_state" invisible="1"/>
+                            </group>
+                            <group>
+                                <group attrs="{'invisible': [('prolong','=', 'fixed')]}">
+                                    <field name="prolong_interval" attrs="{'required': [('prolong', '!=', 'fixed')]}"/>
+                                    <field name="prolong_unit" attrs="{'required': [('prolong', '!=', 'fixed')]}"/>
+                                </group>
+                                <group attrs="{'invisible': [('prolong','!=', 'fixed')]}"> 
+                                    <field name="end_date" attrs="{'required': [('prolong', '=', 'fixed')]}"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Lines">
+                                <field name="agreement_line">
+                                    <tree string="Agreement lines" editable="bottom">
+                                        <field name="active_chk"/>
+                                        <field name="product_id" on_change="onchange_product_id(product_id)"/>
+                                        <field name="additional_description"/>
+                                        <field name="quantity"/>
+                                        <field name="discount"/>
+                                        <field name="invoicing_interval"/>
+                                        <field name="invoicing_unit"/>
+                                        <field name="last_invoice_date" readonly="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Invoices">
+                                <field colspan="4" mode="tree" name="invoice_line" widget="one2many_list" nolabel="1"/>
+                            </page>
+                            <page string="Renewals" attrs="{'invisible': [('prolong','!=', 'recurrent')]}">
+                                <field colspan="4" mode="tree" name="renewal_line" widget="one2many_list" nolabel="1"/>
+                            </page>
+                        </notebook>
+                        <div class="oe_clear"/>
+                        <field name="notes"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
 				</form>
 			</field>
 		</record>
@@ -161,7 +129,13 @@
 			<field name="res_model">account.periodical_invoicing.agreement</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
-			<field name="help">Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a periodical invoice.</field>
+			<field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to set a new agreement.
+                </p><p>
+                Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a periodical invoice.
+                </p>
+            </field>
 		</record>
 	
 		<!-- Windows actions views -->

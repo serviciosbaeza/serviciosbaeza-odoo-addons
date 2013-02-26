@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="view_sale_order_form" model="ir.ui.view">
+			<field name="name">sale.order.form.recurring_orders_inherited</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<button name="invoice_cancel" position="after">
+                    <button name="action_button_generate_agreement_invoicing" string="Generate agreement" type="object"/>
+				</button>
+			</field>
+		</record>
+	</data>
+</openerp>

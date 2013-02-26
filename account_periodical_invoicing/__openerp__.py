@@ -31,15 +31,15 @@
     """,
     'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
     'website' : 'http://www.serviciosbaeza.com',
-    'depends': ['account'],
-    'init_xml': [],
-    'update_xml': [
+    'depends': ['account', 'sale'],
+    'data': [
         'security/ir.model.access.csv',
         'wizard/renew_wizard_view.xml', 
         'periodical_invoicing_data.xml', 
         'periodical_invoicing_view.xml',
+        'sale_order_view.xml',
     ],
-    'installable': True,
-    'active': False,
+    'auto_install': False,
+    "installable": True,
 }
 

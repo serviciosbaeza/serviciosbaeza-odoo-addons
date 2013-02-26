@@ -21,4 +21,5 @@
 ##############################################################################
 
 import periodical_invoicing
+import sale_order
 import wizard

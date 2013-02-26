@@ -22,13 +22,16 @@
 ##############################################################################
 
 from osv import osv, fields
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import decimal_precision as dp
 import sale
 import netsvc
 
 class agreement(osv.osv):
+    _name = 'sale.recurring_orders.agreement'
+    _inherit = ['mail.thread']
+    _description = "Recurring orders agreement"
 
     def __get_next_term_date(self, date, unit, interval):
         """
@@ -40,9 +43,9 @@ class agreement(osv.osv):
         @return: The date incremented in 'interval' units of 'unit'.    
         """
         if unit == 'days':
-            return date + datetime.timedelta(days=interval)
+            return date + timedelta(days=interval)
         elif unit == 'weeks':
-            return date + datetime.timedelta(weeks=interval)
+            return date + timedelta(weeks=interval)
         elif unit == 'months':
             return date + relativedelta(months=interval)
         elif unit == 'years':
@@ -70,7 +73,6 @@ class agreement(osv.osv):
                     agreement.prolong_unit, agreement.prolong_interval)
         return res
 
-    _name = 'sale.recurring_orders.agreement'
     _columns = {
         'name': fields.char('Name', size=100, select=1, required=True, help='Name that helps to identify the agreement'),
         'number': fields.char('Agreement number', select=1, size=32, help="Number of agreement. Keep empty to get the number assigned by a sequence."),
@@ -87,6 +89,7 @@ class agreement(osv.osv):
         'renewal_line': fields.one2many('sale.recurring_orders.agreement.renewal', 'agreement_id', 'Renewal lines', readonly=True),
         'last_renovation_date': fields.date('Last renovation date', help="Last date when agreement was renewed (same as start date if not renewed)"),
         'next_expiration_date': fields.function(__get_next_expiration_date, string='Next expiration date', type='date', method=True, store=True),
+        #TODO: Añadir posibilidad de seguir cuando se genera una factura con _track = {}
         'state': fields.selection([('empty', 'Without orders'), ('first', 'First order created'), ('orders', 'With orders')], 'State', readonly=True),
         'renewal_state': fields.selection([('not_renewed', 'Agreement not renewed'), ('renewed', 'Agreement renewed')], 'Renewal state', readonly=True),
         'notes': fields.text('Notes'),
@@ -218,11 +221,10 @@ class agreement(osv.osv):
             # get other order line values from agreement line product
             order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, uid, [], order['pricelist_id'], \
                 product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=order['fiscal_position'])['value'])
-            if agreement_line.price > 0: order_line['price_unit'] = agreement_line.price
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
             # Put custom description
-            order_line['name'] = '[%s] %s' % (agreement_line.product_id.default_code, agreement_line.name) 
+            order_line['name'] += " " + agreement_line.additional_description
             order_line_obj.create(cr, uid, order_line, context=context)
             agreement_lines_ids.append(agreement_line.id)
         # Update last order date for lines
@@ -234,7 +236,6 @@ class agreement(osv.osv):
         agreement_order = {
             'agreement_id': agreement.id,
             'order_id': order_id,
-            #'confirmed': confirmed_flag,
         }
         self.pool.get('sale.recurring_orders.agreement.order').create(cr, uid, agreement_order, context=context)
         
@@ -391,14 +392,13 @@ class agreement_line(osv.osv):
         'active_chk': fields.boolean('Active', help='Unchecking this field, this quota is not generated'),
         'agreement_id': fields.many2one('sale.recurring_orders.agreement', 'Agreement reference', ondelete='cascade'),
         'product_id': fields.many2one('product.product', 'Product', ondelete='set null', required=True),
-        'name': fields.char('Description', size=128, help='Product description', required=True),
-        'quantity': fields.float('Product quantity', required=True, help='Quantity of the product'),
-        'price': fields.float('Product price', digits_compute= dp.get_precision('Sale Price'), help='Specific price for this product. Keep empty to use the current price while generating order'),
+        'name': fields.related('product_id', 'name', type="char", relation='product.product', string='Description', store=False),
+        'additional_description': fields.char('Add. description', size=30, help='Additional description that will be added to the product description on orders.'),
+        'quantity': fields.float('Quantity', required=True, help='Quantity of the product'),
         'discount': fields.float('Discount (%)', digits=(16, 2)),
-        'ordering_interval': fields.integer('Order interval', help="Interval in time units for making and order of this product", required=True),
-        'ordering_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Ordering interval unit', required=True),
-        'last_order_date': fields.date('Last order date'),
-        'notes': fields.char('Notes', size=300), 
+        'ordering_interval': fields.integer('Interval', help="Interval in time units for making an order of this product", required=True),
+        'ordering_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Interval unit', required=True),
+        'last_order_date': fields.date('Last order', help='Date of the last sale order generated'),
     }
 
     _defaults = {
@@ -407,7 +407,7 @@ class agreement_line(osv.osv):
         'ordering_interval': lambda *a: 1,
         'ordering_unit': lambda *a: 'months',
     }
-    
+
     def onchange_product_id(self, cr, uid, ids, product_id=False, context={}):
         result = {}
         if product_id:

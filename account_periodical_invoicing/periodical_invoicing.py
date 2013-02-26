@@ -29,6 +29,9 @@ import account
 from tools.translate import _
 
 class agreement(osv.osv):
+    _name = 'account.periodical_invoicing.agreement'
+    _inherit = ['mail.thread']
+    _description = "Periodical invoicing agreement"
 
     def __get_next_term_date(self, date, unit, interval):
         """
@@ -88,7 +91,6 @@ class agreement(osv.osv):
                     agreement.prolong_unit, agreement.prolong_interval)
         return res
 
-    _name = 'account.periodical_invoicing.agreement'
     _columns = {
         'name': fields.char('Name', size=100, select=1, required=True, help='Name that helps to identify the agreement'),
         'number': fields.char('Agreement number', select=1, size=32, help="Number of agreement. Keep empty to get the number assigned by a sequence."),
@@ -106,6 +108,7 @@ class agreement(osv.osv):
         'last_renovation_date': fields.date('Last renovation date', help="Last date when agreement was renewed (same as start date if not renewed)"),
         'next_expiration_date': fields.function(__get_next_expiration_date, string='Next expiration date', type='date', method=True, store=True),
         'period_type': fields.selection([('pre-paid', 'Pre-paid'), ('post-paid', 'Post-paid')], "Period type", required=True, help="Period type for invoicing. 'Pre-paid': Invoices are generated for the upcoming period. 'Post-paid': Invoices are generated for the consumed period."),
+        #TODO: Añadir posibilidad de seguir cuando se genera una factura con _track = {}
         'state': fields.selection([('empty', 'Without invoices'), ('first', 'First invoice created'), ('invoices', 'With invoices')], 'State', readonly=True),
         'renewal_state': fields.selection([('not_renewed', 'Agreement not renewed'), ('renewed', 'Agreement renewed')], 'Renewal state', readonly=True),
         'notes': fields.text('Notes'),
@@ -267,9 +270,10 @@ class agreement(osv.osv):
                 'discount': agreement_line.discount,
             }
             # get other invoice line values from agreement line product
-            invoice_line.update(account.account_invoice.account_invoice_line.product_id_change(invoice_line_obj, cr, uid, [], \
-                product=agreement_line.product_id.id, uom=False, partner_id=agreement.partner_id.id, fposition_id=invoice['fiscal_position'], context=context)['value'])
-            if agreement_line.price > 0: invoice_line['price_unit'] = agreement_line.price
+            invoice_line.update(account.account_invoice.account_invoice_line.product_id_change(invoice_line_obj, cr, uid, [],
+                                product=agreement_line.product_id.id, uom_id=False, qty=agreement_line.quantity,
+                                partner_id=agreement.partner_id.id, fposition_id=invoice['fiscal_position'], 
+                                context=context)['value'])
             # Put line taxes
             invoice_line['invoice_line_tax_id'] = [(6, 0, tuple(invoice_line['invoice_line_tax_id']))]
             # Put custom description
@@ -342,14 +346,13 @@ class agreement_line(osv.osv):
         'active_chk': fields.boolean('Active', help='Unchecking this field, this quota is not generated'),
         'agreement_id': fields.many2one('account.periodical_invoicing.agreement', 'Agreement reference', ondelete='cascade'),
         'product_id': fields.many2one('product.product', 'Product', ondelete='set null', required=True),
-        'name': fields.char('Description', size=128, help='Product description', required=True),
-        'quantity': fields.float('Product quantity', required=True, help='Quantity of the product to invoice'),
-        'price': fields.float('Product price', digits_compute= dp.get_precision('Account'), help='Specific price for this product. Keep empty to use the current price while generating invoice'),
+        'name': fields.related('product_id', 'name', type="char", relation='product.product', string='Description', store=False),
+        'additional_description': fields.char('Add. description', size=30, help='Additional description that will be added to the product description on orders.'),
+        'quantity': fields.float('Quantity', required=True, help='Quantity of the product to invoice'),
         'discount': fields.float('Discount (%)', digits=(16, 2)),
-        'invoicing_interval': fields.integer('Invoicing interval', help="Interval in time units for invoicing this product", required=True),
-        'invoicing_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Invoicing interval unit', required=True),
-        'last_invoice_date': fields.date('Last invoice date'),
-        'notes': fields.char('Notes', size=300),
+        'invoicing_interval': fields.integer('Interval', help="Interval in time units for invoicing this product", required=True),
+        'invoicing_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Interval unit', required=True),
+        'last_invoice_date': fields.date('Last invoice'),
     }
 
     _defaults = {

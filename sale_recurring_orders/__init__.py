@@ -22,4 +22,5 @@
 ##############################################################################
 
 import recurring_orders
+import sale_order
 import wizard
