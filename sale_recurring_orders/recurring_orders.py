@@ -360,7 +360,7 @@ class agreement(osv.osv):
         Check if there is any pending order to create for each agreement. 
         """
         if context is None: context = {}
-        ids = self.search(cr, uid, ['active', '=', True])
+        ids = self.search(cr, uid, [('active','=',True)])
         self.generate_next_year_orders(cr, uid, ids, context)
 
     def generate_next_year_orders(self, cr, uid, ids, context={}):
