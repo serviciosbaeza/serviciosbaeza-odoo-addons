@@ -277,10 +277,8 @@ class agreement(osv.osv):
             # Put line taxes
             invoice_line['invoice_line_tax_id'] = [(6, 0, tuple(invoice_line['invoice_line_tax_id']))]
             # Put custom description
-            if agreement_line.product_id.default_code:
-                invoice_line['name'] = '[%s] %s' % (agreement_line.product_id.default_code, agreement_line.name)
-            else: 
-                invoice_line['name'] = '%s' % (agreement_line.name)
+            if agreement_line.additional_description:
+                invoice_line['name'] += " " + agreement_line.additional_description
             # Put period string
             next_invoice_date = agreement_lines[agreement_line]
             if agreement.period_type == 'pre-paid':

@@ -24,6 +24,7 @@
 from osv import osv, fields
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from openerp.tools.translate import _
 import decimal_precision as dp
 import sale
 import netsvc
@@ -156,7 +157,22 @@ class agreement(osv.osv):
             'renewal_line': [],
         })
         return super(agreement, self).copy(cr, uid, orig_id, default, context)
-    
+
+    def unlink(self, cr, uid, ids, context=None):
+        unlink_ids = []
+        for agreement in self.browse(cr, uid, ids, context=context):
+            confirmedOrders = False
+            for order_line in agreement.order_line:
+                if order_line.confirmed:
+                    confirmedOrders = True
+            if not confirmedOrders:
+                unlink_ids.append(agreement.id)
+            else:
+                raise osv.except_osv(_('Invalid action!'), _('You cannot remove agreements with confirmed orders!'))
+
+        self.unlink_orders(cr, uid, unlink_ids, datetime.date(datetime.now()), context=context)
+        return osv.osv.unlink(self, cr, uid, unlink_ids, context=context)    
+
     def onchange_start_date(self, cr, uid, ids, start_date=False):
         """
         It changes last renovation date to the new start date.
@@ -204,6 +220,7 @@ class agreement(osv.osv):
             'partner_id': agreement.partner_id.id,
             'state': 'draft',
             'company_id': agreement.company_id.id,
+            'from_agreement': True,
         }
         # Get other order values from agreement partner
         order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, uid, [], agreement.partner_id.id)['value'])                   
@@ -224,7 +241,8 @@ class agreement(osv.osv):
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
             # Put custom description
-            order_line['name'] += " " + agreement_line.additional_description
+            if agreement_line.additional_description:
+                order_line['name'] += " " + agreement_line.additional_description
             order_line_obj.create(cr, uid, order_line, context=context)
             agreement_lines_ids.append(agreement_line.id)
         # Update last order date for lines
@@ -287,7 +305,7 @@ class agreement(osv.osv):
             if line.active_chk:
                 # Check future orders for this line until endDate
                 next_order_date = self._get_next_order_date(agreement, line, startDate)
-                while next_order_date <= endDate:
+                while next_order_date < endDate:
                     # Add to a list to order all lines together
                     if not lines_to_order.get(next_order_date):
                         lines_to_order[next_order_date] = [] 
@@ -378,8 +396,8 @@ class agreement(osv.osv):
         for agreement in self.browse(cr, uid, ids, context=context):
             for order in agreement['order_line']:
                 order_date = datetime.date(datetime.strptime(order['date'], '%Y-%m-%d'))
-                if order_date >= startDate:
-                    if order['order_id']['id']: ordersToRemove.append(order['order_id']['id'])
+                if order_date >= startDate and not order.confirmed:
+                    if order.order_id.id: ordersToRemove.append(order.order_id.id)
                     agreement_order_obj.unlink(cr, uid, order['id'], context)                    
         self.pool.get('sale.order').unlink(cr, uid, ordersToRemove, context)
     

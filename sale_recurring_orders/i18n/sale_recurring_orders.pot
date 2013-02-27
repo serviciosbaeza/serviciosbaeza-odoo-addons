@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0-20130206-000101\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 17:56+0000\n"
-"PO-Revision-Date: 2013-02-26 17:56+0000\n"
+"POT-Creation-Date: 2013-02-27 16:59+0000\n"
+"PO-Revision-Date: 2013-02-27 16:59+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,6 +62,11 @@ msgid "Order date"
 msgstr ""
 
 #. module: sale_recurring_orders
+#: view:sale.order:0
+msgid "Not from agreements"
+msgstr ""
+
+#. module: sale_recurring_orders
 #: selection:sale.recurring_orders.agreement,prolong_unit:0
 #: selection:sale.recurring_orders.agreement.line,ordering_unit:0
 msgid "weeks"
@@ -106,6 +111,12 @@ msgstr ""
 #. module: sale_recurring_orders
 #: view:sale.recurring_orders.renew_wizard:0
 msgid "Set renewal agreement data"
+msgstr ""
+
+#. module: sale_recurring_orders
+#: code:addons/sale_recurring_orders/recurring_orders.py:171
+#, python-format
+msgid "You cannot remove agreements with confirmed orders!"
 msgstr ""
 
 #. module: sale_recurring_orders
@@ -346,6 +357,12 @@ msgid "Interval"
 msgstr ""
 
 #. module: sale_recurring_orders
+#: code:addons/sale_recurring_orders/recurring_orders.py:171
+#, python-format
+msgid "Invalid action!"
+msgstr ""
+
+#. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement,message_summary:0
 msgid "Summary"
 msgstr ""
@@ -364,6 +381,11 @@ msgstr ""
 #: help:sale.recurring_orders.agreement.renewal,comments:0
 #: help:sale.recurring_orders.renew_wizard,comments:0
 msgid "Renewal comments"
+msgstr ""
+
+#. module: sale_recurring_orders
+#: help:sale.order,from_agreement:0
+msgid "This field indicates if the sale order comes from an agreement."
 msgstr ""
 
 #. module: sale_recurring_orders
@@ -413,6 +435,11 @@ msgstr ""
 #. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement.line,product_id:0
 msgid "Product"
+msgstr ""
+
+#. module: sale_recurring_orders
+#: field:sale.order,from_agreement:0
+msgid "From agrement?"
 msgstr ""
 
 #. module: sale_recurring_orders

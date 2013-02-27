@@ -11,5 +11,18 @@
 				</button>
 			</field>
 		</record>
+        
+        <record id="view_sales_order_filter" model="ir.ui.view">
+			<field name="name">sale.order.form.list.select_inherited</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_sales_order_filter"/>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+                    <filter string="Not from agreements" name="from_agreement" domain="[('from_agreement','=',False)]"/>
+                    <separator/>
+				</field>
+			</field>
+		</record>
+        
 	</data>
 </openerp>

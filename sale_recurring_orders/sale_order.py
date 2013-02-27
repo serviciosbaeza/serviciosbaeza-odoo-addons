@@ -40,6 +40,10 @@ class sale_order(osv.osv):
 
     _name = 'sale.order'
     _inherit = 'sale.order'
+    
+    _columns = {
+        'from_agreement': fields.boolean('From agrement?', help='This field indicates if the sale order comes from an agreement.'),
+    }        
 
 sale_order()
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0-20130206-000101\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 17:57+0000\n"
-"PO-Revision-Date: 2013-02-26 17:57+0000\n"
+"POT-Creation-Date: 2013-02-27 17:00+0000\n"
+"PO-Revision-Date: 2013-02-27 17:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,6 +62,11 @@ msgid "Order date"
 msgstr "Fecha del pedido"
 
 #. module: sale_recurring_orders
+#: view:sale.order:0
+msgid "Not from agreements"
+msgstr "No de contratos"
+
+#. module: sale_recurring_orders
 #: selection:sale.recurring_orders.agreement,prolong_unit:0
 #: selection:sale.recurring_orders.agreement.line,ordering_unit:0
 msgid "weeks"
@@ -107,6 +112,12 @@ msgstr "Si está marcado, hay mensajes que requieren su atención."
 #: view:sale.recurring_orders.renew_wizard:0
 msgid "Set renewal agreement data"
 msgstr "Establezca los datos para la renovación del contrato:"
+
+#. module: sale_recurring_orders
+#: code:addons/sale_recurring_orders/recurring_orders.py:171
+#, python-format
+msgid "You cannot remove agreements with confirmed orders!"
+msgstr "¡No puede eliminar contratos que tengan pedidos confirmados!"
 
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,prolong_interval:0
@@ -166,7 +177,7 @@ msgstr "Estado"
 #. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement,message_follower_ids:0
 msgid "Followers"
-msgstr "Followers"
+msgstr "Seguidores"
 
 #. module: sale_recurring_orders
 #: view:sale.order:0
@@ -351,6 +362,12 @@ msgid "Interval"
 msgstr "Intervalo"
 
 #. module: sale_recurring_orders
+#: code:addons/sale_recurring_orders/recurring_orders.py:171
+#, python-format
+msgid "Invalid action!"
+msgstr "¡Acción no válida!"
+
+#. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement,message_summary:0
 msgid "Summary"
 msgstr "Resumen"
@@ -370,6 +387,11 @@ msgstr "sale.recurring_orders.agreement.order"
 #: help:sale.recurring_orders.renew_wizard,comments:0
 msgid "Renewal comments"
 msgstr "Comentarios sobre la renovación"
+
+#. module: sale_recurring_orders
+#: help:sale.order,from_agreement:0
+msgid "This field indicates if the sale order comes from an agreement."
+msgstr "This field indicates if the sale order comes from an agreement."
 
 #. module: sale_recurring_orders
 #: model:ir.model,name:sale_recurring_orders.model_sale_recurring_orders_agreement_renewal
@@ -419,6 +441,11 @@ msgstr "Referencia del contrato"
 #: field:sale.recurring_orders.agreement.line,product_id:0
 msgid "Product"
 msgstr "Producto"
+
+#. module: sale_recurring_orders
+#: field:sale.order,from_agreement:0
+msgid "From agrement?"
+msgstr "¿Desde contrato?"
 
 #. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement.line,name:0
