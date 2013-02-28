@@ -345,7 +345,7 @@ class agreement_line(osv.osv):
         'agreement_id': fields.many2one('account.periodical_invoicing.agreement', 'Agreement reference', ondelete='cascade'),
         'product_id': fields.many2one('product.product', 'Product', ondelete='set null', required=True),
         'name': fields.related('product_id', 'name', type="char", relation='product.product', string='Description', store=False),
-        'additional_description': fields.char('Add. description', size=30, help='Additional description that will be added to the product description on orders.'),
+        'additional_description': fields.char('Add. description', size=30, help='Additional description that will be added to the product description on invoices.'),
         'quantity': fields.float('Quantity', required=True, help='Quantity of the product to invoice'),
         'discount': fields.float('Discount (%)', digits=(16, 2)),
         'invoicing_interval': fields.integer('Interval', help="Interval in time units for invoicing this product", required=True),

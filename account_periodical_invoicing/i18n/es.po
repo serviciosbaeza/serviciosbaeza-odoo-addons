@@ -307,8 +307,8 @@ msgstr "Última fecha de renovación"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement.line,additional_description:0
-msgid "Additional description that will be added to the product description on orders."
-msgstr "Additional description that will be added to the product description on orders."
+msgid "Additional description that will be added to the product description on invoices."
+msgstr "Descripción adicional que se añadirá a la descripción del producto en las facturas."
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,prolong_unit:0
