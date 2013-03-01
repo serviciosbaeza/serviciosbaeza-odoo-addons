@@ -93,7 +93,7 @@
 	                <field name="partner_id"/>
 	                <field name="start_date"/>
 	                <field name="next_expiration_date"/>
-	                <field name="company_id"/>
+	                <field name="company_id" groups="base.group_multi_company"/>
 	            </tree>
 	        </field>
 	    </record>
@@ -113,7 +113,7 @@
 						<field name="active"/>
 					</group>
 					<field name="partner_id"/>
-					<field name="company_id"/>
+					<field name="company_id" groups="base.group_multi_company"/>
 					<group colspan="4" col="8">	
 						<field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
 						<field name="period_type"/>
