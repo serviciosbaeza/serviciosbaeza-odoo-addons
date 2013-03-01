@@ -93,6 +93,7 @@
 	                <field name="start_date"/>
 					<field name="prolong"/>
 	                <field name="next_expiration_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
 	            </tree>
 	        </field>
 	    </record>
@@ -112,7 +113,7 @@
 						<field name="active"/>
 					</group>
 					<field name="partner_id" domain="[('customer','=',True)]"/>
-					<field name="company_id"/>
+					<field name="company_id" groups="base.group_multi_company"/>
 					<field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
 					<field name="prolong" attrs="{'readonly':[('renewal_state','!=','not_renewed')]}"/>
 					<group colspan="4" col="8">	

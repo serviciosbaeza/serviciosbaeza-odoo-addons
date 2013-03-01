@@ -111,7 +111,6 @@ class agreement(osv.osv):
         'notes': fields.text('Notes'),
     }
 
-    #TODO: Ocultar campo compañía si no se pertenece al grupo Useability / Multi companies
     _defaults = {
         'active': lambda *a: 1,
         'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'account', context=c),
