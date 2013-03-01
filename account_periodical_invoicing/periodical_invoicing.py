@@ -114,7 +114,6 @@ class agreement(osv.osv):
         'notes': fields.text('Notes'),
     }
 
-    #TODO: Ocultar campo compañía si no se pertenece al grupo Useability / Multi companies
     _defaults = {
         'active': lambda *a: 1,
         'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'account', context=c),
@@ -360,6 +359,11 @@ class agreement_line(osv.osv):
         'invoicing_unit': lambda *a: 'months',
     }
     
+    _sql_constraints = [
+        ('line_qty_zero', 'CHECK (quantity > 0)',  'All product quantities must be greater than 0.\n'),
+        ('line_interval_zero', 'CHECK (invoicing_interval > 0)',  'All invoicing intervals must be greater than 0.\n'),
+    ]
+
     def onchange_product_id(self, cr, uid, ids, product_id=False, context={}):
         result = {}
         if product_id:

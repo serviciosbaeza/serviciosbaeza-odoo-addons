@@ -43,6 +43,7 @@
 	                <field name="start_date"/>
 					<field name="prolong"/>
 	                <field name="next_expiration_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
 	            </tree>
 	        </field>
 	    </record>
@@ -64,7 +65,7 @@
                             <group>
                                 <field name="name"/>
                                 <field name="partner_id" domain="[('customer','=',True)]"/>
-                                <field name="company_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                             <group>
                                 <field name="active"/>

@@ -525,3 +525,15 @@ msgstr ""
 msgid "End date of the agreement"
 msgstr ""
 
+#. module: netllar
+#: sql_constraint:sale.telecommunications.contract.line:0
+msgid "All invoicing intervals must be greater than 0.\n"
+""
+msgstr ""
+
+#. module: netllar
+#: sql_constraint:sale.telecommunications.contract.line:0
+msgid "All product quantities must be greater than 0.\n"
+""
+msgstr ""
+

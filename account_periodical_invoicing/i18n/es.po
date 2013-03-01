@@ -530,3 +530,18 @@ msgstr "Nombre que ayuda a identificar el contrato"
 msgid "End date of the agreement"
 msgstr "Fecha de finalización del contrato"
 
+
+#. module: netllar
+#: sql_constraint:sale.telecommunications.contract.line:0
+msgid "All invoicing intervals must be greater than 0.\n"
+""
+msgstr "Todos los intervalos de facturación deben ser mayores de 0.\n"
+""
+
+#. module: netllar
+#: sql_constraint:sale.telecommunications.contract.line:0
+msgid "All product quantities must be greater than 0.\n"
+""
+msgstr "Todas las cantidades de producto deben ser mayor de 0.\n"
+""
+

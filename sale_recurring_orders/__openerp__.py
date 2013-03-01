@@ -23,7 +23,7 @@
 
 {
     'name': 'Recurring orders',
-    'version': '1.1',
+    'version': '1.2',
     'category': 'Sales & Purchase',
     'description': """
     Module for making easyly recurring orders to partners from agreements that allow to set:

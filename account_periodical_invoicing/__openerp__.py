@@ -22,7 +22,7 @@
 
 {
     'name': 'Periodical invoicing',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Accounting',
     'description': """Module for making easily periodical invoices to customers from agreements that allow to set:
     * Agreement term
