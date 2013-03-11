@@ -241,6 +241,7 @@ class agreement(osv.osv):
         lang = lang_obj.browse(cr, uid, lang_ids)[0]
         # Create invoice object
         context['company_id'] = agreement.company_id.id
+        context['force_company'] = agreement.company_id.id
         context['type'] = 'out_invoice'
         invoice = {
             'date_invoice': now.strftime('%Y-%m-%d'),
