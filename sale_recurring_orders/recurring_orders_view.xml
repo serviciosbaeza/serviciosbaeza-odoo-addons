@@ -123,6 +123,17 @@
 				</form>
 			</field>
 		</record>
+
+        <record id="view_sales_ro_agreement_filter" model="ir.ui.view">
+            <field name="name">sale.recurring_orders.agreement.select</field>
+            <field name="model">sale.recurring_orders.agreement</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" filter_domain="[('name','ilike',self)]"/>
+					<field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+               </search>
+            </field>
+        </record>
 		
 		<!-- Windows actions -->
 		
@@ -131,6 +142,7 @@
 			<field name="res_model">sale.recurring_orders.agreement</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_sales_ro_agreement_filter"/>
 			<field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                 Click to set a new agreement.
