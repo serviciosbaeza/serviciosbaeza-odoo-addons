@@ -89,8 +89,8 @@ class general_ledger(rml_parse.rml_parse):
 
     def get_periods(self, form):
         result=''
-        if form.has_key('periods') and form['periods'][0][2]:
-            period_ids = ",".join([str(x) for x in form['periods'][0][2] if x])
+        if form.has_key('periods') and form['periods']:
+            period_ids = ",".join([str(x) for x in form['periods'] if x])
             self.cr.execute("SELECT name FROM account_period WHERE id in (%s)" % (period_ids))
             res = self.cr.fetchall()
             len_res = len(res) 
