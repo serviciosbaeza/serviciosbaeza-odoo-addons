@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record id="account_journal_entries_report_view" model="ir.ui.view">
+            <field name="name">Print journal by entries</field>
+            <field name="model">account.journal.entries.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Print Journal by entries">
+                <field name="journal_ids"/>
+                <field name="period_ids"/>
+                <field name="sort_selection"/>
+                <field name="landscape"/>
+                <newline/>
+                <separator colspan="4"/>
+                <group col="4" colspan="4">
+                    <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="2"/>
+                    <button name="print_report" string="Print" type="object" icon="gtk-print" default_focus="1"/>
+                </group>
+            </form>
+            </field>
+         </record>
+    </data>
+</openerp>

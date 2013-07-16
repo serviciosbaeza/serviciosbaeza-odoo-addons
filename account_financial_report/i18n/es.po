@@ -1,0 +1,1046 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_financial_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-05 12:11+0000\n"
+"PO-Revision-Date: 2013-07-05 12:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,in_invoice:0
+msgid "Supplier invoices"
+msgstr "Facturas de proveedor"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+msgid "Account number"
+msgstr "Código de la cuenta"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Customer Refund Invoices"
+msgstr "Facturas rectificativas de cliente"
+
+#. module: account_financial_report
+#: field:account.general.ledger.cumulative.report,initial_balance:0
+msgid "Show initial balances"
+msgstr "Mostrar saldo inicial"
+
+#. module: account_financial_report
+#: constraint:account.move:0
+msgid "You can not create more than one move per period on centralized journal"
+msgstr "No puede crear más de un movimiento por periodo en un diario centralizado"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line
+msgid "**Entry lines"
+msgstr "Líneas de asiento"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_financial_report_print_invoice_list_wizard
+msgid "account.financial.report.print.invoice.list.wizard"
+msgstr "account.financial.report.print.invoice.list.wizard"
+
+#. module: account_financial_report
+#: field:account.general.ledger.cumulative.report,landscape:0
+#: field:account.journal.entries.report,landscape:0
+msgid "Landscape mode"
+msgstr "Modo apaisado"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:84
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:93
+#, python-format
+msgid "Date to must be set between %s and %s"
+msgstr "La fecha desde debe estar entre %s y %s"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Vat"
+msgstr "NIF"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Entry Label"
+msgstr "Línea de asiento"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,company_id:0
+#: field:account.general.ledger.cumulative.report,company_id:0
+#: field:account.invoice.list.report,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Account name"
+msgstr "Nombre de la cuenta"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line_record2
+msgid "**Entry"
+msgstr "**Asiento"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,order_by:0
+msgid "Order by"
+msgstr "Ordenar por"
+
+#. module: account_financial_report
+#: report:account.move.line.report:0
+msgid "Analitic account"
+msgstr "Cuenta analítica"
+
+#. module: account_financial_report
+#: field:account.account.chart.report,account:0
+#: report:account.balance.full.report.wzd:0
+#: field:account.general.ledger.cumulative.report,account_list:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_account_balance_full_report
+msgid "**Full account balance"
+msgstr "**Balance de sumas y saldos"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Supplier Refund Invoices"
+msgstr "Facturas rectificativas de proveedor"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,state:0
+#: selection:account.general.ledger.cumulative.report,state:0
+#: selection:account.invoice.list.report,state:0
+msgid "By Date and Period"
+msgstr "Por fecha y periodo"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,account_list:0
+msgid "Root accounts"
+msgstr "Cuentas raíz"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:292
+#, python-format
+msgid "CI: "
+msgstr "FC: "
+
+#. module: account_financial_report
+#: report:account.move.line.report:0
+msgid "Ref."
+msgstr "Ref."
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: account_financial_report
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "¡Valor haber o debe erróneo en el asiento contable!"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+msgid "Ref - Entry Label"
+msgstr "Ref. líneas de asiento"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,state:0
+#: selection:account.general.ledger.cumulative.report,state:0
+#: selection:account.invoice.list.report,state:0
+msgid "By Date"
+msgstr "Por fecha"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,cancel:0
+#: report:account.invoice.list.report.wzd:0
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: account_financial_report
+#: report:account.move.line.report:0
+msgid "Entry Lines  -"
+msgstr "Líneas de asiento  -"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:84
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:88
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:93
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:97
+#, python-format
+msgid "UserError"
+msgstr "Error del usuario"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: report:account.invoice.list.report.wzd:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "End of report"
+msgstr "Final del informe"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:88
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:97
+#, python-format
+msgid "Date not in a defined fiscal year"
+msgstr "La fecha no está comprendida en un ejercicio fiscal definido"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "External ref."
+msgstr "Ref. externa"
+
+#. module: account_financial_report
+#: model:ir.actions.act_window,name:account_financial_report.wizard_account_account_chart_report_menu_new
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_account_chart
+#: model:ir.model,name:account_financial_report.model_account_account_chart_report
+msgid "Chart of accounts"
+msgstr "Plan contable"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+msgid "Account Chart"
+msgstr "Plan de cuentas"
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "Account requires a partner in all its moves."
+msgstr "La cuenta requiere una empresa en todos sus apuntes."
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
+msgstr "¡La fecha de su asiento no está en el periodo definido! Usted debería cambiar la fecha o borar este esta restricción del diario."
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Untaxed"
+msgstr "Base"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report.h:0
+msgid "To check"
+msgstr "A revisar"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_financial_report_wizard_print_journal
+msgid "account.financial.report.wizard.print.journal"
+msgstr "account.financial.report.wizard.print.journal"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Fiscal position"
+msgstr "Posición fiscal"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report.h:0
+msgid "YES"
+msgstr "SÍ"
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,sort_selection:0
+msgid "By reference number"
+msgstr "Por número de referencia"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Periods/Date range:"
+msgstr "Períodos/Intervalo de fechas:"
+
+#. module: account_financial_report
+#: view:account.account.chart.report:0
+#: view:account.general.ledger.cumulative.report:0
+msgid "Select parent account"
+msgstr "Seleccionar cuenta padre"
+
+#. module: account_financial_report
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "¡Error! No puede crear compañías recursivas."
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:354
+#, python-format
+msgid "Initial balance"
+msgstr "Saldo inicial"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report.h:0
+msgid "State"
+msgstr "Estado"
+
+#. module: account_financial_report
+#: report:account.move.line.report:0
+msgid "Valid"
+msgstr "Válido"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Debit"
+msgstr "Debe"
+
+#. module: account_financial_report
+#: view:account.account.chart.report:0
+#: view:account.balance.full.report:0
+#: view:account.general.ledger.cumulative.report:0
+#: view:account.invoice.list.report:0
+#: view:account.journal.entries.report:0
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,date_from:0
+#: field:account.general.ledger.cumulative.report,date_from:0
+#: field:account.invoice.list.report,date_from:0
+msgid "Start date"
+msgstr "Fecha inicial"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Ref"
+msgstr "Ref"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Fiscal year:"
+msgstr "Ejercicio fiscal:"
+
+#. module: account_financial_report
+#: view:account.balance.full.report:0
+#: view:account.general.ledger.cumulative.report:0
+#: view:account.invoice.list.report:0
+msgid "Filter on Periods"
+msgstr "Filtrado por períodos"
+
+#. module: account_financial_report
+#: view:account.balance.full.report:0
+#: model:ir.actions.act_window,name:account_financial_report.wizard_account_balance_full_report_menu_new
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_balance_full_report
+msgid "Full Account Balance"
+msgstr "Balance de sumas y saldos"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,state:0
+#: selection:account.general.ledger.cumulative.report,state:0
+#: selection:account.invoice.list.report,state:0
+msgid "No Filter"
+msgstr "Sin filtro"
+
+#. module: account_financial_report
+#: view:account.journal.entries.report:0
+msgid "Print Journal by entries"
+msgstr "Imprimir diario por asientos"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,display_account:0
+msgid "With balance is not equal to 0"
+msgstr "Con saldo distinto a 0"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+msgid "Account Balance -"
+msgstr "Balance de sumas y saldos -"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,moment_form:0
+msgid "Report"
+msgstr "Informe"
+
+#. module: account_financial_report
+#: view:account.balance.full.report:0
+msgid "Accounts to include"
+msgstr "Cuentas a incluir"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_financial_report_print_chart_of_accounts_wizard
+msgid "account.financial.report.print.chart.of.accounts.wizard"
+msgstr "account.financial.report.print.chart.of.accounts.wizard"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Mvt"
+msgstr "Asiento"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+msgid "1cm 27.9cm 20cm 27.9cm"
+msgstr "1cm 27.9cm 20cm 27.9cm"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,out_refund:0
+msgid "Customer refunds"
+msgstr "Facturas rectificativas de cliente"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,in_refund:0
+msgid "Supplier refunds"
+msgstr "Facturas rectificativas de proveedor"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: selection:account.invoice.list.report,order_by:0
+#: report:account.invoice.list.report.wzd:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: account_financial_report
+#: view:account.invoice.list.report:0
+msgid "Options"
+msgstr "Opciones"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,display_account:0
+#: selection:account.general.ledger.cumulative.report,display_account:0
+msgid "With movements"
+msgstr "Con movimientos"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Counterpart"
+msgstr "Contrapartida"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_print_journal_entries.py:66
+#, python-format
+msgid "No Data Available"
+msgstr "No hay datos disponibles"
+
+#. module: account_financial_report
+#: view:account.invoice.list.report:0
+msgid "Filter by state"
+msgstr "Filtrar por estado"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Due date"
+msgstr "Fecha de vencimiento"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Currency :"
+msgstr "Moneda :"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,proforma:0
+#: report:account.invoice.list.report.wzd:0
+msgid "Pro-forma"
+msgstr "Pro-forma"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_others_formats
+msgid "Other formats"
+msgstr "Otros formatas"
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
+msgstr "La cuenta selecionada de su diario obliga a tener una moneda secundaria. Usted debería eliminar la moneda secundaria de la cuenta o asignar una vista de multi-moneda al diario."
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,display_account:0
+#: field:account.general.ledger.cumulative.report,display_account:0
+msgid "Display accounts"
+msgstr "Mostrar cuentas"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,display_account_level:0
+msgid "Up to level"
+msgstr "Hasta el nivel"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,moment_form:0
+msgid "Check report"
+msgstr "Comprobar informe"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Partner code"
+msgstr "Código empresa"
+
+#. module: account_financial_report
+#: view:account.general.ledger.cumulative.report:0
+msgid "(Keep empty for all open fiscal years)"
+msgstr "(dejarlo vacío para todos los ejercicios fiscales abiertos)"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_financial_report_print_full_report_wizard
+msgid "account.financial.report.print.full.report.wizard"
+msgstr "account.financial.report.print.full.report.wizard"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_invoice_list_report
+msgid "**Print invoice list"
+msgstr "**Imprimir listado de facturas"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "General Ledger -"
+msgstr "Libro mayor  -"
+
+#. module: account_financial_report
+#: view:account.balance.full.report:0
+#: view:account.general.ledger.cumulative.report:0
+#: view:account.invoice.list.report:0
+msgid "Date Filter"
+msgstr "Filtrado por fechas"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,draft:0
+#: report:account.invoice.list.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report.h:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,sortbydate:0
+msgid "Movement"
+msgstr "Asiento"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report.h:0
+msgid "NO"
+msgstr "NO"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,state:0
+#: selection:account.general.ledger.cumulative.report,state:0
+#: selection:account.invoice.list.report,state:0
+msgid "By Period"
+msgstr "Por periodo"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Paid"
+msgstr "Pagada"
+
+#. module: account_financial_report
+#: help:account.general.ledger.cumulative.report,period_ids:0
+#: help:account.invoice.list.report,periods:0
+msgid "All periods if empty"
+msgstr "Todos los períodos si está vacío"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,sortbydate:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: selection:account.invoice.list.report,order_by:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "You can not create journal items on an account of type view."
+msgstr "No puede crear asientos en una cuenta de tipo vista"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "1.3cm 24.9cm 38.3cm 24.9cm"
+msgstr "1.3cm 24.9cm 38.3cm 24.9cm"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,display_account_level:0
+msgid "Display accounts up to this level (0 to show all)"
+msgstr "Mostrar cuentas hasta este nivel (0 para mostrar todas)."
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_account_chart_report
+msgid "**Chart of accounts"
+msgstr "**Plan contable"
+
+#. module: account_financial_report
+#: help:account.general.ledger.cumulative.report,fiscalyear:0
+msgid "Keep empty for all open fiscal year"
+msgstr "Dejarlo vacío para todos los ejercicios fiscales abiertos."
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Credit"
+msgstr "Haber"
+
+#. module: account_financial_report
+#: model:res.groups,name:account_financial_report.group_afreport
+msgid "Account Financial Report"
+msgstr "Informes financieros"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,date_to:0
+#: field:account.general.ledger.cumulative.report,date_to:0
+#: field:account.invoice.list.report,date_to:0
+msgid "End date"
+msgstr "Fecha final"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+msgid "Code"
+msgstr "Código"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Entry num."
+msgstr "Nº asiento"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Customer Invoices"
+msgstr "Facturas de cliente"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,state:0
+#: field:account.general.ledger.cumulative.report,state:0
+#: field:account.invoice.list.report,state:0
+msgid "Date/Period Filter"
+msgstr "Filtrar por fecha/período"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+msgid "Init. balance"
+msgstr "Saldo inicial"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,moment_form:0
+msgid "Report landscape"
+msgstr "Informe apaisado"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,fiscalyear:0
+#: report:account.balance.full.report.wzd:0
+#: field:account.general.ledger.cumulative.report,fiscalyear:0
+msgid "Fiscal year"
+msgstr "Ejercicio fiscal"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,paid:0
+msgid "Done"
+msgstr "Realizada"
+
+#. module: account_financial_report
+#: field:account.balance.full.report,periods:0
+#: field:account.general.ledger.cumulative.report,period_ids:0
+#: field:account.invoice.list.report,periods:0
+msgid "Periods"
+msgstr "Periodos"
+
+#. module: account_financial_report
+#: view:account.account.chart.report:0
+#: view:account.balance.full.report:0
+#: view:account.general.ledger.cumulative.report:0
+#: view:account.invoice.list.report:0
+#: view:account.journal.entries.report:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,open:0
+#: report:account.invoice.list.report.wzd:0
+msgid "Open"
+msgstr "Abierta"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_move_line
+msgid "Journal Items"
+msgstr "Apuntes contables"
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "Company must be the same for its related account and period."
+msgstr "La compañía debe ser la misma para su cuenta y periodos relacionados"
+
+#. module: account_financial_report
+#: field:account.general.ledger.cumulative.report,sortbydate:0
+msgid "Sort By"
+msgstr "Ordenar por"
+
+#. module: account_financial_report
+#: model:ir.actions.act_window,name:account_financial_report.wizard_account_journal_entries_report_new
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_journal_entries_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_journal_entries_report1
+#: model:ir.model,name:account_financial_report.model_account_journal_entries_report
+msgid "Print journal by entries"
+msgstr "Imprimir diario por asientos"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_journal_entries_report
+msgid "**Print journal by entries"
+msgstr "**Imprimir diario por asientos"
+
+#. module: account_financial_report
+#: field:account.general.ledger.cumulative.report,moment_form:0
+msgid "Time is the form"
+msgstr "El tiempo es la forma"
+
+#. module: account_financial_report
+#: view:account.balance.full.report:0
+#: report:account.balance.full.report.wzd:0
+#: field:account.journal.entries.report,period_ids:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Period"
+msgstr "Periodo"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:293
+#, python-format
+msgid "SI: "
+msgstr "FP: "
+
+#. module: account_financial_report
+#: constraint:account.move.line:0
+msgid "You can not create journal items on closed account."
+msgstr "No puede crear asientos en cuentas cerradas"
+
+#. module: account_financial_report
+#: help:account.move,name_split:0
+#: help:account.move.line,name_split:0
+msgid "inserts space for wrap in longer numbers"
+msgstr "inserta espacios para ajustar números largos"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Supplier Invoices"
+msgstr "Facturas de proveedor"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:294
+#, python-format
+msgid "OR: "
+msgstr "FRC: "
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,sort_selection:0
+msgid "By entry number"
+msgstr "Por número de asiento"
+
+#. module: account_financial_report
+#: field:account.journal.entries.report,journal_ids:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_financial_report
+#: view:account.invoice.list.report:0
+#: report:account.invoice.list.report.wzd:0
+msgid "Invoice List"
+msgstr "Listado de facturas"
+
+#. module: account_financial_report
+#: field:account.general.ledger.cumulative.report,amount_currency:0
+msgid "With Currency"
+msgstr "Con moneda"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,detailed_taxes:0
+msgid "Detailed taxes"
+msgstr "Impuestos detallados"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line_record_h2
+msgid "**Entry landscape"
+msgstr "**Asiento horizontal"
+
+#. module: account_financial_report
+#: selection:account.invoice.list.report,order_by:0
+#: report:account.invoice.list.report.wzd:0
+#: field:account.move,name_split:0
+#: field:account.move.line,name_split:0
+msgid "Number"
+msgstr "Número"
+
+#. module: account_financial_report
+#: view:account.invoice.list.report:0
+msgid "Filter by date (default current year)"
+msgstr "Filtrado por fecha (por defecto, el año actual)"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_afr
+msgid "afr"
+msgstr "afr"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report.h:0
+msgid "Posted"
+msgstr "Asentado"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Journal Ledger  -"
+msgstr "Libro diario  -"
+
+#. module: account_financial_report
+#: sql_constraint:res.company:0
+msgid "The company name must be unique !"
+msgstr "¡El nombre de la compañía debe ser único!"
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,sort_selection:0
+msgid "By date"
+msgstr "By date"
+
+#. module: account_financial_report
+#: field:account.journal.entries.report,sort_selection:0
+msgid "Entries Sorted By"
+msgstr "Asientos ordenados por"
+
+#. module: account_financial_report
+#: field:account.invoice.list.report,out_invoice:0
+msgid "Customer invoices"
+msgstr "Facturas de cliente"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "Invoice date"
+msgstr "Fecha de factura"
+
+#. module: account_financial_report
+#: view:account.general.ledger.cumulative.report:0
+msgid "Select Date-Period"
+msgstr "Seleccionar período-fecha"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_reports
+msgid "Reports"
+msgstr "Informes"
+
+#. module: account_financial_report
+#: report:account.invoice.list.report.wzd:0
+msgid "0.8cm 19.8cm 28.8cm 19.8cm"
+msgstr "0.8cm 19.8cm 28.8cm 19.8cm"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,periods:0
+msgid "All periods in the fiscal year if empty"
+msgstr "Todos los periodos en el ejercicio fiscal si está vacío."
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_balance_full_report
+msgid "Print Full account balance"
+msgstr "Imprimir balance de sumas y saldos"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,display_account:0
+msgid "With balance"
+msgstr "Con saldo"
+
+#. module: account_financial_report
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Entry"
+msgstr "Asiento"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_wizard_report
+msgid "wizard.report"
+msgstr "wizard.report"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+msgid "0.9cm 27.7cm 20.1cm 27.7cm"
+msgstr "0.9cm 27.7cm 20.1cm 27.7cm"
+
+#. module: account_financial_report
+#: report:account.account.chart.report.wzd:0
+#: report:account.balance.full.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: report:account.invoice.list.report.wzd:0
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Page"
+msgstr "Página"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,display_account:0
+#: selection:account.general.ledger.cumulative.report,display_account:0
+msgid "All"
+msgstr "Todos"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_financial_report_print_general_ledger_wizard
+msgid "account.financial.report.print.general.ledger.wizard"
+msgstr "account.financial.report.print.general.ledger.wizard"
+
+#. module: account_financial_report
+#: model:ir.model,name:account_financial_report.model_account_move
+msgid "Account Entry"
+msgstr "Asiento contable"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_print_journal_entries.py:66
+#, python-format
+msgid "No records found for your selection!"
+msgstr "¡No se encontraron registros para su selección!"
+
+#. module: account_financial_report
+#: model:ir.actions.act_window,name:account_financial_report.wizard_account_invoice_list_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_invoice_list
+#: model:ir.model,name:account_financial_report.model_account_invoice_list_report
+msgid "Print invoice list"
+msgstr "Imprimir lista de facturas"
+
+#. module: account_financial_report
+#: model:ir.ui.menu,name:account_financial_report.menu_account_general_ledger_cumulative_report
+msgid "**Cumulative general ledger"
+msgstr "**Libro mayor acumulado"
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd1:0
+msgid "JNRL"
+msgstr "DIAR"
+
+#. module: account_financial_report
+#: report:account.balance.full.report.wzd:0
+msgid "1cm 19.2cm 28.7cm 19.2cm"
+msgstr "1cm 19.2cm 28.7cm 19.2cm"
+
+#. module: account_financial_report
+#: view:account.general.ledger.cumulative.report:0
+#: model:ir.actions.act_window,name:account_financial_report.wizard_account_general_ledger_cumulative_report_new
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_general_ledger_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_general_ledger_report1
+#: model:ir.model,name:account_financial_report.model_account_general_ledger_cumulative_report
+msgid "Cumulative general ledger"
+msgstr "Libro diario acumulado"
+
+#. module: account_financial_report
+#: view:account.general.ledger.cumulative.report:0
+msgid "Filters"
+msgstr "Filtros"
+
+#. module: account_financial_report
+#: view:account.invoice.list.report:0
+msgid "Filter by type"
+msgstr "Filtrar por tipo"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,fiscalyear:0
+msgid "Keep empty to use all open fiscal years to compute the balance"
+msgstr "Dejarlo vacío para usar todos los ejercicios fiscales abiertos para calcular el saldo."
+
+#. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: report:account.invoice.list.report.wzd:0
+msgid "Total"
+msgstr "Total"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:295
+#, python-format
+msgid "SR: "
+msgstr "FRP: "
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record id="account_general_ledger_cumulative_report_view" model="ir.ui.view">
+            <field name="name">Cumulative general ledger</field>
+            <field name="model">account.general.ledger.cumulative.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Cumulative general ledger">
+                <field name="moment_form" invisible="1"/>
+                <group colspan="4">
+                    <separator string="Select parent account" colspan="4" />
+                    <field name="account_list" colspan="4"/>
+                </group>
+                <group colspan="4">
+                    <separator string="Select Date-Period" colspan="4" />
+                    <field name="company_id" colspan="4"/>
+                    <newline/>
+                    <field name="fiscalyear"/>
+                    <label colspan="2" string="(Keep empty for all open fiscal years)" align="0.0"/>
+                    <newline/>
+
+                    <field name="display_account" required="True"/>
+                    <field name="sortbydate" required="True"/>
+                    <field name="landscape"/>
+                    <field name="amount_currency"/>
+                    <field name="initial_balance"/>
+                    <newline/>
+                    <separator string="Filters" colspan="4"/>
+                    <field name="state" required="True"/>
+                    <newline/>
+                    <group attrs="{'invisible':[('state','=','none')]}" colspan="4">
+                        <group attrs="{'invisible':[('state','=','byperiod')]}" colspan="4">
+                            <separator string="Date Filter" colspan="4"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group attrs="{'invisible':[('state','=','bydate')]}" colspan="4">
+                            <separator string="Filter on Periods" colspan="4"/>
+                            <field name="period_ids" colspan="4" nolabel="1"/>
+                        </group>
+                    </group>
+                    <newline/>
+                    <separator colspan="4"/>
+                    <group col="4" colspan="4">
+                        <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="2"/>
+                        <button name="print_report" string="Print" type="object" icon="gtk-print" default_focus="1"/>
+                    </group>
+                </group>
+            </form>
+            </field>
+         </record>
+    </data>
+</openerp>
+
+
+

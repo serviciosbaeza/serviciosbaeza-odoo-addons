@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <record id="account_invoice_list_report_view" model="ir.ui.view">
+            <field name="name">Print invoice list</field>
+            <field name="model">account.invoice.list.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Invoice List">
+                <field name="company_id"/>
+                <newline/>
+                <group colspan="4">
+                    <separator string="Filter by type" colspan="4"/>
+                    <field name="out_invoice"/>
+                    <field name="out_refund"/>
+                    <field name="in_invoice"/>
+                    <field name="in_refund"/>
+                </group>
+                <group colspan="4">
+                    <separator string="Filter by state" colspan="4"/>
+                    <field name="draft"/>
+                    <field name="proforma"/>
+                    <field name="open"/>
+                    <field name="paid"/>
+                    <field name="cancel"/>
+                </group>
+                <group colspan="4">
+                    <separator string="Filter by date (default current year)" colspan="4"/>
+                    <field name="state" required="True"/>
+                    <newline/>
+                    <group attrs="{'invisible':[('state','=','none')]}" colspan="4">
+                        <group attrs="{'invisible':[('state','=','byperiod')]}" colspan="4">
+                            <separator string="Date Filter" colspan="4"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group attrs="{'invisible':[('state','=','bydate')]}" colspan="4">
+                            <separator string="Filter on Periods" colspan="4"/>
+                            <field name="periods" colspan="4" nolabel="1"/>
+                        </group>
+                    </group>
+                </group>
+                <group colspan="4">
+                    <separator string="Options" colspan="4"/>
+                    <field name="detailed_taxes" required="False"/>
+                    <field name="order_by" required="True"/>
+                </group>
+                <group col="4" colspan="4">
+                    <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="2"/>
+                    <button name="print_report" string="Print" type="object" icon="gtk-print" default_focus="1"/>
+                </group>
+            </form>
+            </field>
+         </record>
+    </data>
+</openerp>

@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<document filename="account_move_line_report.pdf">
+  <template pageSize="21cm, 29.7cm" title="Linea de asiento" author="" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="1cm" y1="1cm" width="19cm" height="27.7cm"/>
+
+      <pageGraphics>
+          <!--
+          Footer
+          -->
+          <setFont name="Helvetica" size="8"/>
+          <!--<drawString x="1cm" y="0.9cm">[[formatLang(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), date_time=True)]]</drawString>-->
+          <drawRightString style="pageFooter" x="20cm" y="1.0cm">Page <pageNumber/></drawRightString>
+      </pageGraphics>
+    </pageTemplate>
+  </template>
+
+  <!--
+  Report stylesheet
+  -->
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+
+    <!--
+    Table styles
+    -->
+    <blockTableStyle id="Tabla">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <blockBottomPadding length="0.0"/>
+    </blockTableStyle>
+
+    <blockTableStyle id="TablaS">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <blockTopPadding length="0.0"/>
+      <blockBottomPadding length="0.0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0"/>
+    </blockTableStyle>
+
+    <blockTableStyle id="SubTabla">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <blockTopPadding length="2.0"/>
+      <blockBottomPadding length="0.0"/>
+    </blockTableStyle>
+
+    <blockTableStyle id="SubTablaS">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBELOW" colorName="#444444" start="0,0"/>
+      <blockTopPadding length="0.0"/>
+      <blockBottomPadding length="-0.5"/>
+    </blockTableStyle>
+
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+
+    <!--
+    Own styles
+    -->
+    <paraStyle name="Standard" fontName="Helvetica" fontSize="8"/>
+    <paraStyle name="TitleText" fontName="Helvetica-Bold" fontSize="20.0" leading="25" alignment="CENTER"/>
+    <paraStyle name="FieldDescription" fontName="Helvetica-Bold" fontSize="9.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="FieldDescriptionItalic" fontName="Helvetica-BoldOblique" fontSize="9.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="FieldDescriptionCenterItalic" fontName="Helvetica-BoldOblique" fontSize="9.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="FieldDescriptionCenter" fontName="Helvetica-Bold" fontSize="9.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="FieldDescriptionRight" fontName="Helvetica-Bold" fontSize="9.0" leading="13" alignment="RIGHT"/>
+    <paraStyle name="Detail" fontName="Helvetica" fontSize="8.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="DetailItalic" fontName="Helvetica-Oblique" fontSize="8.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="DetailCenter" fontName="Helvetica" fontSize="8.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="DetailCenterItalic" fontName="Helvetica-Oblique" fontSize="8.0" leading="13" alignment="CENTER"/>
+    <paraStyle name="DetailRight" fontName="Helvetica" fontSize="8.0" leading="13" alignment="RIGHT"/>
+    <paraStyle name="DetailLeft" fontName="Helvetica" fontSize="8.0" leading="13" alignment="LEFT"/>
+    <paraStyle name="pageFooter" fontName="Helvetica-Bold" fontSize="6.0" leading="10"/>
+  </stylesheet>
+  <images/>
+
+
+  <!--
+  Main content
+  -->
+  <story>
+    <para style="Standard">[[setLang(user.context_lang)]]</para>
+
+    <!--
+    Report title
+    -->
+    <para style="TitleText">Entry Lines  -  [[company.name]]</para>
+    <para style="TitleText">
+        <font color="white"> </font>
+    </para>
+
+    <!--
+    Data table
+    -->
+    <blockTable colWidths="1.5cm,1.5cm,7cm,2cm,2cm,5cm" style="Tabla">
+        <!--
+        Table header
+        -->
+      <!-- First line -->
+      <tr>
+        <td>
+          <para style="FieldDescription">Entry</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionRight">Date</para>
+        </td>
+        <td>
+          <para style="FieldDescription">Account</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionRight">Debit</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionRight">Credit</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionCenter">Description</para>
+        </td>
+      </tr>
+    </blockTable>
+
+    <blockTable colWidths="1.5cm,1.5cm,5.5cm,5.5cm,5cm" style="TablaS">
+      <!-- Second line -->
+      <tr>
+        <td>
+          <para style="FieldDescriptionCenterItalic">Ref.</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionItalic">State</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionItalic">Partner</para>
+        </td>
+        <td>
+          <para style="FieldDescriptionItalic">Analitic account</para>
+        </td>
+        <td></td>
+      </tr>
+    </blockTable>
+
+    <!--
+    Table content
+    -->
+    <section>
+        [[repeatIn(objects,'o')]]
+        <blockTable colWidths="1.5cm,1.5cm,7cm,2cm,2cm,5cm" style="SubTabla">
+            <tr>
+                <td>
+                    <para style="DetailCenter">[[o.move_id.name_split]]</para>
+                </td>
+                <td>
+                    <para style="DetailCenter">[[formatLang(o.date_created, date=True)]]</para>
+                </td>
+                <td>
+                    <para style="Detail">[[o.account_id.code]] [[o.account_id.name]]</para>
+                </td>
+                <td>
+                    <para style="DetailRight">[[formatLang(o.debit)]] </para>
+                </td>
+                <td>
+                    <para style="DetailRight">[[formatLang(o.credit)]] </para>
+                </td>
+                <td>
+                    <para style="Detail">[[o.name]]</para>
+                </td>
+            </tr>
+         </blockTable>
+         <blockTable colWidths="1.5cm,1.5cm,5.5cm,5.5cm,5cm" style="SubTablaS">
+            <tr>
+                <td>
+                    <para style="DetailCenterItalic">[[o.ref]]</para>
+                </td>
+                <td>
+                    <para style="DetailItalic">Draft [[ (o.state=='draft' or removeParentNode('para')) and '']]</para>
+                    <para style="DetailItalic">Valid [[ (o.state=='valid' or removeParentNode('para')) and '']]</para>
+                </td>
+                <td>
+                    <para style="DetailItalic">[[o.partner_id.name]]</para>
+                </td>
+                <td>
+                    <para style="DetailItalic">[[o.analytic_account_id.name]]</para>
+                </td>
+                <td></td>
+            </tr>
+        </blockTable>
+      </section>
+        <para alignment="LEFT" style="Standard">End of report</para>
+
+  </story>
+</document>

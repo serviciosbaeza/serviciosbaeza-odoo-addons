@@ -1,0 +1,1164 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_financial_report
+#
+# Ferdinand Gassauer <f.gassauer@chricar.at>, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2010-04-23 11:30+0000\n"
+"PO-Revision-Date: 2011-01-18 06:42+0000\n"
+"Last-Translator: Ferdinand @ Camptocamp <Unknown>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-04-20 05:29+0000\n"
+"X-Generator: Launchpad (build 16567)\n"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,in_invoice:0
+msgid "Supplier invoices"
+msgstr "Lieferantenrechnung"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,display_account:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,display_account:0
+msgid "Display accounts "
+msgstr "Zeige Konten "
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+msgid "Account number"
+msgstr "Kontonummer"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Customer Refund Invoices"
+msgstr "Kundengutschriften"
+
+#. module: account_financial_report
+#: wizard_field:account.general.ledger.cumulative.report,checktype,initial_balance:0
+msgid "Show initial balances"
+msgstr "Zeige Anfangssaldo"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "First line"
+msgstr "Erste Zeile"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Fiscal position"
+msgstr "Steuer Umschlüsselung"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:0
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:0
+#, python-format
+msgid "Date to must be set between %s and %s"
+msgstr "Das Datum muss zwischen %s und %s liegen"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Vat"
+msgstr "USt."
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line
+msgid "Entry lines"
+msgstr "Buchungszeilen"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,company_id:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,company_id:0
+#: wizard_field:account.invoice.list.report,init,company_id:0
+msgid "Company"
+msgstr "Gesellschaft"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,in_refund:0
+msgid "Supplier refunds"
+msgstr "Lieferantengutschriften"
+
+#. module: account_financial_report
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Own style"
+msgstr "eigener Stil"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "<drawRightString x=\"19.8cm\" y=\"25.50cm\">"
+msgstr "<drawRightString x=\"19.8cm\" y=\"25.50cm\">"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Account name"
+msgstr "Kontobezeichnung"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+msgid "Account Balance -"
+msgstr "Konto Saldo"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Analitic account"
+msgstr "Analysekonto"
+
+#. module: account_financial_report
+#: wizard_field:account.account.chart.report,init,account:0
+#: rml:account.balance.full:0
+#: wizard_field:account.general.ledger.cumulative.report,account_selection,account_list:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Account"
+msgstr "Konto"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,state:0
+#: selection:account.general.ledger.cumulative.report,checktype,state:0
+#: selection:account.invoice.list.report,init,state:0
+msgid "By Date and Period"
+msgstr "Nach Datum und Periode"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,account_list:0
+msgid "Root accounts"
+msgstr "Konto Wurzel"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:0
+#: code:addons/account_financial_report/report/general_ledger_landscape.py:0
+#, python-format
+msgid "CI: "
+msgstr ""
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_invoice_list_report
+msgid "Invoice list"
+msgstr "Rechungsliste"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Own styles"
+msgstr "eigene Stile"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Taxes"
+msgstr "Steuern"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+msgid "Ref - Entry Label"
+msgstr "Beleg Nr."
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,state:0
+#: selection:account.general.ledger.cumulative.report,checktype,state:0
+#: selection:account.invoice.list.report,init,state:0
+msgid "By Date"
+msgstr "Nach Datum"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: wizard_field:account.invoice.list.report,init,cancel:0
+msgid "Cancelled"
+msgstr "Storniert"
+
+#. module: account_financial_report
+#: model:ir.actions.wizard,name:account_financial_report.wizard_account_general_ledger_cumulative_report
+msgid "Cum. general ledger"
+msgstr "kum. Sachkonten"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Entry Lines  -"
+msgstr "Buchungszeilen -"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Table styles"
+msgstr "Tabellen Stil"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:0
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:0
+#, python-format
+msgid "UserError"
+msgstr "Benutzer Fehler"
+
+#. module: account_financial_report
+#: model:ir.module.module,description:account_financial_report.module_meta_information
+msgid ""
+"\n"
+"Add some common financial/accounting reports and some wizards to quickly "
+"compute them:\n"
+"  * Account chart list\n"
+"  * Invoice list\n"
+"  * Account move (journal ledger)\n"
+"  * Account move line\n"
+"  * Account balance compared period-fiscal year\n"
+"  * Cumulative general ledger\n"
+"\n"
+"They can be found in the \"Financial Management/Legal Statements/Generic "
+"Reports\" menu or in the tree/form views of accounts, journals, invoices, "
+"account entries and account move lines.\n"
+"\n"
+"Some reports are based on previous work by Pexego and others on the "
+"c2c_finance_report module for TinyERP 4.2 by Camptocamp SA.\n"
+msgstr ""
+"\n"
+"Einige übliche FIbu Ausdrucke und Assistenten:\n"
+"  * Kontenplan\n"
+"  * Rechnungsliste\n"
+"  * Buchungsjournal\n"
+"  * Buchungszeilenjournal\n"
+"  * SAlden Geschäftsjahresvergleich\n"
+"  * kum Sachkontenauszug\n"
+"\n"
+"Diese Reports können aus dem Menü oder aus dem jeweilgen Formular aufgerufen "
+"werden.\n"
+"\n"
+"Einige Reports basieren auf Arbeiten von Pexego und andere auf dem "
+"c2c_finance_report  Module für TinyERP 4.2. von CCamptocamp SA.\n"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "<drawString x=\"1cm\" y=\"0.9cm\">"
+msgstr "<drawString x=\"1cm\" y=\"0.9cm\">"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "<fill color=\"darkblue\"/>"
+msgstr "<fill color=\"darkblue\"/>"
+
+#. module: account_financial_report
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Reference"
+msgstr "Referenz"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_account_balance_report.py:0
+#: code:addons/account_financial_report/wizard/wizard_general_ledger_report.py:0
+#, python-format
+msgid "Date not in a defined fiscal year"
+msgstr "Datum liegt nicht in einem definierten Geschäftsjahr"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "External ref."
+msgstr "ext. Referenz"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line_record_h
+msgid "Entry landscape"
+msgstr "Zeilen im Querformat"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "<stroke color=\"darkblue\"/>"
+msgstr "<stroke color=\"darkblue\"/>"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+msgid "Account Chart"
+msgstr "Kontenplan"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Ref."
+msgstr "Ref."
+
+#. module: account_financial_report
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "To check"
+msgstr "Zu prüfen"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+#: selection:account.invoice.list.report,init,order_by:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_financial_report
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "YES"
+msgstr "Ja"
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,init,sort_selection:0
+msgid "By reference number"
+msgstr "nach Referenznummer"
+
+#. module: account_financial_report
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Table style"
+msgstr "Tabellenstil"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Periods/Date range:"
+msgstr "Perioden/Datum Auswahl:"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "<td>                             <para style=\"Text body\">"
+msgstr "<td>                             <para style=\"Text body\">"
+
+#. module: account_financial_report
+#: wizard_view:account.account.chart.report,init:0
+#: wizard_view:account.general.ledger.cumulative.report,account_selection:0
+msgid "Select parent account"
+msgstr "Wählen übergeordnetes Konto"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:0
+#: code:addons/account_financial_report/report/general_ledger_landscape.py:0
+#, python-format
+msgid "Initial balance"
+msgstr "Eröffnungskontostand"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "State"
+msgstr "Status"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Valid"
+msgstr "Gültig"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Second line"
+msgstr "2. Zeile"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Debit"
+msgstr "Soll"
+
+#. module: account_financial_report
+#: wizard_button:account.account.chart.report,init,report:0
+#: wizard_button:account.balance.full.report,init,report:0
+#: wizard_button:account.general.ledger.cumulative.report,checktype,checkreport:0
+#: wizard_button:account.invoice.list.report,init,report:0
+#: wizard_button:account.journal.entries.report,init,print:0
+msgid "Print"
+msgstr "Druck"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "logo"
+msgstr "Logo"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,date_from:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,date_from:0
+#: wizard_field:account.invoice.list.report,init,date_from:0
+msgid "Start date"
+msgstr "Datum von"
+
+#. module: account_financial_report
+#: wizard_button:account.general.ledger.cumulative.report,account_selection,checktype:0
+msgid "Next"
+msgstr "Nächste"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Fiscal year:"
+msgstr "GEschäftsjahr:"
+
+#. module: account_financial_report
+#: wizard_view:account.balance.full.report,init:0
+#: wizard_view:account.general.ledger.cumulative.report,checktype:0
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Filter on Periods"
+msgstr "Periodenfilter"
+
+#. module: account_financial_report
+#: wizard_view:account.balance.full.report,init:0
+msgid "Full Account Balance"
+msgstr "Bilanz alle Konten"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Table header"
+msgstr "Tabellen Kopf"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "</para>                             </td>"
+msgstr "</para>                             </td>"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,state:0
+#: selection:account.general.ledger.cumulative.report,checktype,state:0
+#: selection:account.invoice.list.report,init,state:0
+msgid "No Filter"
+msgstr "kein Filter"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: wizard_field:account.balance.full.report,init,fiscalyear:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,fiscalyear:0
+msgid "Fiscal year"
+msgstr "Geschäftsjahr"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,checktype,display_account:0
+msgid "With balance is not equal to 0"
+msgstr "mit Saldo ungleich 0"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid ""
+"<td>                             <para style=\"Standard\" size=\"5\">Invoice "
+"description</para>                         </td>"
+msgstr ""
+"<td>                             <para style=\"Standard\" "
+"size=\"5\">Rechnungsbezeichnung</para>                         </td>"
+
+#. module: account_financial_report
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Filter by date"
+msgstr "Filter Datum"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "</drawString>"
+msgstr "</drawString>"
+
+#. module: account_financial_report
+#: wizard_view:account.balance.full.report,init:0
+msgid "Accounts to include"
+msgstr "Einzubeziehende Konten"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid ""
+"<blockTable "
+"colWidths=\"1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm"
+",1.8cm,1.6cm\" repeatRows=\"1\" style=\"Table3\">"
+msgstr ""
+"<blockTable "
+"colWidths=\"1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm"
+",1.8cm,1.6cm\" repeatRows=\"1\" style=\"Table3\">"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Mvt"
+msgstr "Buchung"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+msgid "1cm 27.9cm 20cm 27.9cm"
+msgstr "1cm 27.9cm 20cm 27.9cm"
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,init,sort_selection:0
+msgid "By entry number"
+msgstr "Nach Belegnummer"
+
+#. module: account_financial_report
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Options"
+msgstr "Optionen"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Entry Label"
+msgstr "Belegnummer"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_general_ledger_cumulative_landscape
+msgid "Cumulative general ledger landscape"
+msgstr "kum. Sachkonten"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Counterpart"
+msgstr "Gegenkonto"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_print_journal_entries.py:0
+#, python-format
+msgid "No Data Available"
+msgstr "Keine Daten verfügbar"
+
+#. module: account_financial_report
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Filter by state"
+msgstr "FIlter Status"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Due date"
+msgstr "Fälligkeit"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,init,periods:0
+msgid "All periods in the fiscal year if empty"
+msgstr "Alle Perioden des Wirtschaftsjahres, wenn leer"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: wizard_field:account.invoice.list.report,init,proforma:0
+msgid "Pro-forma"
+msgstr "Pro-Forma"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Currency"
+msgstr "Währung"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_account_chart_report
+#: model:ir.actions.wizard,name:account_financial_report.wizard_account_chart_report
+#: model:ir.ui.menu,name:account_financial_report.menu_account_chart_report
+msgid "Chart of accounts"
+msgstr "Kontenplan"
+
+#. module: account_financial_report
+#: selection:account.journal.entries.report,init,sort_selection:0
+msgid "By date"
+msgstr "nach Datum"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,display_account_level:0
+msgid "Up to level"
+msgstr "Bis Ebene"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Partner code"
+msgstr "Partner Code"
+
+#. module: account_financial_report
+#: wizard_view:account.general.ledger.cumulative.report,checktype:0
+msgid "(Keep empty for all open fiscal years)"
+msgstr "(Leer für alle offenen Wirtschaftsjahre)"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Report title"
+msgstr "Report Titel"
+
+#. module: account_financial_report
+#: wizard_view:account.balance.full.report,init:0
+#: wizard_view:account.general.ledger.cumulative.report,checktype:0
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Date Filter"
+msgstr "Filter Datum"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: wizard_field:account.invoice.list.report,init,draft:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "TITLE COMPANY"
+msgstr ""
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "</para>                         </td>"
+msgstr "</para>                         </td>"
+
+#. module: account_financial_report
+#: selection:account.general.ledger.cumulative.report,checktype,sortbydate:0
+msgid "Movement"
+msgstr "Buchung"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_balance_full
+#: model:ir.actions.wizard,name:account_financial_report.wizard_account_balance_full_report
+#: model:ir.actions.wizard,name:account_financial_report.wizard_account_balance_full_report_menu
+#: model:ir.ui.menu,name:account_financial_report.menu_account_balance_full_report
+msgid "Full account balance"
+msgstr "vollständige Bilanz"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "<drawRightString x=\"19.8cm\" y=\"28cm\">"
+msgstr "<drawRightString x=\"19.8cm\" y=\"28cm\">"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Untaxed"
+msgstr "Unversteuert"
+
+#. module: account_financial_report
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "NO"
+msgstr ""
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,state:0
+#: selection:account.general.ledger.cumulative.report,checktype,state:0
+#: selection:account.invoice.list.report,init,state:0
+msgid "By Period"
+msgstr "nach Periode"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Paid"
+msgstr "bezahlt"
+
+#. module: account_financial_report
+#: help:account.general.ledger.cumulative.report,checktype,periods:0
+#: help:account.invoice.list.report,init,periods:0
+msgid "All periods if empty"
+msgstr "Alle Perioden, wenn leer"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: selection:account.general.ledger.cumulative.report,checktype,sortbydate:0
+#: selection:account.invoice.list.report,init,order_by:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "1.3cm 24.9cm 38.3cm 24.9cm"
+msgstr "1.3cm 24.9cm 38.3cm 24.9cm"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,init,display_account_level:0
+msgid "Display accounts up to this level (0 to show all)"
+msgstr "Zeige Konten bis Ebene (0 = alle)"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,display_account:0
+#: selection:account.general.ledger.cumulative.report,checktype,display_account:0
+msgid "With movements"
+msgstr "mit Buchungen"
+
+#. module: account_financial_report
+#: wizard_view:account.journal.entries.report,init:0
+msgid "Print Journal"
+msgstr "Joural"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Footer"
+msgstr "Fuss"
+
+#. module: account_financial_report
+#: help:account.general.ledger.cumulative.report,checktype,fiscalyear:0
+msgid "Keep empty for all open fiscal year"
+msgstr "Leer für alle offenen Geschäftsjahre"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Credit"
+msgstr "Haben"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "COL 2"
+msgstr ""
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "COL 1"
+msgstr ""
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "<drawString x=\"4.6cm\" y=\"28.7cm\">"
+msgstr "<drawString x=\"4.6cm\" y=\"28.7cm\">"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,date_to:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,date_to:0
+#: wizard_field:account.invoice.list.report,init,date_to:0
+msgid "End date"
+msgstr "Datum bis"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+msgid "Code"
+msgstr "Code"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Entry num."
+msgstr "Buch.Nr."
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Customer Invoices"
+msgstr "Kundenrechnungen"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,state:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,state:0
+#: wizard_field:account.invoice.list.report,init,state:0
+msgid "Date/Period Filter"
+msgstr "Filter Datum/Periode"
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+msgid "Init. balance"
+msgstr "Eröffnungsbilanz"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "</drawRightString>"
+msgstr "</drawRightString>"
+
+#. module: account_financial_report
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Subtable style"
+msgstr "Stil Untertabelle"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,paid:0
+msgid "Done"
+msgstr "Erledigt"
+
+#. module: account_financial_report
+#: wizard_field:account.balance.full.report,init,periods:0
+#: wizard_field:account.general.ledger.cumulative.report,checktype,periods:0
+#: wizard_field:account.invoice.list.report,init,periods:0
+msgid "Periods"
+msgstr "Perioden"
+
+#. module: account_financial_report
+#: wizard_field:account.general.ledger.cumulative.report,checktype,landscape:0
+#: wizard_field:account.journal.entries.report,init,landscape:0
+msgid "Landscape Mode"
+msgstr "QUerformat"
+
+#. module: account_financial_report
+#: wizard_button:account.account.chart.report,init,end:0
+#: wizard_button:account.balance.full.report,init,end:0
+#: wizard_button:account.general.ledger.cumulative.report,account_selection,end:0
+#: wizard_button:account.general.ledger.cumulative.report,checktype,end:0
+#: wizard_button:account.invoice.list.report,init,end:0
+#: wizard_button:account.journal.entries.report,init,end:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,order_by:0
+msgid "Order by"
+msgstr "Sortiert nach"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: wizard_field:account.invoice.list.report,init,open:0
+msgid "Open"
+msgstr "Offen"
+
+#. module: account_financial_report
+#: model:ir.module.module,shortdesc:account_financial_report.module_meta_information
+msgid "Common financial reports"
+msgstr "Allgemeine Finanz Reports"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_print_journal_entries
+#: model:ir.actions.wizard,name:account_financial_report.wizard_journal_entries_report
+#: model:ir.ui.menu,name:account_financial_report.menu_journal_entries_report
+msgid "Print journal by entries"
+msgstr "Buchungsjournal"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "Ref"
+msgstr "Ref."
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+#: wizard_view:account.balance.full.report,init:0
+#: wizard_field:account.journal.entries.report,init,period_ids:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Period"
+msgstr "Periode"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:0
+#: code:addons/account_financial_report/report/general_ledger_landscape.py:0
+#, python-format
+msgid "SI: "
+msgstr ""
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "<td>                                 <para style=\"Text body\">"
+msgstr "<td>                                 <para style=\"Text body\">"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Supplier Invoices"
+msgstr "Lieferantenrechnung"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:0
+#: code:addons/account_financial_report/report/general_ledger_landscape.py:0
+#, python-format
+msgid "OR: "
+msgstr ""
+
+#. module: account_financial_report
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Filter by type"
+msgstr "Filter nach Typ"
+
+#. module: account_financial_report
+#: wizard_field:account.journal.entries.report,init,journal_ids:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: wizard_view:account.invoice.list.report,init:0
+msgid "Invoice List"
+msgstr "Rechnungsliste"
+
+#. module: account_financial_report
+#: wizard_field:account.general.ledger.cumulative.report,checktype,amount_currency:0
+msgid "With Currency"
+msgstr "Mit Währung"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,detailed_taxes:0
+msgid "Detailed taxes"
+msgstr "Steuerdetail"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Supplier Refund Invoices"
+msgstr "Lieferantengutschrift"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+#: selection:account.invoice.list.report,init,order_by:0
+msgid "Number"
+msgstr "Nummer"
+
+#. module: account_financial_report
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entriesh:0
+msgid "Posted"
+msgstr "Gebucht"
+
+#. module: account_financial_report
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Journal Ledger  -"
+msgstr "Journalbuchungen -"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "General Ledger -"
+msgstr "Sachkonten -"
+
+#. module: account_financial_report
+#: wizard_field:account.journal.entries.report,init,sort_selection:0
+msgid "Entries Sorted By"
+msgstr "Buchungen sortiert nach"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,out_invoice:0
+msgid "Customer invoices"
+msgstr "Kundenrechnungen"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Invoice date"
+msgstr "Rechnungs- datum"
+
+#. module: account_financial_report
+#: wizard_view:account.general.ledger.cumulative.report,checktype:0
+msgid "Select Date-Period"
+msgstr "Wähle Datum,Periode"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+msgid "Data table"
+msgstr "Datumstabelle"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "0.8cm 19.8cm 28.8cm 19.8cm"
+msgstr "0.8cm 19.8cm 28.8cm 19.8cm"
+
+#. module: account_financial_report
+#: rml:account.invoice.list.report:0
+msgid "Currency :"
+msgstr "Währung:"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Table content"
+msgstr "Tabelleninhalt"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,display_account:0
+msgid "With balance"
+msgstr "Mit Saldo"
+
+#. module: account_financial_report
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+#: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line_record
+msgid "Entry"
+msgstr "Buchung"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+msgid "0.9cm 27.7cm 20.1cm 27.7cm"
+msgstr "0.9cm 27.7cm 20.1cm 27.7cm"
+
+#. module: account_financial_report
+#: rml:account.account.chart.report:0
+#: rml:account.balance.full:0
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+#: rml:account.move.line.report:0
+#: rml:account.move.report:0
+#: rml:account.move.report.h:0
+#: rml:account.print.journal.entries:0
+#: rml:account.print.journal.entriesh:0
+msgid "Page"
+msgstr "Seite"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_print_journal_entriesh
+msgid "Print journal by entries landscape"
+msgstr "Buchungsjournal Querformat"
+
+#. module: account_financial_report
+#: selection:account.balance.full.report,init,display_account:0
+#: selection:account.general.ledger.cumulative.report,checktype,display_account:0
+msgid "All"
+msgstr "Alle"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/wizard/wizard_print_journal_entries.py:0
+#, python-format
+msgid "No records found for your selection!"
+msgstr "Keine Datensätze für Ihre Auswahl gefunden"
+
+#. module: account_financial_report
+#: model:ir.actions.wizard,name:account_financial_report.wizard_invoice_list_report
+#: model:ir.ui.menu,name:account_financial_report.menu_invoice_list_report
+msgid "Print invoice list"
+msgstr "Rechnungsliste"
+
+#. module: account_financial_report
+#: wizard_field:account.general.ledger.cumulative.report,checktype,sortbydate:0
+msgid "Sort by"
+msgstr "Sortiere nach"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative.landscape:0
+msgid "JNRL"
+msgstr ""
+
+#. module: account_financial_report
+#: rml:account.balance.full:0
+msgid "1cm 19.2cm 28.7cm 19.2cm"
+msgstr "1cm 19.2cm 28.7cm 19.2cm"
+
+#. module: account_financial_report
+#: model:ir.actions.report.xml,name:account_financial_report.account_general_ledger_cumulative
+#: model:ir.actions.wizard,name:account_financial_report.wizard_account_general_ledger_cumulative_report_menu
+#: model:ir.ui.menu,name:account_financial_report.menu_account_general_ledger_cumulative_report
+msgid "Cumulative general ledger"
+msgstr "kum. Sachkonten"
+
+#. module: account_financial_report
+#: wizard_view:account.general.ledger.cumulative.report,checktype:0
+msgid "Filters"
+msgstr "Filter"
+
+#. module: account_financial_report
+#: wizard_field:account.invoice.list.report,init,out_refund:0
+msgid "Customer refunds"
+msgstr "Kundengutschriften"
+
+#. module: account_financial_report
+#: help:account.balance.full.report,init,fiscalyear:0
+msgid "Keep empty to use all open fiscal years to compute the balance"
+msgstr ""
+"Leer lassen um auf Basis aller offenen Geschäftsjahre den Saldo zu errechnen"
+
+#. module: account_financial_report
+#: rml:account.general.ledger.cumulative:0
+#: rml:account.general.ledger.cumulative.landscape:0
+#: rml:account.invoice.list.report:0
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: account_financial_report
+#: code:addons/account_financial_report/report/general_ledger.py:0
+#: code:addons/account_financial_report/report/general_ledger_landscape.py:0
+#, python-format
+msgid "SR: "
+msgstr ""
+
+#. module: account_financial_report
+#: report:account.account.chart.report:0
+#: report:account.balance.full:0
+#: report:account.general.ledger.cumulative:0
+#: report:account.general.ledger.cumulative.landscape:0
+#: report:account.invoice.list.report:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+#: report:account.print.journal.entries:0
+#: report:account.print.journal.entriesh:0
+msgid "End of report"
+msgstr ""

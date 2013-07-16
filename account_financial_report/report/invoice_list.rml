@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<document filename="invoice_list.pdf">
+    <template pageSize="29.7cm, 21cm" title="Invoice List" author="Nicolas Bessi-Jordi Esteve (Zikzakmedia)-Pedro Manuel Baeza Romero" allowSplitting="20">
+        <pageTemplate id="first">
+            <frame id="first" x1="1cm" y1="1cm" width="27.7cm" height="19cm"/>
+            <pageGraphics>
+                <!--logo-->
+                <!--<fill color="darkblue"/>-->
+                <!--<stroke color="darkblue"/>-->
+
+                <!--COL 1-->
+                <setFont name="Helvetica-Bold" size="10"/>
+                <drawString x="0.8cm" y="20cm">[[company.name]]</drawString>
+                <setFont name="Helvetica-Bold" size="9"/>
+                <!--<drawRightString x="19.8cm" y="25.50cm">[[ company.rml_header1 ]]</drawRightString>-->
+                <drawString x="25.8cm" y="20cm">Invoice List</drawString>
+
+                <!--COL 2-->
+                <setFont name="Helvetica" size="8"/>
+                <drawString x="0.8cm" y="0.9cm">[[formatLang(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), date_time=True)]]</drawString>
+                <drawString x="27.5cm" y="0.9cm">Page <pageNumber/></drawString>
+
+                <lineMode width="0.7"/>
+                <lines>0.8cm 19.8cm 28.8cm 19.8cm</lines>
+                <setFont name="Helvetica" size="8"/>
+            </pageGraphics>
+        </pageTemplate>
+    </template>
+
+    <stylesheet>
+        <blockTableStyle id="Standard_Outline">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table1">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+            <blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+            <blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+            <blockBackground colorName="#e6e6e6" start="0,1" stop="0,1"/>
+            <blockBackground colorName="#e6e6e6" start="1,1" stop="1,1"/>
+            <blockBackground colorName="#e6e6e6" start="2,1" stop="2,1"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table2">
+            <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="-1,0"/>
+            <lineStyle kind="LINEBELOW" colorName="#e6e6e6" start="0,1" stop="-1,-1"/>
+            <blockValign value="TOP"/>
+            <blockAlignment value="RIGHT" start="2,1" stop="-1,-1"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table3">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <blockBottomPadding length="1.0"/>
+            <lineStyle kind="LINEABOVE" colorName="#AAAAAA"/>
+            <blockBackground colorName="white" start="0,0" stop="-1,0"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table3a">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="MIDDLE"/>
+            <lineStyle kind="LINEABOVE" colorName="#888888"/>
+            <blockBottomPadding length="1.0"/>
+            <blockBackground colorName="white" start="0,0" stop="-1,0"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table3b">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <blockTopPadding length="0.5"/>
+            <blockBottomPadding length="1.0"/>
+            <blockBackground colorName="white" start="0,0" stop="-1,0"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table5">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+        </blockTableStyle>
+        <blockTableStyle id="Table4">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <lineStyle kind="GRID" colorName="black"/>
+        </blockTableStyle>
+        <blockTableStyle id="Theader">
+            <blockAlignment value="LEFT"/>
+            <blockValign value="TOP"/>
+            <lineStyle kind="OUTLINE" colorName="#e6e6e6"/>
+            <blockBackground colorName="white" start="0,0" stop="-1,0"/>
+        </blockTableStyle>
+
+        <initialize>
+            <paraStyle name="all" alignment="justify"/>
+        </initialize>
+        <paraStyle name="P1" fontName="Helvetica" fontSize="20.0" leading="25" alignment="CENTER"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P2" fontName="Helvetica" fontSize="7.0" leading="10" spaceBefore="0.0"
+            spaceAfter="6.0"/>
+        <paraStyle name="P3" fontName="Helvetica" fontSize="7.0" leading="10" alignment="LEFT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P4" fontName="Helvetica" fontSize="7.0" leading="10" alignment="RIGHT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P5" fontName="Helvetica" fontSize="10.0" leading="13" alignment="RIGHT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P6" fontName="Helvetica" alignment="CENTER" spaceBefore="0.0"
+            spaceAfter="6.0"/>
+        <paraStyle name="P7" fontName="Helvetica" fontSize="10.0" leading="14" alignment="RIGHT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P8" fontName="Helvetica" fontSize="10.0" leading="14" alignment="RIGHT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P9" fontName="Helvetica" fontSize="7.0" leading="10" alignment="RIGHT"
+            spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P9b" fontName="Helvetica-Bold" fontSize="7.0" leading="10"
+            alignment="RIGHT" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P10" fontName="Helvetica" alignment="CENTER"/>
+        <paraStyle name="P11" fontName="Helvetica" fontSize="10.0" leading="14"/>
+        <paraStyle name="P12" fontName="Helvetica" fontSize="14.0" leading="17"/>
+        <paraStyle name="P13" fontName="Helvetica-Bold" fontSize="10.0" leading="8"
+            alignment="CENTER" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P14" fontName="Helvetica" fontSize="7.0" leading="10" spaceBefore="0.0"
+            spaceAfter="6.0"/>
+        <paraStyle name="P15" fontName="Helvetica-Bold" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P16" rightIndent="17.0" leftIndent="-0.0" fontName="Times-Roman"
+            fontSize="7.0" leading="10" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="P17" fontName="Helvetica" alignment="LEFT" fontSize="12.0" spaceAfter="0.0"/>
+        <paraStyle name="Standard" fontName="Helvetica-Bold" size="9" fontSize="7.5"/>
+        <paraStyle name="Header" fontName="Helvetica-Bold" size="9" fontSize="9"/>
+        <paraStyle name="Account" fontName="Helvetica"/>
+        <paraStyle name="Text body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0" fontSize="7.5"/>
+        <paraStyle name="Text body italic" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0" fontSize="7.5"/>
+        <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="Table Contents" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+        <paraStyle name="Table Heading" fontName="Helvetica" alignment="CENTER" spaceBefore="0.0"
+            spaceAfter="6.0"/>
+        <paraStyle name="Caption" fontName="Helvetica" fontSize="10.0" leading="13"
+            spaceBefore="6.0" spaceAfter="6.0"/>
+        <paraStyle name="Index" fontName="Helvetica"/>
+    </stylesheet>
+
+    <story>
+        <para style="Standard">[[setLang(user.context_lang)]]</para>
+        <para style="Standard">
+            <font color="white"> </font>
+        </para>
+        <para style="Header">Customer Invoices [[ (out_invoices or removeParentNode('para')) and '' ]]</para>
+        <section>
+            <section> [[ repeatIn(out_invoices, 'obj') ]] <para style="Standard"> Currency : [[ obj[0] ]] </para>
+                <!--<blockTable colWidths="1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm,1.8cm,1.6cm" repeatRows="1" style="Table3">-->
+                <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" repeatRows="1" style="Table3a">
+                    <tr>
+                        <td>
+                            <para style="Standard" size="5">Number</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">External ref.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Entry num.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Invoice date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Due date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner code</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Vat</para>
+                        </td>
+                        <!--<td>
+                            <para style="Standard" size="5">Invoice description</para>
+                        </td>-->
+                        <td>
+                            <para style="Standard" size="5">State</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Untaxed</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Taxes</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Total</para>
+                        </td>
+                    </tr>
+                </blockTable>
+                <section>[[ repeatIn(obj[1], 'inv') ]]
+                    <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                        <tr>
+                            <td>
+                                <para style="Text body">[[inv.number]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.reference]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.move_id.name_split]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_invoice and formatLang(inv.date_invoice, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_due and formatLang(inv.date_due, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.ref]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.name]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.vat]]</para>
+                            </td>
+                            <!--<td>
+                                <para style="Text body">[[inv.name]]</para>
+                            </td>-->
+                            <td>
+                                <para style="Text body">Draft [[ (inv.state=='draft' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Pro-forma [[ (inv.state in ['proforma','proforma2'] or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Open [[ (inv.state=='open' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Paid [[ (inv.state=='paid' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Cancelled [[ (inv.state=='cancel' or removeParentNode('para')) and '']]</para> 
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_untaxed)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_tax)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_total)]]</para>
+                            </td>
+                        </tr>
+                    </blockTable>
+                    <section>[[ repeatIn(detailed_taxes and inv.tax_line or [], 'tax_line') ]]
+                        <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+                            [[ (tax_line.tax_code_id and tax_line.tax_code_id.notprintable and removeParentNode('blockTable')) or '']]
+                            <tr>
+                                <td>
+                                    <para/>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[tax_line.name or '']]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.amount)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base+tax_line.amount)]]</para>
+                                </td>
+                            </tr>
+                        </blockTable>
+                    </section>
+                </section>
+                <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                    <tr>
+                        <td>
+                            <para/>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">Total</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[2])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[3])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[4])]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+				<section>[[ repeatIn(obj[5], 'taxTotals') ]]
+					<blockTable colWidths="21.3cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+						<tr>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[ taxTotals[0] ]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[1])]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[2])]]</para>
+							</td>
+							<td>
+								<para/>
+							</td>
+						</tr>
+					</blockTable>
+				</section>
+                <para style="Standard">
+                    <font color="white"> </font>
+                </para>
+            </section>
+        </section>
+
+
+
+        <para style="Header">Customer Refund Invoices [[ (out_refunds or removeParentNode('para')) and '' ]]</para>
+        <section>
+            <section> [[ repeatIn(out_refunds, 'obj') ]] <para style="Standard"> Currency : [[ obj[0] ]] </para>
+                <!--<blockTable colWidths="1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm,1.8cm,1.6cm" repeatRows="1" style="Table3">-->
+                <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" repeatRows="1" style="Table3a">
+                    <tr>
+                        <td>
+                            <para style="Standard" size="5">Number</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">External ref.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Entry num.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Invoice date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Due date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner code</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Vat</para>
+                        </td>
+                        <!--<td>
+                            <para style="Standard" size="5">Invoice description</para>
+                        </td>-->
+                        <td>
+                            <para style="Standard" size="5">State</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Untaxed</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Taxes</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Total</para>
+                        </td>
+                    </tr>
+                </blockTable>
+                <section>[[ repeatIn(obj[1], 'inv') ]]
+                    <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                        <tr>
+                            <td>
+                                <para style="Text body">[[inv.number]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.reference]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.move_id.name_split]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_invoice and formatLang(inv.date_invoice, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_due and formatLang(inv.date_due, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.ref]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.name]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.vat]]</para>
+                            </td>
+                            <!--<td>
+                                <para style="Text body">[[inv.name]]</para>
+                            </td>-->
+                            <td>
+                                <para style="Text body">Draft [[ (inv.state=='draft' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Pro-forma [[ (inv.state in ['proforma','proforma2'] or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Open [[ (inv.state=='open' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Paid [[ (inv.state=='paid' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Cancelled [[ (inv.state=='cancel' or removeParentNode('para')) and '']]</para> 
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_untaxed)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_tax)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_total)]]</para>
+                            </td>
+                        </tr>
+                    </blockTable>
+                    <section>[[ repeatIn(detailed_taxes and inv.tax_line or [], 'tax_line') ]]
+                        <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+                            [[ (tax_line.tax_code_id and tax_line.tax_code_id.notprintable and removeParentNode('blockTable')) or '']]
+                            <tr>
+                                <td>
+                                    <para/>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[tax_line.name or '']]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.amount)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base+tax_line.amount)]]</para>
+                                </td>
+                            </tr>
+                        </blockTable>
+                    </section>
+                </section>
+                <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                    <tr>
+                        <td>
+                            <para/>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">Total</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[2])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[3])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[4])]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+				<section>[[ repeatIn(obj[5], 'taxTotals') ]]
+					<blockTable colWidths="21.3cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+						<tr>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[ taxTotals[0] ]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[1])]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[2])]]</para>
+							</td>
+							<td>
+								<para/>
+							</td>
+						</tr>
+					</blockTable>
+				</section>
+                <para style="Standard">
+                    <font color="white"> </font>
+                </para>
+            </section>
+        </section>
+
+
+        <para style="Header">Supplier Invoices [[ (in_invoices or removeParentNode('para')) and '' ]]</para>
+        <section>
+            <section> [[ repeatIn(in_invoices, 'obj') ]] <para style="Standard"> Currency : [[ obj[0] ]] </para>
+                <!--<blockTable colWidths="1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm,1.8cm,1.6cm" repeatRows="1" style="Table3">-->
+                <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" repeatRows="1" style="Table3a">
+                    <tr>
+                        <td>
+                            <para style="Standard" size="5">Number</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">External ref.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Entry num.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Invoice date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Due date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner code</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Vat</para>
+                        </td>
+                        <!--<td>
+                            <para style="Standard" size="5">Invoice description</para>
+                        </td>-->
+                        <td>
+                            <para style="Standard" size="5">State</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Untaxed</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Taxes</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Total</para>
+                        </td>
+                    </tr>
+                </blockTable>
+                <section>[[ repeatIn(obj[1], 'inv') ]]
+                    <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                        <tr>
+                            <td>
+                                <para style="Text body">[[inv.number]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.reference]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.move_id.name_split]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_invoice and formatLang(inv.date_invoice, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_due and formatLang(inv.date_due, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.ref]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.name]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.vat]]</para>
+                            </td>
+                            <!--<td>
+                                <para style="Text body">[[inv.name]]</para>
+                            </td>-->
+                            <td>
+                                <para style="Text body">Draft [[ (inv.state=='draft' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Pro-forma [[ (inv.state in ['proforma','proforma2'] or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Open [[ (inv.state=='open' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Paid [[ (inv.state=='paid' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Cancelled [[ (inv.state=='cancel' or removeParentNode('para')) and '']]</para> 
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_untaxed)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_tax)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_total)]]</para>
+                            </td>
+                        </tr>
+                    </blockTable>
+                    <section>[[ repeatIn(detailed_taxes and inv.tax_line or [], 'tax_line') ]]
+                        <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+                            [[ (tax_line.tax_code_id and tax_line.tax_code_id.notprintable and removeParentNode('blockTable')) or '']]
+                            <tr>
+                                <td>
+                                    <para/>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[tax_line.name or '']]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.amount)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base+tax_line.amount)]]</para>
+                                </td>
+                            </tr>
+                        </blockTable>
+                    </section>
+                </section>
+                <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                    <tr>
+                        <td>
+                            <para/>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">Total</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[2])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[3])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[4])]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+				<section>[[ repeatIn(obj[5], 'taxTotals') ]]
+					<blockTable colWidths="21.3cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+						<tr>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[ taxTotals[0] ]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[1])]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[2])]]</para>
+							</td>
+							<td>
+								<para/>
+							</td>
+						</tr>
+					</blockTable>
+				</section>
+                <para style="Standard">
+                    <font color="white"> </font>
+                </para>
+            </section>
+        </section>
+
+
+        <para style="Header">Supplier Refund Invoices [[ (in_refunds or removeParentNode('para')) and '' ]]</para>
+        <section>
+            <section> [[ repeatIn(in_refunds, 'obj') ]] <para style="Standard"> Currency : [[ obj[0] ]] </para>
+                <!--<blockTable colWidths="1.8cm,1.4cm,1.4cm,1.8cm,1.8cm,2cm,3.5cm,2cm,4cm,1.2cm,1.8cm,1.4cm,1.8cm,1.6cm" repeatRows="1" style="Table3">-->
+                <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" repeatRows="1" style="Table3a">
+                    <tr>
+                        <td>
+                            <para style="Standard" size="5">Number</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">External ref.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Entry num.</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Invoice date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Due date</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner code</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Partner</para>
+                        </td>
+                        <td>
+                            <para style="Standard" size="5">Vat</para>
+                        </td>
+                        <!--<td>
+                            <para style="Standard" size="5">Invoice description</para>
+                        </td>-->
+                        <td>
+                            <para style="Standard" size="5">State</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Untaxed</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Taxes</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard" size="5">Total</para>
+                        </td>
+                    </tr>
+                </blockTable>
+                <section>[[ repeatIn(obj[1], 'inv') ]]
+                    <blockTable colWidths="2.0cm,2.3cm,2.0cm,1.8cm,2.0cm,1.6cm,6.4cm,2cm,1.2cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                        <tr>
+                            <td>
+                                <para style="Text body">[[inv.number]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.reference]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.move_id.name_split]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_invoice and formatLang(inv.date_invoice, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.date_due and formatLang(inv.date_due, date=True)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.ref]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.name]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body">[[inv.partner_id.vat]]</para>
+                            </td>
+                            <!--<td>
+                                <para style="Text body">[[inv.name]]</para>
+                            </td>-->
+                            <td>
+                                <para style="Text body">Draft [[ (inv.state=='draft' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Pro-forma [[ (inv.state in ['proforma','proforma2'] or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Open [[ (inv.state=='open' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Paid [[ (inv.state=='paid' or removeParentNode('para')) and '']]</para>
+                                <para style="Text body">Cancelled [[ (inv.state=='cancel' or removeParentNode('para')) and '']]</para> 
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_untaxed)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_tax)]]</para>
+                            </td>
+                            <td>
+                                <para style="Text body" alignment="RIGHT">[[formatLang(inv.amount_total)]]</para>
+                            </td>
+                        </tr>
+                    </blockTable>
+                    <section>[[ repeatIn(detailed_taxes and inv.tax_line or [], 'tax_line') ]]
+                        <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+                            [[ (tax_line.tax_code_id and tax_line.tax_code_id.notprintable and removeParentNode('blockTable')) or '']]
+                            <tr>
+                                <td>
+                                    <para/>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[tax_line.name or '']]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.amount)]]</para>
+                                </td>
+                                <td>
+                                    <para style="Text body italic" alignment="RIGHT">[[formatLang(tax_line.base+tax_line.amount)]]</para>
+                                </td>
+                            </tr>
+                        </blockTable>
+                    </section>
+                </section>
+                <blockTable colWidths="11.6cm,9.7cm,2.0cm,2.0cm,1.8cm" style="Table3">
+                    <tr>
+                        <td>
+                            <para/>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">Total</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[2])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[3])]]</para>
+                        </td>
+                        <td>
+                            <para alignment="RIGHT" style="Standard">[[formatLang(obj[4])]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+				<section>[[ repeatIn(obj[5], 'taxTotals') ]]
+					<blockTable colWidths="21.3cm,2.0cm,2.0cm,1.8cm" style="Table3b">
+						<tr>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[ taxTotals[0] ]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[1])]]</para>
+							</td>
+							<td>
+								<para alignment="RIGHT" style="Standard">[[formatLang(taxTotals[2])]]</para>
+							</td>
+							<td>
+								<para/>
+							</td>
+						</tr>
+					</blockTable>
+				</section>
+                <para style="Standard">
+                    <font color="white"> </font>
+                </para>
+            </section>
+        </section>
+
+    <para alignment="LEFT" style="Standard">End of report</para>
+
+    </story>
+</document>

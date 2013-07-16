@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data >
+        <menuitem id="menu_reports" name="Reports" parent="account.final_accounting_reports" sequence="1"/>
+
+        # Report account move
+        <record id="wizard_account_journal_entries_report_new" model="ir.actions.act_window">
+            <field name="name">Print journal by entries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.journal.entries.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_journal_entries_report_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem
+                name="**Print journal by entries"
+                parent="menu_reports"
+                action="wizard_account_journal_entries_report_new"
+                icon="STOCK_PRINT"
+                id="menu_journal_entries_report"/>
+         <report id="report_account_journal_entries_report"
+            string="Print journal by entries"
+            model="account.journal.period"
+            name="account.journal.entries.report.wzd"
+            rml="addons/account_financial_report/report/account_move_line_record.rml"
+            header="0"
+            auto="0"/>
+         <report id="report_account_journal_entries_report1"
+            string="Print journal by entries"
+            model="account.journal.period"
+            name="account.journal.entries.report.wzd1"
+            rml="addons/account_financial_report/report/account_move_line_record_h.rml"
+            header="0"
+            auto="0"/>
+         <report
+            id="report_account_move_line_record2"
+            string="**Entry"
+            model="account.move"
+            name="account.move.report"
+            rml="account_financial_report/report/account_move_line_record.rml"
+            header="False"
+            auto="True"/>
+         <report
+            id="report_account_move_line_record_h2"
+            string="**Entry landscape"
+            model="account.move"
+            name="account.move.report.h"
+            rml="account_financial_report/report/account_move_line_record_h.rml"
+            header="False"
+            auto="True"/>
+
+	# Report full account balance
+        <record id="wizard_account_balance_full_report_menu_new" model="ir.actions.act_window">
+            <field name="name">Full Account Balance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.balance.full.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_balance_full_report_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                name="**Full account balance"
+                parent="menu_reports"
+                action="wizard_account_balance_full_report_menu_new"
+                icon="STOCK_PRINT"
+                id="menu_account_balance_full_report"/>
+
+        <report id="report_account_balance_full_report"
+            string="Full Account Balance"
+            model="account.account"
+            name="account.balance.full.report.wzd"
+            rml="addons/account_financial_report/report/account_balance_full.rml"
+            header="0"
+            auto="0"/>
+
+	# Report cumulative general ledger
+        <record id="wizard_account_general_ledger_cumulative_report_new" model="ir.actions.act_window">
+            <field name="name">Cumulative general ledger</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.general.ledger.cumulative.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_general_ledger_cumulative_report_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem
+                name="**Cumulative general ledger"
+                parent="menu_reports"
+                action="wizard_account_general_ledger_cumulative_report_new"
+                icon="STOCK_PRINT"
+                id="menu_account_general_ledger_cumulative_report"/>
+
+	<report id="report_account_general_ledger_report"
+            string="Cumulative general ledger"
+            model="account.account"
+            name="account.general.ledger.cumulative.report.wzd"
+            rml="addons/account_financial_report/report/general_ledger.rml"
+            menu="0"
+            multi="0"
+            header="0"
+            auto="0"/>
+         <report id="report_account_general_ledger_report1"
+            string="Cumulative general ledger"
+            model="account.account"
+            name="account.general.ledger.cumulative.report.wzd1"
+            rml="addons/account_financial_report/report/general_ledger_landscape.rml"
+            menu="0"
+            multi="0"
+            header="0"
+            auto="0"/>
+
+        # Report account chart
+        <record id="wizard_account_account_chart_report_menu_new" model="ir.actions.act_window">
+            <field name="name">Chart of accounts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.account.chart.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_account_chart_report_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+		
+        <menuitem
+                name="**Chart of accounts"
+                parent="menu_reports"
+                action="wizard_account_account_chart_report_menu_new"
+                icon="STOCK_PRINT"
+                id="menu_account_chart_report"/>
+
+        <report id="report_account_account_chart"
+            string="Chart of accounts"
+            model="account.account"
+            name="account.account.chart.report.wzd"
+            rml="addons/account_financial_report/report/account_chart.rml"
+            header="0"
+            auto="0"/>
+	
+        # Report invoice list
+        <record id="wizard_account_invoice_list_report" model="ir.actions.act_window">
+            <field name="name">Print invoice list</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice.list.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_invoice_list_report_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem
+            name="**Print invoice list"
+            parent="menu_reports"
+            action="wizard_account_invoice_list_report"
+            icon="STOCK_PRINT"
+            id="menu_invoice_list_report"/>
+
+        <report id="report_account_invoice_list"
+            string="Print invoice list"
+            model="account.invoice"
+            name="account.invoice.list.report.wzd"
+            rml="addons/account_financial_report/report/invoice_list.rml"
+            header="0"
+            auto="0"/>
+
+
+        <menuitem id="menu_others_formats" name="Other formats" parent="account.final_accounting_reports" sequence="1"/>
+            <menuitem
+                icon="STOCK_PRINT"
+                name="Trial Balance"
+                parent="menu_others_formats"
+                action="account.action_account_balance_menu"
+                id="account.menu_general_Balance_report"
+               />
+            <menuitem
+                icon="STOCK_PRINT"
+                name="Balance Sheet"
+                action="account.action_account_report_bs"
+                id="account.menu_account_report_bs"
+                parent="menu_others_formats"/>
+            <menuitem
+                icon="STOCK_PRINT"
+                name="Profit And Loss"
+                action="account.action_account_report_pl"
+                id="account.menu_account_report_pl"
+                parent="menu_others_formats"/>
+
+            
+
+
+
+
+  </data>
+</openerp>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data >
+
+	# Report account move line
+        <report
+            id="report_account_move_line"
+            string="**Entry lines"
+            model="account.move.line"
+            name="account.move.line.report"
+            rml="account_financial_report/report/account_move_line.rml"
+            header="False"
+            auto="True"/>
+
+    </data>
+</openerp>
