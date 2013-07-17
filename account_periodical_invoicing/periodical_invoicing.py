@@ -75,13 +75,7 @@ class agreement(osv.osv):
         for agreement in self.browse(cr, uid, ids):
             if agreement.prolong == 'fixed':
                 res[agreement.id] = agreement.end_date
-            elif agreement.prolong == 'unlimited':
-                now = datetime.now()
-                date = self.__get_next_term_date(datetime.strptime(agreement.start_date, "%Y-%m-%d"), agreement.prolong_unit, agreement.prolong_interval)
-                while (date < now):
-                    date = self.__get_next_term_date(date, agreement.prolong_unit, agreement.prolong_interval)
-                res[agreement.id] = date
-            else:
+            elif agreement.prolong == 'recurrent':
                 # for renewable fixed term
                 res[agreement.id] = self.__get_next_term_date(datetime.strptime( \
                     agreement.last_renovation_date if agreement.last_renovation_date else agreement.start_date, "%Y-%m-%d"), \
@@ -202,7 +196,10 @@ class agreement(osv.osv):
         now = datetime.now()
         for agreement in self.browse(cr, uid, ids, context=context):
             if not agreement.active: continue
-            if datetime.strptime(agreement.start_date, '%Y-%m-%d') < now and now <= datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d'):
+            # check dates
+            if (datetime.strptime(agreement.start_date, '%Y-%m-%d') < now and 
+                (agreement.prolong == 'unlimited' 
+                 or now <= datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d'))):
                 # Agreement is still valid
                 lines_to_invoice = {}
                 # Check if there is any agreement line to invoice 

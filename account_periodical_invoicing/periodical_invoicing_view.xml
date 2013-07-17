@@ -143,8 +143,8 @@
 						</page>
 					</notebook>
 					<group colspan="4" col="8">
-						<field name="last_renovation_date" readonly="1"/>
-						<field name="next_expiration_date"/>
+						<field name="last_renovation_date" readonly="1" attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>
+						<field name="next_expiration_date" readonly="1" attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>
 						<button name="make_initial_invoice" string="Make initial invoice" type="object" icon="gtk-execute" attrs="{'invisible': ['|', ('period_type','=', 'post-paid'), ('state','!=','empty')]}"/>
 	                    <button name="%(action_account_periodical_invoicing_renew_wizard)d" type="action" string="Renew agreement"  attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>
 						<field name="state" invisible="1"/>
