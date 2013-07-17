@@ -205,7 +205,10 @@ class agreement(osv.osv):
         now = datetime.now()
         for agreement in self.browse(cr, uid, ids, context=context):
             if not agreement.active: continue
-            if datetime.strptime(agreement.start_date, '%Y-%m-%d') < now and now <= datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d'):
+            # check dates
+            if (datetime.strptime(agreement.start_date, '%Y-%m-%d') < now and 
+                (agreement.prolong == 'unlimited' 
+                 or now <= datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d'))):
                 # Agreement is still valid
                 lines_to_invoice = {}
                 # Check if there is any agreement line to invoice 
