@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from osv import fields, osv
+from openerp.osv import fields, orm
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT 
 import datetime
 
-class sale_order(osv.osv):
+class sale_order(orm.Model):
 
     def action_button_generate_agreement_invoicing(self, cr, uid, ids, context=None):
         agreement_ids = []
@@ -12,7 +13,7 @@ class sale_order(osv.osv):
             agreement = { 'name': sale_order.name,
                           'partner_id': sale_order.partner_id.id,
                           'company_id': sale_order.company_id.id, 
-                          'start_date': datetime.datetime.now().strftime("%Y-%m-%d"), }
+                          'start_date': datetime.datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT), }
             agreement_id = agreement_obj.create(cr, uid, agreement, context=context)
             agreement_ids.append(agreement_id)
             for order_line in sale_order.order_line:
@@ -40,7 +41,5 @@ class sale_order(osv.osv):
 
     _name = 'sale.order'
     _inherit = 'sale.order'
-
-sale_order()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
