@@ -22,11 +22,12 @@
 ##############################################################################
 
 from osv import osv, fields
+from tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import decimal_precision as dp
 import account
-from tools.translate import _
 
 class agreement(osv.osv):
 
@@ -100,7 +101,7 @@ class agreement(osv.osv):
         'last_renovation_date': fields.date('Last renovation date', help="Last date when agreement was renewed (same as start date if not renewed)"),
         'next_expiration_date': fields.function(__get_next_expiration_date, string='Next expiration date', type='date', method=True, store=True),
         'period_type': fields.selection([('pre-paid', 'Pre-paid'), ('post-paid', 'Post-paid')], "Period type", required=True, help="Period type for invoicing. 'Pre-paid': Invoices are generated for the upcoming period. 'Post-paid': Invoices are generated for the consumed period."),
-        'state': fields.selection([('empty', 'Without invoices'), ('first', 'First invoice created'), ('invoices', 'With invoices')], 'State', readonly=True),
+        'state': fields.selection([('empty', 'Without invoices'), ('invoices', 'With invoices')], 'State', readonly=True),
         'renewal_state': fields.selection([('not_renewed', 'Agreement not renewed'), ('renewed', 'Agreement renewed')], 'Renewal state', readonly=True),
         'notes': fields.text('Notes'),
     }
@@ -196,22 +197,29 @@ class agreement(osv.osv):
         now = datetime.now()
         for agreement in self.browse(cr, uid, ids, context=context):
             if not agreement.active: continue
+            agreement_start_date = datetime.strptime(agreement.start_date, 
+                                                    DEFAULT_SERVER_DATE_FORMAT)
             # check dates
-            if (datetime.strptime(agreement.start_date, '%Y-%m-%d') < now and 
-                (agreement.prolong == 'unlimited' 
-                 or now <= datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d'))):
+            if (agreement_start_date < now and 
+                    (agreement.prolong == 'unlimited' 
+                     or now <= datetime.strptime(
+                            agreement.next_expiration_date, 
+                            DEFAULT_SERVER_DATE_FORMAT
+                    ))):
                 # Agreement is still valid
                 lines_to_invoice = {}
                 # Check if there is any agreement line to invoice 
                 for line in agreement.agreement_line:
                     if line.active_chk:
-                        if line.last_invoice_date:
-                            last_invoice_date = datetime.strptime(line.last_invoice_date, "%Y-%m-%d")
-                        else:
-                            agreement_metadata = self.perm_read(cr, uid, [agreement.id], details=False)[0]
-                            last_invoice_date = datetime.strptime(agreement_metadata['create_date'][0:10], "%Y-%m-%d")
                         # Check next date of invoicing for this line
-                        next_invoice_date = self._get_next_invoice_date(agreement, line, last_invoice_date)
+                        if line.last_invoice_date:
+                            last_invoice_date = datetime.strptime(
+                                line.last_invoice_date, 
+                                DEFAULT_SERVER_DATE_FORMAT)
+                            next_invoice_date = self._get_next_invoice_date(
+                                agreement, line, last_invoice_date)
+                        else:
+                            next_invoice_date = agreement_start_date
                         if next_invoice_date <= now:
                             lines_to_invoice[line] = next_invoice_date # Add to a dictionary to invoice all lines together
                 # Invoice all pending lines
@@ -301,35 +309,6 @@ class agreement(osv.osv):
         
         return invoice_id
 
-    def make_initial_invoice(self, cr, uid, ids, context={}):
-        """
-        Method that creates an initial invoice with all the agreement lines
-        """
-        agreement = self.browse(cr, uid, ids, context=context)[0]
-        # Add only active lines
-        agreement_lines = {}
-        for line in agreement.agreement_line:
-            if line.active_chk: agreement_lines[line] = datetime.strptime(agreement.start_date, '%Y-%m-%d')
-        invoice_id = self.create_invoice(cr, uid, agreement, agreement_lines, context=context)
-        # Update agreement state
-        self.write(cr, uid, agreement.id, { 'state': 'first' }, context=context)
-        # Get view to show
-        data_obj = self.pool.get('ir.model.data')
-        result = data_obj._get_id(cr, uid, 'account', 'invoice_form')
-        view_id = data_obj.browse(cr, uid, result).res_id
-        # Return view with invoice created
-        return {
-            'domain': "[('id','=', " + str(invoice_id) + ")]",
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'account.invoice',
-            'context': context,
-            'res_id': invoice_id,
-            'view_id': [view_id],
-            'type': 'ir.actions.act_window',
-            'nodestroy': True
-        }
-
 agreement()
 
 class agreement_line(osv.osv):
@@ -366,7 +345,6 @@ class agreement_line(osv.osv):
     
 agreement_line()
 
-#TODO: Impedir que se haga doble clic sobre el registro invoice y añadir botón para abrir en una nueva pantalla la factura
 class agreement_invoice(osv.osv):
     """
     Class for recording each invoice created for each line of the agreement. It keeps only reference to the agreement, not to the line.
