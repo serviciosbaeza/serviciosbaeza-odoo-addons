@@ -6,11 +6,11 @@
             <pageGraphics>
                 <setFont name="Helvetica-Bold" size="9"/>
 
-				<!--COL 1-->
+                <!--COL 1-->
                 <drawString x="1.0cm" y="19.6cm">[[ company.name ]]</drawString>
                 <drawString x="23.5cm" y="19.6cm">Account Balance - [[ company.currency_id.name ]]</drawString>
 
-				<!--COL 2-->
+                <!--COL 2-->
                 <setFont name="Helvetica" size="8"/>
                 <drawString x="1.0cm" y="1cm"> [[ formatLang(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),date_time = True) ]]</drawString>
                 <drawString x="27.7cm" y="1cm">Page <pageNumber/></drawString>
@@ -202,62 +202,52 @@
             <tr>
                 <td>
                     <para style="P14">[[ repeatIn(lines(data.get('form',{})), 'a') ]]
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <i>[[ a['code'] or removeParentNode('tr')  ]]</i>
                     </para>
                 </td>
                 <td>
                     <para style="P14">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font color="white">[[ '..'*(a['level']) ]]</font>
                         <font>[[ a['name'] ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['balanceinit']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['debit']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['credit']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['balance']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['balanceinit_fy']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['debit_fy']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['credit_fy']) ]]</font>
                     </para>
                 </td>
                 <td>
                     <para style="P3">
-                        <font>[[ a['type']&lt;&gt;'view' and setTag('para','para',{'fontName':"Helvetica"}) ]]</font>
                         <font>[[ formatLang(a['balance_fy']) ]]</font>
                     </para>
                 </td>

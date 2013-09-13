@@ -79,7 +79,7 @@ class account_balance(report_sxw.rml_parse):
        
         period_ids = period_obj.search(self.cr, self.uid, [('fiscalyear_id','=',fiscalyear_id),('special','=',False)])
         if form.get('state', False) and form['state'] in ['byperiod', 'all']:
-            period_ids = form['periods'][0][2]
+            period_ids = form['periods']
         periods_str = ', '.join([period.name or period.code for period in period_obj.browse(self.cr, self.uid, period_ids)])
 
         dates_str = None
@@ -179,7 +179,7 @@ class account_balance(report_sxw.rml_parse):
         ctx['fiscalyear'] = fiscalyear.id
         ctx['periods'] = period_obj.search(self.cr, self.uid, [('fiscalyear_id','=',fiscalyear.id),('special','=',False)])
         if 'state' in form and form['state'] in ['byperiod', 'all']:
-            ctx['periods'] = form['periods'][0][2]
+            ctx['periods'] = form['periods']
         if 'state' in form and form['state'] in ['bydate', 'all']:
             ctx['date_from'] = form['date_from']
             ctx['date_to'] = form['date_to']
