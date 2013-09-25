@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-05 12:11+0000\n"
-"PO-Revision-Date: 2013-07-05 12:11+0000\n"
+"POT-Creation-Date: 2013-09-25 22:29+0000\n"
+"PO-Revision-Date: 2013-09-25 22:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "No puede crear más de un movimiento por periodo en un diario centraliza
 #. module: account_financial_report
 #: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line
 msgid "**Entry lines"
-msgstr "Líneas de asiento"
+msgstr "**Líneas de asiento"
 
 #. module: account_financial_report
 #: model:ir.model,name:account_financial_report.model_account_financial_report_print_invoice_list_wizard
@@ -264,9 +264,17 @@ msgid "account.financial.report.wizard.print.journal"
 msgstr "account.financial.report.wizard.print.journal"
 
 #. module: account_financial_report
+#: report:account.general.ledger.cumulative.report.wzd:0
+#: report:account.general.ledger.cumulative.report.wzd1:0
+#: selection:account.invoice.list.report,order_by:0
 #: report:account.invoice.list.report.wzd:0
-msgid "Fiscal position"
-msgstr "Posición fiscal"
+#: report:account.journal.entries.report.wzd:0
+#: report:account.journal.entries.report.wzd1:0
+#: report:account.move.line.report:0
+#: report:account.move.report:0
+#: report:account.move.report.h:0
+msgid "Partner"
+msgstr "Empresa"
 
 #. module: account_financial_report
 #: report:account.journal.entries.report.wzd1:0
@@ -291,11 +299,6 @@ msgstr "Períodos/Intervalo de fechas:"
 #: view:account.general.ledger.cumulative.report:0
 msgid "Select parent account"
 msgstr "Seleccionar cuenta padre"
-
-#. module: account_financial_report
-#: constraint:res.company:0
-msgid "Error! You can not create recursive companies."
-msgstr "¡Error! No puede crear compañías recursivas."
 
 #. module: account_financial_report
 #: code:addons/account_financial_report/report/general_ledger.py:354
@@ -424,24 +427,6 @@ msgid "Customer refunds"
 msgstr "Facturas rectificativas de cliente"
 
 #. module: account_financial_report
-#: field:account.invoice.list.report,in_refund:0
-msgid "Supplier refunds"
-msgstr "Facturas rectificativas de proveedor"
-
-#. module: account_financial_report
-#: report:account.general.ledger.cumulative.report.wzd:0
-#: report:account.general.ledger.cumulative.report.wzd1:0
-#: selection:account.invoice.list.report,order_by:0
-#: report:account.invoice.list.report.wzd:0
-#: report:account.journal.entries.report.wzd:0
-#: report:account.journal.entries.report.wzd1:0
-#: report:account.move.line.report:0
-#: report:account.move.report:0
-#: report:account.move.report.h:0
-msgid "Partner"
-msgstr "Empresa"
-
-#. module: account_financial_report
 #: view:account.invoice.list.report:0
 msgid "Options"
 msgstr "Opciones"
@@ -487,7 +472,7 @@ msgstr "Pro-forma"
 #. module: account_financial_report
 #: model:ir.ui.menu,name:account_financial_report.menu_others_formats
 msgid "Other formats"
-msgstr "Otros formatas"
+msgstr "Otros formatos"
 
 #. module: account_financial_report
 #: constraint:account.move.line:0
@@ -616,9 +601,9 @@ msgid "Display accounts up to this level (0 to show all)"
 msgstr "Mostrar cuentas hasta este nivel (0 para mostrar todas)."
 
 #. module: account_financial_report
-#: model:ir.model,name:account_financial_report.model_res_company
-msgid "Companies"
-msgstr "Compañías"
+#: field:account.invoice.list.report,in_refund:0
+msgid "Supplier refunds"
+msgstr "Facturas rectificativas de proveedor"
 
 #. module: account_financial_report
 #: model:ir.ui.menu,name:account_financial_report.menu_account_chart_report
@@ -641,11 +626,6 @@ msgstr "Dejarlo vacío para todos los ejercicios fiscales abiertos."
 #: report:account.move.report.h:0
 msgid "Credit"
 msgstr "Haber"
-
-#. module: account_financial_report
-#: model:res.groups,name:account_financial_report.group_afreport
-msgid "Account Financial Report"
-msgstr "Informes financieros"
 
 #. module: account_financial_report
 #: report:account.balance.full.report.wzd:0
@@ -841,7 +821,7 @@ msgstr "Impuestos detallados"
 #. module: account_financial_report
 #: model:ir.actions.report.xml,name:account_financial_report.report_account_move_line_record_h2
 msgid "**Entry landscape"
-msgstr "**Asiento horizontal"
+msgstr "**Asientos apaisados"
 
 #. module: account_financial_report
 #: selection:account.invoice.list.report,order_by:0
@@ -857,11 +837,6 @@ msgid "Filter by date (default current year)"
 msgstr "Filtrado por fecha (por defecto, el año actual)"
 
 #. module: account_financial_report
-#: model:ir.model,name:account_financial_report.model_afr
-msgid "afr"
-msgstr "afr"
-
-#. module: account_financial_report
 #: report:account.journal.entries.report.wzd1:0
 #: report:account.move.report.h:0
 msgid "Posted"
@@ -874,11 +849,6 @@ msgstr "Asentado"
 #: report:account.move.report.h:0
 msgid "Journal Ledger  -"
 msgstr "Libro diario  -"
-
-#. module: account_financial_report
-#: sql_constraint:res.company:0
-msgid "The company name must be unique !"
-msgstr "¡El nombre de la compañía debe ser único!"
 
 #. module: account_financial_report
 #: selection:account.journal.entries.report,sort_selection:0
@@ -938,11 +908,6 @@ msgstr "Con saldo"
 #: report:account.move.report.h:0
 msgid "Entry"
 msgstr "Asiento"
-
-#. module: account_financial_report
-#: model:ir.model,name:account_financial_report.model_wizard_report
-msgid "wizard.report"
-msgstr "wizard.report"
 
 #. module: account_financial_report
 #: report:account.general.ledger.cumulative.report.wzd:0

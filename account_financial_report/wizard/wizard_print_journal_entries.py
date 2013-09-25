@@ -34,9 +34,9 @@ class account_journal_entries_report(osv.osv_memory):
         'journal_ids': fields.many2many('account.journal', 'account_journal_entries_journal_rel', 'acc_journal_entries_id','journal_id','Journal', required=True),
         'period_ids': fields.many2many('account.period','account_journal_entries_account_period_rel','acc_journal_entries_id','account_period_id','Period'),
         'sort_selection': fields.selection([
-                   ('date','By date'),
-                   ("to_number(name,'999999999')",'By entry number'),
-                   ('ref','By reference number')],'Entries Sorted By', required=True),
+                   ('date', 'By date'),
+                   ('name', 'By entry number'),
+                   ('ref','By reference number')], 'Entries Sorted By', required=True),
         'landscape': fields.boolean('Landscape mode')
     }
     def default_get(self, cr, uid, fields, context=None):
