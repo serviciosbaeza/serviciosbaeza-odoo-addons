@@ -20,14 +20,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from osv import osv, fields
 from tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import decimal_precision as dp
-import account
 
 class agreement(osv.osv):
 
@@ -143,17 +141,35 @@ class agreement(osv.osv):
             vals['number'] = self.pool.get('ir.sequence').get(cr, uid, 'account.agreement.sequence')
         return super(agreement, self).create(cr, uid, vals, context=context)
     
-    def copy(self, cr, uid, orig_id, default={}, context=None):
-        if context is None: context = {}
-        agreement_record = self.browse(cr, uid, orig_id)
+    def copy(self, cr, uid, orig_id, default=None, context=None):
+        if default is None:
+            default = {}
+        if context is None:
+            context = {}
+        context_wo_lang = context.copy()
+        agreement_line_obj = self.pool.get('account.periodical_invoicing.agreement.line')
+        if 'lang' in context:
+            del context_wo_lang['lang']
+        agreement_record = self.browse(cr, uid, orig_id) # dont' name the variable agreement
+        # Read agreement_lines
+        lines = []
+        for line in agreement_record.agreement_line:
+            data = agreement_line_obj.read(cr, uid, line.id, context=context_wo_lang)
+            if data:
+                del data['last_invoice_date']
+                del data['id']
+                del data['agreement_id']
+                data['product_id'] = data['product_id'][0]
+                lines.append(data)
         default.update({
             'state': 'empty',
             'number': False,
             'active': True,
-            'name': '%s*' % agreement_record['name'],
+            'name': '%s*' % agreement_record.name,
             'start_date': False,
             'invoice_line': [],
             'renewal_line': [],
+            'agreement_line': [(0, 0, x) for x in lines]
         })
         return super(agreement, self).copy(cr, uid, orig_id, default, context)
 
@@ -163,7 +179,8 @@ class agreement(osv.osv):
         @rtype: dictionary
         @return: field last_renovation_date with new start date
         """
-        if not start_date: return {}
+        if not start_date:
+            return {}
         result = {}
         result['value'] = { 'last_renovation_date': start_date }
         return result
@@ -192,7 +209,8 @@ class agreement(osv.osv):
         """
         Check if there is any pending invoice to create from each agreement. 
         """
-        if context is None: context = {}
+        if context is None:
+            context = {}
         ids = self.search(cr, uid, [])
         now = datetime.now()
         for agreement in self.browse(cr, uid, ids, context=context):
@@ -249,10 +267,10 @@ class agreement(osv.osv):
             'date_invoice': now.strftime('%Y-%m-%d'),
             'origin': agreement.number,
             'partner_id': agreement.partner_id.id,
-            'journal_id': account.account_invoice.account_invoice._get_journal(invoice_obj, cr, uid, context),
+            'journal_id': invoice_obj._get_journal(cr, uid, context),
             'type': 'out_invoice',
             'state': 'draft',
-            'currency_id': account.account_invoice.account_invoice._get_currency(invoice_obj, cr, uid, context),
+            'currency_id': invoice_obj._get_currency(cr, uid, context),
             'company_id': agreement.company_id.id,
             'reference_type': 'none',
             'check_total': 0.0,
@@ -260,20 +278,22 @@ class agreement(osv.osv):
             'user_id': agreement.partner_id.user_id.id,
         }
         # Get other invoice values from agreement partner
-        invoice.update(account.account_invoice.account_invoice.onchange_partner_id(invoice_obj, cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id)['value'])                   
-        invoice_id = invoice_obj.create(cr, uid, invoice, context=context)
-        # Create invoice lines objects
+        invoice.update(invoice_obj.onchange_partner_id(cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id)['value'])                   
+        # Prepare invoice lines objects
         agreement_lines_ids = []
+        invoice_lines = []
         for agreement_line in agreement_lines.keys():
             invoice_line = {
-                'invoice_id': invoice_id,
                 'product_id': agreement_line.product_id.id,
                 'quantity': agreement_line.quantity,
                 'discount': agreement_line.discount,
             }
             # get other invoice line values from agreement line product
-            invoice_line.update(account.account_invoice.account_invoice_line.product_id_change(invoice_line_obj, cr, uid, [], \
-                product=agreement_line.product_id.id, uom=False, partner_id=agreement.partner_id.id, fposition_id=invoice['fiscal_position'], context=context)['value'])
+            invoice_line.update(invoice_line_obj.product_id_change(cr, uid, [],
+                product=agreement_line.product_id.id, uom=False, 
+                partner_id=agreement.partner_id.id, 
+                fposition_id=invoice['fiscal_position'], 
+                context=context)['value'])
             if agreement_line.price > 0: invoice_line['price_unit'] = agreement_line.price
             # Put line taxes
             invoice_line['invoice_line_tax_id'] = [(6, 0, tuple(invoice_line['invoice_line_tax_id']))]
@@ -291,9 +311,11 @@ class agreement(osv.osv):
                 from_date = self.__get_previous_invoice_date(agreement, agreement_line, next_invoice_date)
                 to_date = next_invoice_date - timedelta(days=1)
             invoice_line['note'] = _('Period: from %s to %s') %(from_date.strftime(lang.date_format), to_date.strftime(lang.date_format))
-            # Create the line
-            invoice_line_obj.create(cr, uid, invoice_line, context=context)
+            invoice_lines.append(invoice_line)
             agreement_lines_ids.append(agreement_line.id)
+        # Add lines to invoice and create it
+        invoice['invoice_line'] = [(0, 0, x) for x in invoice_lines]
+        invoice_id = invoice_obj.create(cr, uid, invoice, context=context)
         # Update last invoice date for lines
         self.pool.get('account.periodical_invoicing.agreement.line').write(cr, uid, agreement_lines_ids, {'last_invoice_date': now.strftime('%Y-%m-%d')} ,context=context)
         # Update agreement state
@@ -306,7 +328,7 @@ class agreement(osv.osv):
             'invoice_id': invoice_id
         }
         self.pool.get('account.periodical_invoicing.agreement.invoice').create(cr, uid, agreement_invoice, context=context)
-        
+
         return invoice_id
 
 agreement()
@@ -334,7 +356,14 @@ class agreement_line(osv.osv):
         'invoicing_interval': lambda *a: 1,
         'invoicing_unit': lambda *a: 'months',
     }
-    
+
+    def copy(self, cr, uid, orig_id, default=None, context=None):
+        if default is None: default = {}
+        default.update({
+            'last_invoice_date': False,
+        })
+        return super(agreement_line, self).copy(cr, uid, orig_id, default, context)
+
     def onchange_product_id(self, cr, uid, ids, product_id=False, context={}):
         result = {}
         if product_id:
