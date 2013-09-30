@@ -164,6 +164,9 @@ class account_balance(report_sxw.rml_parse):
             ctx['date_to'] = form['date_to']
         if account_ids:
             accounts = account_obj.read(self.cr, self.uid, account_ids, ['type','code','name','debit','credit','balance','parent_id'], ctx)
+            # In some versions of OpenERP server, the order of the read records differs from the order of the ids of the records
+            accounts.sort(lambda x,y: cmp(x['code'], y['code']))
+            
         # Calculate the period initial Balance
         # (fy balance minus the balance from the start of the selected period
         #  to the end of the year)
