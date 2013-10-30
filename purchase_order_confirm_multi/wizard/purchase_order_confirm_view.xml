@@ -1,0 +1,26 @@
+<openerp>
+    <data>
+
+        <record id="purchase_order_confirm_view" model="ir.ui.view">
+            <field name="name">purchase.order.confirm.form</field>
+            <field name="model">purchase.order.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm selected purchase orders" version="7.0">
+                    <p>Do you want to confirm selected purchase orders?</p>
+                    <footer>
+                        <button string="Confirm orders" name="order_confirm" type="object" default_focus="1" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_purchase_order_confirm"
+            multi="True"
+            key2="client_action_multi" name="Confirm orders"
+            res_model="purchase.order.confirm" src_model="purchase.order"
+            view_mode="form" target="new" view_type="form" />
+
+    </data>
+</openerp>
