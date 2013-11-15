@@ -239,19 +239,26 @@ class agreement(osv.osv):
                         else:
                             next_invoice_date = agreement_start_date
                         if next_invoice_date <= now:
-                            lines_to_invoice[line] = next_invoice_date # Add to a dictionary to invoice all lines together
+                            # Add to a dictionary to invoice all lines together
+                            lines_to_invoice[line] = next_invoice_date
                 # Invoice all pending lines
                 if len(lines_to_invoice) > 0:
-                    invoice_id = self.create_invoice(cr, uid, agreement, lines_to_invoice, context=context)
+                    invoice_id = self.create_invoice(cr, uid, agreement,
+                                                     lines_to_invoice,
+                                                     context=context)
                     # Call 'event' method
-                    self._invoice_created(cr, uid, agreement, lines_to_invoice, invoice_id, context=context)
+                    self._invoice_created(cr, uid, agreement, lines_to_invoice,
+                                          invoice_id, context=context)
 
-    def create_invoice(self, cr, uid, agreement, agreement_lines, context={}):
+    def create_invoice(self, cr, uid, agreement, agreement_lines,
+                       context=None):
         """
         Method that creates an invoice from given data.
         @param agreement: Agreement from which invoice is going to be generated.  
         @param agreement_lines: Dictionary with agreement lines as keys and next invoice date of that line as values. 
         """
+        if context is None:
+            context = {}
         now = datetime.now()
         invoice_obj = self.pool.get('account.invoice')
         invoice_line_obj = self.pool.get('account.invoice.line')
@@ -278,7 +285,9 @@ class agreement(osv.osv):
             'user_id': agreement.partner_id.user_id.id,
         }
         # Get other invoice values from agreement partner
-        invoice.update(invoice_obj.onchange_partner_id(cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id)['value'])                   
+        invoice.update(invoice_obj.onchange_partner_id(cr, uid, [],
+                type=invoice['type'], partner_id=agreement.partner_id.id,
+                company_id=agreement.company_id.id)['value'])
         # Prepare invoice lines objects
         agreement_lines_ids = []
         invoice_lines = []
@@ -306,11 +315,18 @@ class agreement(osv.osv):
             next_invoice_date = agreement_lines[agreement_line]
             if agreement.period_type == 'pre-paid':
                 from_date = next_invoice_date
-                to_date = self._get_next_invoice_date(agreement, agreement_line, next_invoice_date) - timedelta(days=1)
+                to_date = (self.__get_next_term_date(next_invoice_date,
+                                        agreement_line.invoicing_unit,
+                                        agreement_line.invoicing_interval) -
+                                        timedelta(days=1))
             else:
-                from_date = self.__get_previous_invoice_date(agreement, agreement_line, next_invoice_date)
+                from_date = self.__get_previous_term_date(next_invoice_date,
+                                            agreement_line.invoicing_unit,
+                                            agreement_line.invoicing_interval)
                 to_date = next_invoice_date - timedelta(days=1)
-            invoice_line['note'] = _('Period: from %s to %s') %(from_date.strftime(lang.date_format), to_date.strftime(lang.date_format))
+            invoice_line['note'] = _('Period: from %s to %s') %(
+                                        from_date.strftime(lang.date_format),
+                                        to_date.strftime(lang.date_format))
             invoice_lines.append(invoice_line)
             agreement_lines_ids.append(agreement_line.id)
         # Add lines to invoice and create it
