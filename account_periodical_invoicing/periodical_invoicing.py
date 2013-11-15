@@ -313,11 +313,18 @@ class agreement(orm.Model):
             next_invoice_date = agreement_lines[agreement_line]
             if agreement.period_type == 'pre-paid':
                 from_date = next_invoice_date
-                to_date = self._get_next_invoice_date(agreement, agreement_line, next_invoice_date) - timedelta(days=1)
+                to_date = (self.__get_next_term_date(next_invoice_date,
+                                        agreement_line.invoicing_unit,
+                                        agreement_line.invoicing_interval) -
+                                        timedelta(days=1))
             else:
-                from_date = self.__get_previous_invoice_date(agreement, agreement_line, next_invoice_date)
+                from_date = self.__get_previous_term_date(next_invoice_date,
+                                            agreement_line.invoicing_unit,
+                                            agreement_line.invoicing_interval)
                 to_date = next_invoice_date - timedelta(days=1)
-            invoice_line['name'] += "\n" + _('Period: from %s to %s') %(from_date.strftime(lang.date_format), to_date.strftime(lang.date_format))
+            invoice_line['name'] += "\n" + _('Period: from %s to %s') %(
+                                        from_date.strftime(lang.date_format),
+                                        to_date.strftime(lang.date_format))
             invoice_lines.append(invoice_line)
             agreement_lines_ids.append(agreement_line.id)
         # Add lines to invoice and create it
