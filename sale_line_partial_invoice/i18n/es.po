@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2012-06-07 11:06+0000\n"
+"PO-Revision-Date: 2012-06-07 22:02+0100\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sale_line_partial_invoice
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:85
+#, python-format
+msgid "Partial invoice cannot be created for multiple sale orders"
+msgstr "No se puede realizar una factura parcial para más de un pedido de venta"
+
+#. module: sale_line_partial_invoice
+#: view:sale.order.line.make.partial_invoice:0
+msgid "Select percentage for partial invoice"
+msgstr "Seleccione porcentaje para la factura parcial"
+
+#. module: sale_line_partial_invoice
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:81
+#, python-format
+msgid "Selected percentage can't be greater than pending percentage"
+msgstr "El porcentaje seleccionado no puede ser mayor que el porcentaje pendiente"
+
+#. module: sale_line_partial_invoice
+#: model:ir.model,name:sale_line_partial_invoice.model_sale_order_line_make_partial_invoice
+msgid "Sale order line - Make partial invoice wizard"
+msgstr "Línea de pedido de venta - Asistente de creación de factura parcial"
+
+#. module: sale_line_partial_invoice
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:68
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:72
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:74
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:81
+#, python-format
+msgid "Warning"
+msgstr "Aviso"
+
+#. module: sale_line_partial_invoice
+#: model:ir.actions.act_window,name:sale_line_partial_invoice.action_view_sale_order_line_make_partial_invoice
+msgid "Make partial invoice"
+msgstr "Realizar factura parcial"
+
+#. module: sale_line_partial_invoice
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:72
+#, python-format
+msgid "Sale order line is fully invoiced!"
+msgstr "¡La línea del pedido de venta está totalmente facturada!"
+
+#. module: sale_line_partial_invoice
+#: view:sale.order.line.make.partial_invoice:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: sale_line_partial_invoice
+#: view:sale.order.line.make.partial_invoice:0
+msgid "Create partial invoice"
+msgstr "Crear factura parcial"
+
+#. module: sale_line_partial_invoice
+#: code:addons/sale_line_partial_invoice/wizard/sale_line_partial_invoice.py:74
+#, python-format
+msgid "No sale order line(s) selected"
+msgstr "No se ha seleccionado ninguna línea de pedido de venta"
+
+#. module: sale_line_partial_invoice
+#: field:sale.order.line.make.partial_invoice,percentage:0
+msgid "Percentage (%)"
+msgstr "Porcentaje (%)"
+
