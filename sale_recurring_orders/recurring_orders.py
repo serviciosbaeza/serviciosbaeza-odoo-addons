@@ -101,6 +101,7 @@ class agreement(osv.osv):
         'state': lambda *a: 'empty',
         'renewal_state': lambda *a: 'not_renewed',
     }
+
     _sql_constraints = [
         ('number_uniq', 'unique(number)', 'Agreement number must be unique !'),
     ]
@@ -121,7 +122,7 @@ class agreement(osv.osv):
     _constraints = [
         (_check_dates, 'Agreement end date must be greater than start date', ['start_date','end_date']),
     ]
-        
+
     def create(self, cr, uid, vals, context=None):
         # Set start date if empty
         if not vals.get('start_date'): 
@@ -152,7 +153,7 @@ class agreement(osv.osv):
             'renewal_line': [],
         })
         return super(agreement, self).copy(cr, uid, orig_id, default, context)
-    
+
     def onchange_start_date(self, cr, uid, ids, start_date=False):
         """
         It changes last renovation date to the new start date.
@@ -275,11 +276,12 @@ class agreement(osv.osv):
         """
         Check if there is any pending order to create for given agreement. 
         """
-        if not agreement.active: return
-        
+        if not agreement.active:
+            return
         lines_to_order = {}
         agreement_expiration_date = datetime.strptime(agreement.next_expiration_date, '%Y-%m-%d') 
-        if (agreement_expiration_date < endDate) and (agreement.prolong != 'unlimited'): endDate = agreement_expiration_date 
+        if (agreement_expiration_date < endDate) and (agreement.prolong != 'unlimited'):
+            endDate = agreement_expiration_date 
         for line in agreement.agreement_line:
             # Check if there is any agreement line to order 
             if line.active_chk:
@@ -288,7 +290,7 @@ class agreement(osv.osv):
                 while next_order_date <= endDate:
                     # Add to a list to order all lines together
                     if not lines_to_order.get(next_order_date):
-                        lines_to_order[next_order_date] = [] 
+                        lines_to_order[next_order_date] = []
                     lines_to_order[next_order_date].append(line)
                     next_order_date = self._get_next_order_date(agreement, line, next_order_date)
         # Order all pending lines
@@ -380,7 +382,7 @@ class agreement(osv.osv):
                     if order['order_id']['id']: ordersToRemove.append(order['order_id']['id'])
                     agreement_order_obj.unlink(cr, uid, order['id'], context)                    
         self.pool.get('sale.order').unlink(cr, uid, ordersToRemove, context)
-    
+
 agreement()
 
 class agreement_line(osv.osv):
@@ -414,7 +416,7 @@ class agreement_line(osv.osv):
             if product:
                 result['value'] = { 'name': product['name'] }
         return result
-    
+
 agreement_line()
 
 #TODO: Impedir que se haga doble clic sobre el registro order
