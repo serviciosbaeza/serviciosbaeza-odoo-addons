@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_inventory_tree_owner" model="ir.ui.view">
+            <field name="name">stock.inventory.tree.owner</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="user_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_inventory_form_owner" model="ir.ui.view">
+            <field name="name">stock.inventory.form.owner</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="user_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
