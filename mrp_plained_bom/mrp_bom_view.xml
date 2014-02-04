@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record id="mrp_plained_bom_tree_view" model="ir.ui.view">
+            <field name="name">mrp.bom.plained.tree</field>
+            <field name="model">mrp.bom</field>
+            <field name="field_parent">child_plained_ids</field>
+            <field name="arch" type="xml">
+                <tree string="Plained bill of materials" colors="blue:method">
+                    <field name="sequence" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <field name="product_id"/>
+                    <field name="plained_qty"/>
+                    <field name="product_uom" groups="product.group_uom"/>
+                    <field name="code"/>
+                    <field name="type"/>
+                    <field name="method"/>
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action2" model="ir.actions.act_window">
+            <field name="name">Plained bill of materials</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom</field>
+            <field name="domain">[('id', 'in', active_ids)]</field>
+            <field name="view_id" ref="mrp_plained_bom_tree_view"/>
+            <field name="view_type">tree</field>
+        </record>
+        <record id="ir_BOM_structure" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'mrp.bom'" name="model"/>
+            <field name="name">Plained bill of materials</field>
+            <field eval="'ir.actions.act_window,'+str(action2)" name="value"/>
+        </record>
+
+    </data>
+</openerp>

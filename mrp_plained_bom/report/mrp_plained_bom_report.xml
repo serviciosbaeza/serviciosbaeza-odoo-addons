@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report auto="True"
+            header="False"
+            id="report_bom_plained_structure"
+            model="mrp.bom"
+            name="bom.plained.structure"
+            rml="mrp_plained_bom/report/bom_plained_structure.rml"
+            string="BOM plained structure"/>
+
+    </data>
+</openerp>
