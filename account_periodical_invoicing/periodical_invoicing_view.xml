@@ -82,6 +82,7 @@
                                         <field name="product_id" on_change="onchange_product_id(product_id)"/>
                                         <field name="additional_description"/>
                                         <field name="quantity"/>
+                                        <field name="price"/>
                                         <field name="discount"/>
                                         <field name="invoicing_interval"/>
                                         <field name="invoicing_unit"/>

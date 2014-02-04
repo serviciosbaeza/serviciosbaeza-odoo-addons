@@ -114,14 +114,14 @@ class agreement(orm.Model):
     }
 
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
         'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'account', context=c),
-        'period_type': lambda *a: 'pre-paid',
-        'prolong': lambda *a: 'unlimited',
-        'prolong_interval': lambda *a: 1,
-        'prolong_unit': lambda *a: 'years',
-        'state': lambda *a: 'empty',
-        'renewal_state': lambda *a: 'not_renewed',
+        'period_type': 'pre-paid',
+        'prolong': 'unlimited',
+        'prolong_interval': 1,
+        'prolong_unit': 'years',
+        'state': 'empty',
+        'renewal_state': 'not_renewed',
     }
     
     def _check_dates(self, cr, uid, ids, context=None):
@@ -287,7 +287,9 @@ class agreement(orm.Model):
             'user_id': agreement.partner_id.user_id.id,
         }
         # Get other invoice values from agreement partner
-        invoice.update(invoice_obj.onchange_partner_id(cr, uid, [], type=invoice['type'], partner_id=agreement.partner_id.id, company_id=agreement.company_id.id)['value'])
+        invoice.update(invoice_obj.onchange_partner_id(cr, uid, [],
+                type=invoice['type'], partner_id=agreement.partner_id.id,
+                company_id=agreement.company_id.id)['value'])
         # Prepare invoice lines objects
         agreement_lines_ids = []
         invoice_lines = []
@@ -304,6 +306,8 @@ class agreement(orm.Model):
                     partner_id=agreement.partner_id.id,
                     fposition_id=invoice['fiscal_position'],
                     context=context)['value'])
+            if agreement_line.price > 0:
+                invoice_line['price_unit'] = agreement_line.price
             # Put line taxes
             invoice_line['invoice_line_tax_id'] = [(6, 0, tuple(invoice_line['invoice_line_tax_id']))]
             # Put custom description
@@ -355,6 +359,7 @@ class agreement_line(orm.Model):
         'name': fields.related('product_id', 'name', type="char", relation='product.product', string='Description', store=False),
         'additional_description': fields.char('Add. description', size=30, help='Additional description that will be added to the product description on invoices.'),
         'quantity': fields.float('Quantity', required=True, help='Quantity of the product to invoice'),
+        'price': fields.float('Product price', digits_compute= dp.get_precision('Account'), help='Specific price for this product. Keep empty to use the current price while generating invoice'),
         'discount': fields.float('Discount (%)', digits=(16, 2)),
         'invoicing_interval': fields.integer('Interval', help="Interval in time units for invoicing this product", required=True),
         'invoicing_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Interval unit', required=True),
@@ -362,10 +367,10 @@ class agreement_line(orm.Model):
     }
 
     _defaults = {
-        'active_chk': lambda *a: 1,
-        'quantity': lambda *a: 1,
-        'invoicing_interval': lambda *a: 1,
-        'invoicing_unit': lambda *a: 'months',
+        'active_chk': True,
+        'quantity': 1,
+        'invoicing_interval': 1,
+        'invoicing_unit': 'months',
     }
     
     _sql_constraints = [
