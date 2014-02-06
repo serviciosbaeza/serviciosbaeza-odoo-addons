@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 18:48+0000\n"
-"PO-Revision-Date: 2013-09-12 18:48+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2014-02-06 10:55+0000\n"
+"PO-Revision-Date: 2014-02-06 11:55+0100\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: account_periodical_invoicing
@@ -95,7 +95,8 @@ msgstr ""
 
 #. module: account_periodical_invoicing
 #: model:ir.actions.act_window,help:account_periodical_invoicing.action_account_periodical_invoicing_agreement
-msgid "<p class=\"oe_view_nocontent_create\">\n"
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
 "                Click to set a new agreement.\n"
 "                </p><p>\n"
 "                Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a periodical invoice.\n"
@@ -104,13 +105,13 @@ msgid "<p class=\"oe_view_nocontent_create\">\n"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "View invoice"
+#: help:account.periodical_invoicing.agreement,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_sale_order
-msgid "Sales Order"
+#: view:account.periodical_invoicing.agreement:0
+msgid "Renewals"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -126,6 +127,11 @@ msgstr ""
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,prolong_interval:0
 msgid "Interval in time units to prolong the agreement until new renewall (that is automatic for unlimited term, manual for renewable fixed term)."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong:0
+msgid "Unlimited term"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -153,7 +159,6 @@ msgstr ""
 #. module: account_periodical_invoicing
 #: sql_constraint:account.periodical_invoicing.agreement.line:0
 msgid "All invoicing intervals must be greater than 0.\n"
-""
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -178,6 +183,11 @@ msgstr ""
 
 #. module: account_periodical_invoicing
 #: view:account.periodical_invoicing.agreement:0
+msgid "View invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:0
 msgid "Agreement"
 msgstr ""
 
@@ -197,8 +207,9 @@ msgid "Share a message..."
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong:0
-msgid "Unlimited term"
+#: code:addons/account_periodical_invoicing/periodical_invoicing.py:329
+#, python-format
+msgid "Period: from %s to %s"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -228,13 +239,8 @@ msgid "Discount (%)"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Renewals"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+#: model:ir.model,name:account_periodical_invoicing.model_sale_order
+msgid "Sales Order"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -293,6 +299,11 @@ msgstr ""
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,last_renovation_date:0
 msgid "Last renovation date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,price:0
+msgid "Product price"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -427,15 +438,8 @@ msgid "Post-paid"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: code:addons/account_periodical_invoicing/periodical_invoicing.py:302
-#, python-format
-msgid "Period: from %s to %s"
-msgstr ""
-
-#. module: account_periodical_invoicing
 #: sql_constraint:account.periodical_invoicing.agreement.line:0
 msgid "All product quantities must be greater than 0.\n"
-""
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -446,6 +450,11 @@ msgstr ""
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement.line,name:0
 msgid "Description"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,price:0
+msgid "Specific price for this product. Keep empty to use the current price while generating invoice"
 msgstr ""
 
 #. module: account_periodical_invoicing

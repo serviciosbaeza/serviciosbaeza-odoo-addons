@@ -524,3 +524,14 @@ msgstr "Nombre que ayuda a identificar el contrato"
 msgid "End date of the agreement"
 msgstr "Fecha de finalización del contrato"
 
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,price:0
+msgid "Product price"
+msgstr "Precio específico"
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,price:0
+msgid "Specific price for this product. Keep empty to use the current price while generating invoice"
+msgstr "Precio específico para este producto. Déjelo en blanco para usar el precio de ese momento cuando se generen las facturas."
+
+
