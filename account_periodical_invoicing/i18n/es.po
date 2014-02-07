@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 18:44+0000\n"
-"PO-Revision-Date: 2013-09-12 20:44+0100\n"
-"Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
+"POT-Creation-Date: 2014-02-06 10:55+0000\n"
+"PO-Revision-Date: 2014-02-06 11:19+0000\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"X-Launchpad-Export-Date: 2014-02-07 07:15+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement.renewal,comments:0
@@ -39,8 +40,11 @@ msgstr "Intervalo en unidades de tiempo para este producto"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,last_renovation_date:0
-msgid "Last date when agreement was renewed (same as start date if not renewed)"
-msgstr "Última fecha en la que el contrato fue renovado (igual a la fecha de inicio si no ha habido ninguna renovación)"
+msgid ""
+"Last date when agreement was renewed (same as start date if not renewed)"
+msgstr ""
+"Última fecha en la que el contrato fue renovado (igual a la fecha de inicio "
+"si no ha habido ninguna renovación)"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,message_unread:0
@@ -61,7 +65,8 @@ msgstr "semanas"
 #. module: account_periodical_invoicing
 #: constraint:account.periodical_invoicing.agreement:0
 msgid "Agreement end date must be greater than start date"
-msgstr "La fecha de finalización del contrato debe ser mayor que la de inicio"
+msgstr ""
+"La fecha de finalización del contrato debe ser mayor que la de inicio"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,notes:0
@@ -99,26 +104,34 @@ msgid ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "                Click to set a new agreement.\n"
 "                </p><p>\n"
-"                Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a periodical invoice.\n"
+"                Agreements are the way you define the commercial relation "
+"with your customers which specify certain products/services that you are "
+"providing them that requires a periodical invoice.\n"
 "                </p>\n"
 "            "
 msgstr ""
 "<p class=\"oe_view_nocontent_create\">\n"
 "                Pulse para establecer un nuevo contrato.\n"
 "                </p><p>\n"
-"                Los contratos son la forma de definir la relación comercial con sus clientes que especifica que ciertos productos/servicios que les está proveyendo requieren una factura periódica.\n"
+"                Los contratos son la forma de definir la relación comercial "
+"con sus clientes que especifica que ciertos productos/servicios que les está "
+"proveyendo requieren una factura periódica.\n"
 "                </p>\n"
 "            "
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "View invoice"
-msgstr "Ver factura"
+#: help:account.periodical_invoicing.agreement,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+"Contiene el resumen del chatter (nº de mensajes, ...). Este resumen viene "
+"directamente en formato HTML para poder ser insertado en las vistas kanban."
 
 #. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_sale_order
-msgid "Sales Order"
-msgstr "Pedido de venta"
+#: view:account.periodical_invoicing.agreement:0
+msgid "Renewals"
+msgstr "Renovaciones"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement.line,last_invoice_date:0
@@ -132,8 +145,18 @@ msgstr "Renovaciones"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,prolong_interval:0
-msgid "Interval in time units to prolong the agreement until new renewall (that is automatic for unlimited term, manual for renewable fixed term)."
-msgstr "Intervalo en unidades de tiempo para prolongar el contrato hasta la siguiente renovación (que es automática si se ha definido plazo ilimitado, y manual si se ha seleccionado plazo fijo renovable)."
+msgid ""
+"Interval in time units to prolong the agreement until new renewall (that is "
+"automatic for unlimited term, manual for renewable fixed term)."
+msgstr ""
+"Intervalo en unidades de tiempo para prolongar el contrato hasta la "
+"siguiente renovación (que es automática si se ha definido plazo ilimitado, y "
+"manual si se ha seleccionado plazo fijo renovable)."
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong:0
+msgid "Unlimited term"
+msgstr "Plazo ilimitado"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,state:0
@@ -179,8 +202,17 @@ msgstr "Plazo fijo renovable"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement.line,additional_description:0
-msgid "Additional description that will be added to the product description on invoices."
-msgstr "Descripción adicional que se añadirá a la descripción del producto en las facturas."
+msgid ""
+"Additional description that will be added to the product description on "
+"invoices."
+msgstr ""
+"Descripción adicional que se añadirá a la descripción del producto en las "
+"facturas."
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:0
+msgid "View invoice"
+msgstr "Ver factura"
 
 #. module: account_periodical_invoicing
 #: view:account.periodical_invoicing.agreement:0
@@ -203,9 +235,10 @@ msgid "Share a message..."
 msgstr "Compartir un mensaje..."
 
 #. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong:0
-msgid "Unlimited term"
-msgstr "Plazo ilimitado"
+#: code:addons/account_periodical_invoicing/periodical_invoicing.py:329
+#, python-format
+msgid "Period: from %s to %s"
+msgstr "Periodo: de %s a %s"
 
 #. module: account_periodical_invoicing
 #: selection:account.periodical_invoicing.agreement,state:0
@@ -234,14 +267,9 @@ msgid "Discount (%)"
 msgstr "Descuento (%)"
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Renewals"
-msgstr "Renovaciones"
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
-msgstr "Contiene el resumen del chatter (nº de mensajes, ...). Este resumen viene directamente en formato HTML para poder ser insertado en las vistas kanban."
+#: model:ir.model,name:account_periodical_invoicing.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
 
 #. module: account_periodical_invoicing
 #: view:account.periodical_invoicing.agreement:0
@@ -272,8 +300,11 @@ msgstr "Facturación periódica"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,number:0
-msgid "Number of agreement. Keep empty to get the number assigned by a sequence."
-msgstr "Número de contrato. Déjelo en blanco para que se le asigne un número automático."
+msgid ""
+"Number of agreement. Keep empty to get the number assigned by a sequence."
+msgstr ""
+"Número de contrato. Déjelo en blanco para que se le asigne un número "
+"automático."
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,next_expiration_date:0
@@ -302,6 +333,11 @@ msgid "Last renovation date"
 msgstr "Última fecha de renovación"
 
 #. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,price:0
+msgid "Product price"
+msgstr "Precio específico"
+
+#. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,prolong_unit:0
 #: field:account.periodical_invoicing.agreement.line,invoicing_unit:0
 msgid "Interval unit"
@@ -309,8 +345,13 @@ msgstr "Unidad de tiempo"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,period_type:0
-msgid "Period type for invoicing. 'Pre-paid': Invoices are generated for the upcoming period. 'Post-paid': Invoices are generated for the consumed period."
-msgstr "Periodo para la facturación. 'Prepago': Las facturas son generadas para el siguiente periodo. 'Pospago': Las facturas son generadas para el periodo consumido."
+msgid ""
+"Period type for invoicing. 'Pre-paid': Invoices are generated for the "
+"upcoming period. 'Post-paid': Invoices are generated for the consumed period."
+msgstr ""
+"Periodo para la facturación. 'Prepago': Las facturas son generadas para el "
+"siguiente periodo. 'Pospago': Las facturas son generadas para el periodo "
+"consumido."
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,period_type:0
@@ -329,8 +370,16 @@ msgstr "Es un seguidor"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.agreement,prolong:0
-msgid "Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew."
-msgstr "Establece el plazo del contrato. 'Plazo fijo renovable': Establece un plazo fijo, pero con posibilidad de renovación manual; 'Plazo ilimitado': La renovación se realiza automáticamente; 'Plazo fijo': El plazo está fijado y no hay posibilidad de renovación."
+msgid ""
+"Sets the term of the agreement. 'Renewable fixed term': It sets a fixed "
+"term, but with possibility of manual renew; 'Unlimited term': Renew is made "
+"automatically; 'Fixed term': The term is fixed and there is no possibility "
+"to renew."
+msgstr ""
+"Establece el plazo del contrato. 'Plazo fijo renovable': Establece un plazo "
+"fijo, pero con posibilidad de renovación manual; 'Plazo ilimitado': La "
+"renovación se realiza automáticamente; 'Plazo fijo': El plazo está fijado y "
+"no hay posibilidad de renovación."
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement,active:0
@@ -377,8 +426,12 @@ msgstr "Comentarios sobre la renovación"
 
 #. module: account_periodical_invoicing
 #: help:account.periodical_invoicing.renew_wizard,date:0
-msgid "Effective date of the renewal. This date is the one taken into account in the next renewal"
-msgstr "Fecha efectiva de renovación. Esta fecha es la que se tendrá en cuenta para la próxima renovación"
+msgid ""
+"Effective date of the renewal. This date is the one taken into account in "
+"the next renewal"
+msgstr ""
+"Fecha efectiva de renovación. Esta fecha es la que se tendrá en cuenta para "
+"la próxima renovación"
 
 #. module: account_periodical_invoicing
 #: field:account.periodical_invoicing.agreement.line,quantity:0
@@ -433,12 +486,6 @@ msgid "Post-paid"
 msgstr "Pospago"
 
 #. module: account_periodical_invoicing
-#: code:addons/account_periodical_invoicing/periodical_invoicing.py:302
-#, python-format
-msgid "Period: from %s to %s"
-msgstr "Periodo: de %s a %s"
-
-#. module: account_periodical_invoicing
 #: sql_constraint:account.periodical_invoicing.agreement.line:0
 msgid "All product quantities must be greater than 0.\n"
 msgstr "Todas las cantidades del producto deben ser mayores de 0.\n"
@@ -452,6 +499,15 @@ msgstr "Producto"
 #: field:account.periodical_invoicing.agreement.line,name:0
 msgid "Description"
 msgstr "Descripción"
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,price:0
+msgid ""
+"Specific price for this product. Keep empty to use the current price while "
+"generating invoice"
+msgstr ""
+"Precio específico para este producto. Déjelo en blanco para usar el precio "
+"de ese momento cuando se generen las facturas."
 
 #. module: account_periodical_invoicing
 #: view:account.periodical_invoicing.renew_wizard:0
@@ -523,15 +579,3 @@ msgstr "Nombre que ayuda a identificar el contrato"
 #: help:account.periodical_invoicing.agreement,end_date:0
 msgid "End date of the agreement"
 msgstr "Fecha de finalización del contrato"
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,price:0
-msgid "Product price"
-msgstr "Precio específico"
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.line,price:0
-msgid "Specific price for this product. Keep empty to use the current price while generating invoice"
-msgstr "Precio específico para este producto. Déjelo en blanco para usar el precio de ese momento cuando se generen las facturas."
-
-
