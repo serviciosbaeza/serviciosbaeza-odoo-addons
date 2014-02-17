@@ -20,11 +20,11 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import orm, fields
 from tools.translate import _
 import time
 
-class renew_wizard(osv.osv_memory):
+class renew_wizard(orm.TransientModel):
 
     _name = "account.periodical_invoicing.renew_wizard"
 
@@ -38,33 +38,36 @@ class renew_wizard(osv.osv_memory):
         return agreements[0].next_expiration_date
 
     _columns = {
-        'date': fields.date('Renewal date', help="Effective date of the renewal. This date is the one taken into account in the next renewal", required=True),
+        'date': fields.date('Renewal date', required=True,
+                    help="Effective date of the renewal. This date is the one "
+                         "taken into account in the next renewal"),
         'comments': fields.char('Comments', size=200, help='Renewal comments'),
     }
 
     _defaults = {
         'date': _get_renovation_date,
     }
-    
+
     def create_renewal(self, cr, uid, ids, context=None):
         """
         It creates agreement renewal records with data given in this wizard.
         """
-        if context is None: context = {}
-        
+        if context is None:
+            context = {}
         # Create agreement renewal record
         renew_wizard = self.browse(cr, uid, ids[0], context=context)
-        agreement_ids = context.get('active_ids',[])
+        agreement_ids = context.get('active_ids', [])
+        renewal_obj = self.pool['account.periodical_invoicing.agreement.renewal']
         for agreement_id in agreement_ids:
-            self.pool.get('account.periodical_invoicing.agreement.renewal').create(cr, uid, {
+            renewal_obj.create(cr, uid, {
                 'agreement_id': agreement_id,
                 'date': renew_wizard.date,
                 'comments': renew_wizard.comments,
             }, context=context)
-        
         # Change last renovation date and state in agreement
-        self.pool.get('account.periodical_invoicing.agreement').write(cr, uid, agreement_ids, { 'last_renovation_date': renew_wizard.date, 'renewal_state': 'renewed' }, context=context)
-                    
+        agreement_obj = self.pool['account.periodical_invoicing.agreement']
+        agreement_obj.write(cr, uid, agreement_ids,
+                            {'last_renovation_date': renew_wizard.date,
+                             'renewal_state': 'renewed'},
+                            context=context)
         return {'type': 'ir.actions.act_window_close'}
-
-renew_wizard()
