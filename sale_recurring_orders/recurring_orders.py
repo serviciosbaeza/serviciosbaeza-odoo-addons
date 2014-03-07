@@ -337,13 +337,14 @@ class agreement(osv.osv):
             'nodestroy': True
         }
 
-    def generate_next_year_orders_planned(self, cr, uid, context={}):
+    def generate_next_year_orders_planned(self, cr, uid, context=None):
         """
         Check if there is any pending order to create for each agreement. 
         """
-        if context is None: context = {}
-        ids = self.search(cr, uid, ['active', '=', True])
-        self.generate_next_year_orders(cr, uid, ids, context)
+        if context is None:
+            context = {}
+        ids = self.search(cr, uid, [], context=context)
+        self.generate_next_year_orders(cr, uid, ids, context=context)
 
     def generate_next_year_orders(self, cr, uid, ids, context={}):
         """
@@ -399,7 +400,7 @@ class agreement_line(osv.osv):
         'ordering_interval': fields.integer('Order interval', help="Interval in time units for making and order of this product", required=True),
         'ordering_unit': fields.selection([('days','days'),('weeks','weeks'),('months','months'),('years','years')], 'Ordering interval unit', required=True),
         'last_order_date': fields.date('Last order date'),
-        'notes': fields.char('Notes', size=300), 
+        'notes': fields.char('Notes', size=300),
     }
 
     _defaults = {

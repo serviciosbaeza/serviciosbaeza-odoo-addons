@@ -26,29 +26,39 @@
 ##############################################################################
 
 import time
-from tools.translate import _
-from osv import osv, fields
+from openerp.tools.translate import _
+from openerp.osv import orm, fields
 
-class account_balance_full_report(osv.osv_memory):
+class account_balance_full_report(orm.TransientModel):
     _name = "account.balance.full.report"
     _description = "Print Full account balance"
     _columns = {
         'company_id': fields.many2one('res.company', 'Company', required=True),
-        'account_list': fields.many2many('account.account', 'account_balance_account_list_rel', 'acc_balance_id','account_id','Root accounts', required=True),
+        'account_list': fields.many2many('account.account',
+                                         'account_balance_account_list_rel',
+                                         'acc_balance_id', 'account_id',
+                                         'Root accounts', required=True),
         'state': fields.selection([
                     ('bydate','By Date'),
                     ('byperiod','By Period'),
                     ('all', 'By Date and Period'),
                     ('none','No Filter')],'Date/Period Filter'),
-        'fiscalyear': fields.many2one('account.fiscalyear', 'Fiscal year', help='Keep empty to use all open fiscal years to compute the balance'),
-        'periods': fields.many2many('account.period','account_balance_account_period_rel','acc_balance_id','account_period_id','Periods', help='All periods in the fiscal year if empty'),
+        'fiscalyear': fields.many2one('account.fiscalyear', 'Fiscal year',
+                              help='Keep empty to use all open fiscal '
+                                   'years to compute the balance'),
+        'periods': fields.many2many('account.period',
+                            'account_balance_account_period_rel',
+                            'acc_balance_id', 'account_period_id',
+                            'Periods',
+                            help='All periods in the fiscal year if empty'),
         'display_account': fields.selection([
                     ('bal_all','All'),
                     ('bal_solde', 'With balance'),
                     ('bal_mouvement','With movements')], 'Display accounts'),
-        'display_account_level': fields.integer('Up to level', help= 'Display accounts up to this level (0 to show all)'),
+        'display_account_level': fields.integer('Up to level',
+                    help='Display accounts up to this level (0 to show all)'),
         'date_from': fields.date('Start date'),
-        'date_to': fields.date('End date')
+        'date_to': fields.date('End date'),
     }
 
     def default_get(self, cr, uid, fields, context=None):
@@ -63,8 +73,10 @@ class account_balance_full_report(osv.osv_memory):
         res['display_account_level'] = 0
         res['date_from'] = time.strftime('%Y-01-01')
         res['date_to'] = time.strftime('%Y-%m-%d')
-        res['company_id'] = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id
-        res['fiscalyear'] = self.pool.get('account.fiscalyear').find(cr, uid)
+        res['company_id'] = self.pool['res.users'].browse(cr, uid, uid,
+                                                          context=context
+                                                          ).company_id.id
+        res['fiscalyear'] = self.pool['account.fiscalyear'].find(cr, uid)
         return res
 
     def _check_state(self, cr, uid, ids, context=None):
@@ -77,15 +89,22 @@ class account_balance_full_report(osv.osv_memory):
     def _check_date(self, cr, uid, ids, context=None):
         if ids:
             current_obj = self.browse(cr, uid, ids[0], context=context)
-            res = self.pool.get('account.fiscalyear').search(cr, uid, [('date_start', '<=', current_obj.date_from),('date_stop', '>=', current_obj.date_from)])
+            res = self.pool['account.fiscalyear'].search(cr, uid,
+                                [('date_start', '<=', current_obj.date_from),
+                                 ('date_stop', '>=', current_obj.date_from)])
             if res:
-                acc_fy = self.pool.get('account.fiscalyear').browse(cr, uid, res[0], context=context)
-                if current_obj.date_to > acc_fy.date_stop or current_obj.date_to < acc_fy.date_start:
-                    raise osv.except_osv(_('UserError'),_('Date to must be set between %s and %s') % (acc_fy.date_start,acc_fy.date_stop))
+                acc_fy = self.pool['account.fiscalyear'].browse(cr, uid,
+                                                    res[0], context=context)
+                if (current_obj.date_to > acc_fy.date_stop or
+                        current_obj.date_to < acc_fy.date_start):
+                    raise orm.except_orm(_('UserError'),
+                                _('Date to must be set between %s and %s') %(
+                                        acc_fy.date_start,acc_fy.date_stop))
                 else:
                     return True
             else:
-                raise osv.except_osv(_('UserError'),_('Date not in a defined fiscal year'))
+                raise orm.except_orm(_('UserError'),
+                                     _('Date not in a defined fiscal year'))
 
     def print_report(self, cr, uid, ids, context=None):
         """prints report"""
@@ -105,11 +124,4 @@ class account_balance_full_report(osv.osv_memory):
             'datas': datas
             }
 
-account_balance_full_report()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
-
-
-
-
-     

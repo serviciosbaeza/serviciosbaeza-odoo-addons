@@ -20,6 +20,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_move
-import report
-import wizard
+from . import account_move
+from . import report
+from . import wizard

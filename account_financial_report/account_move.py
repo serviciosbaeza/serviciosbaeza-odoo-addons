@@ -21,14 +21,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import netsvc
-import pooler
-from osv import fields, osv
-from tools.translate import _
+import openerp.pooler
+from openerp import netsvc
+from openerp.osv import fields, orm
+from openerp.tools.translate import _
 
 import sys
-class account_move(osv.osv):
+class account_move(orm.Model):
     _inherit = "account.move"
 
     def _name_split(self, cr, uid, ids, name, args, context=None):
@@ -43,11 +42,13 @@ class account_move(osv.osv):
         return result
 
     _columns = {
-       'name_split' : fields.function(_name_split, method=True, type='char', string="Number", help="inserts space for wrap in longer numbers"),
+       'name_split' : fields.function(_name_split, method=True, type='char',
+                              string="Number",
+                              help="inserts space for wrap in longer numbers"),
     }
-account_move()
 
-class account_move_line(osv.osv):
+
+class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     def _name_split(self, cr, uid, ids, name, args, context=None):
@@ -62,6 +63,8 @@ class account_move_line(osv.osv):
         return result
 
     _columns = {
-       'name_split' : fields.function(_name_split, method=True, type='char', string="Number", help="inserts space for wrap in longer numbers"),
+       'name_split' : fields.function(_name_split, method=True, type='char',
+                              string="Number",
+                              help="inserts space for wrap in longer numbers"),
     }
-account_move_line()
+

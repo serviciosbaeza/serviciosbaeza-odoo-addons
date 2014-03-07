@@ -21,15 +21,19 @@
 #
 ##############################################################################
 {
-	"name" : "Common financial reports",
-	"version" : "1.0",
-	"author" : "Zikzakmedia SL",
-	"website" : "www.zikzakmedia.com",
-    "license" : "GPL-3",
-	"depends" : ["account"],
-	"category" : "Localisation/Accounting",
-	"description": """
-Add some common financial/accounting reports and some wizards to quickly compute them:
+    "name": "Common financial reports",
+    "version": "1.0",
+    "author": "Zikzakmedia SL",
+    "website": "www.zikzakmedia.com",
+    "license": "GPL-3",
+    "depends": ["account"],
+    "category": "Localisation/Accounting",
+    "contributors": [
+        'Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>',
+    ],
+    "description": """
+Add some common financial/accounting reports and some wizards to quickly
+compute them:
   * Account chart list
   * Invoice list
   * Account move (journal ledger)
@@ -37,23 +41,22 @@ Add some common financial/accounting reports and some wizards to quickly compute
   * Account balance compared period-fiscal year
   * Cumulative general ledger
 
-They can be found in the "Financial Management/Legal Statements/Generic Reports" menu or in the tree/form views of accounts, journals, invoices, account entries and account move lines.
+They can be found in the "Financial Management/Legal Statements/Generic
+Reports" menu or in the tree/form views of accounts, journals, invoices,
+account entries and account move lines.
 
-Some reports are based on previous work by Pexego and others on the c2c_finance_report module for TinyERP 4.2 by Camptocamp SA.
+Some reports are based on previous work by Pexego and others on the
+c2c_finance_report module for TinyERP 4.2 by Camptocamp SA.
 201101 ported to v6 by Camptocamp Austria
 """,
-	"init_xml" : [],
-	"demo_xml" : [],
-	"update_xml" : [
-                "wizard/wizard_account_balance_report_view.xml",
-                "wizard/wizard_print_journal_entries_view.xml",
-                "wizard/wizard_general_ledger_report_view.xml",
-                'wizard/wizard_account_chart_view.xml',
-                "wizard/wizard_invoice_list_report_view.xml",
-		"account_report_report.xml",
-		"account_report_wizard.xml",
-                
-	],
-	"active": False,
-	"installable": True
+    "data" : [
+        "wizard/wizard_account_balance_report_view.xml",
+        "wizard/wizard_print_journal_entries_view.xml",
+        "wizard/wizard_general_ledger_report_view.xml",
+        'wizard/wizard_account_chart_view.xml',
+        "wizard/wizard_invoice_list_report_view.xml",
+        "account_report_report.xml",
+        "account_report_wizard.xml",
+    ],
+    "installable": True,
 }
