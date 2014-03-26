@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="project_task_time_control_search_view_gtd">
+            <field name="name">project.task.tree.time</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <field name="hours" position="after">
+                    <button name="button_end_work" string="Stop" type="object" icon="STOCK_STOP"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
