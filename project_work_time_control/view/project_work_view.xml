@@ -8,7 +8,11 @@
             <field name="inherit_id" ref="project.view_task_form2" />
             <field name="arch" type="xml">
                 <field name="hours" position="after">
-                    <button name="button_end_work" string="Stop" type="object" icon="STOCK_STOP"/>
+                    <button name="button_end_work"
+                            string="Stop"
+                            type="object"
+                            icon="STOCK_STOP"
+                            attrs="{'invisible': [('hours', '>', 0)]}"/>
                 </field>
             </field>
         </record>
