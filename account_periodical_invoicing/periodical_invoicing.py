@@ -273,7 +273,7 @@ class agreement(orm.Model):
         context['force_company'] = agreement.company_id.id
         context['type'] = 'out_invoice'
         invoice = {
-            'date_invoice': now.strftime('%Y-%m-%d'),
+            #'date_invoice': now.strftime('%Y-%m-%d'),
             'origin': agreement.number,
             'partner_id': agreement.partner_id.id,
             'journal_id': invoice_obj._get_journal(cr, uid, context),
