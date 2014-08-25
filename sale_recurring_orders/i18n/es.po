@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0-20130206-000101\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-27 16:59+0000\n"
-"PO-Revision-Date: 2014-02-06 11:20+0000\n"
+"PO-Revision-Date: 2014-08-25 01:03+0000\n"
 "Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-03 06:03+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-08-25 07:32+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 
 #. module: sale_recurring_orders
 #: field:sale.recurring_orders.agreement.renewal,comments:0
@@ -111,7 +111,7 @@ msgstr "años"
 #. module: sale_recurring_orders
 #: help:sale.recurring_orders.agreement,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr "Si está marcado, hay mensajes que requieren su atención."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 
 #. module: sale_recurring_orders
 #: view:sale.recurring_orders.renew_wizard:0
