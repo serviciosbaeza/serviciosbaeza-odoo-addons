@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_stock_no_moves" model="ir.ui.view">
+            <field name="name">Products without moves wizard</field>
+            <field name="model">stock.report.no_moves</field>
+            <field name="arch" type="xml">
+                <form string="Products without moves"
+                    version="7.0">
+                    <p>Select the date interval for which you want to list products without stock moves.
+                    </p>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+                    <footer>
+                        <button name="button_show_products" string="Show products"
+                            type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_stock_no_moves" model="ir.actions.act_window">
+            <field name="name">Products without moves</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.report.no_moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stock_no_moves" parent="stock.menu_traceability"
+            action="action_stock_no_moves" name="Products without moves" />
+
+    </data>
+</openerp>
+

@@ -1,0 +1,61 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_products_no_moves
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-12 12:46+0000\n"
+"PO-Revision-Date: 2014-07-12 12:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_products_no_moves
+#: view:stock.report.no_moves:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_products_no_moves
+#: field:stock.report.no_moves,date_from:0
+msgid "Date from"
+msgstr "Fecha desde"
+
+#. module: stock_products_no_moves
+#: field:stock.report.no_moves,date_to:0
+msgid "Date to"
+msgstr "Fecha a"
+
+#. module: stock_products_no_moves
+#: model:ir.actions.act_window,name:stock_products_no_moves.action_stock_no_moves
+#: model:ir.ui.menu,name:stock_products_no_moves.menu_stock_no_moves
+#: view:stock.report.no_moves:0
+msgid "Products without moves"
+msgstr "Productos sin movimientos"
+
+#. module: stock_products_no_moves
+#: view:stock.report.no_moves:0
+msgid "Select the date interval for which you want to list products without stock moves."
+msgstr "Seleccione el intervalo de fechas para el que quiere listar los productos sin movimientos."
+
+#. module: stock_products_no_moves
+#: view:stock.report.no_moves:0
+msgid "Show products"
+msgstr "Mostrar productos"
+
+#. module: stock_products_no_moves
+#: view:stock.report.no_moves:0
+msgid "or"
+msgstr "o"
+
+#. module: stock_products_no_moves
+#: code:_description:0
+#: model:ir.model,name:stock_products_no_moves.model_stock_report_no_moves
+#, python-format
+msgid "stock.report.no_moves"
+msgstr "stock.report.no_moves"
+
