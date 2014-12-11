@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_form_date_onchange" model="ir.ui.view">
+            <field name="name">account.move.form.date_onchange</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="date" position="attributes">
+                    <attribute name="on_change">onchange_date(date, company_id, context)</attribute>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
