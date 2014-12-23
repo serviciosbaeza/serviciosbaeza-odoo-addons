@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -21,26 +21,26 @@
 ##############################################################################
 
 {
-    "name" : "Products without stock moves",
-    "version" : "1.0",
-    "author" : "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "category" : "Warehouse Management",
-    "description" : """
+    "name": "Products without stock moves",
+    "version": "1.0",
+    "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "category": "Warehouse Management",
+    "description": """
 Query products without stock moves
 ==================================
 
 Allows to list products that have no moves in the given period.
     """,
-    "website" : "www.serviciosbaeza.com",
-    "license" : "AGPL-3",
-    "depends" : [
+    "website": "www.serviciosbaeza.com",
+    "license": "AGPL-3",
+    "depends": [
         "stock",
         "product",
     ],
-    "demo" : [],
-    "data" : [
+    "demo": [],
+    "data": [
         'wizard/wizard_stock_no_moves.xml',
     ],
-    "installable" : True,
-    "active" : False,
+    "installable": True,
+    "active": False,
 }

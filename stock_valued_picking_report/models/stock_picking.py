@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 from openerp.osv import fields, orm
 from openerp.addons.decimal_precision import decimal_precision as dp
 
+
 class StockPicking(orm.Model):
     _inherit = "stock.picking"
 
@@ -29,12 +30,11 @@ class StockPicking(orm.Model):
         res = {}
         for picking in self.browse(cr, uid, ids, context=context):
             res[picking.id] = False
-            total_tax = 0.0
             for move in picking.move_lines:
                 if not move.sale_line_id:
                     continue
                 # Take one of the sale order lines currencies (it would be
-                # alwaysthe same for all) 
+                # alwaysthe same for all)
                 res[picking.id] = move.sale_line_id.order_id.currency_id.id
                 break
         return res
@@ -52,18 +52,16 @@ class StockPicking(orm.Model):
         tax_obj = self.pool['account.tax']
         cur_obj = self.pool['res.currency']
         for picking in self.browse(cr, uid, ids, context=context):
-            cur = False
             total_tax = 0.0
             for move in picking.move_lines:
                 if not move.sale_line_id:
                     continue
                 price_unit = (move.sale_price_unit *
                               (100 - move.sale_discount or 0.0) / 100.0)
-                for c in tax_obj.compute_all(cr, uid, move.sale_line_id.tax_id,
-                                         price_unit,
-                                         move.product_qty, move.product_id,
-                                         move.sale_line_id.order_id.partner_id
-                                         )['taxes']:
+                for c in tax_obj.compute_all(
+                        cr, uid, move.sale_line_id.tax_id, price_unit,
+                        move.product_qty, move.product_id,
+                        move.sale_line_id.order_id.partner_id)['taxes']:
                     total_tax += c.get('amount', 0.0)
             res[picking.id] = (picking.currency_id and
                                cur_obj.round(cr, uid, picking.currency_id,
@@ -78,19 +76,21 @@ class StockPicking(orm.Model):
         return res
 
     _columns = {
-        'currency_id': fields.related('sale_id', 'currency_id',
-                       type="many2one", relation="res.currency",
-                       store=True, string='Sale currency', readonly=True),
-        'amount_untaxed': fields.function(_amount_untaxed, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Untaxed amount', readonly=True),
-        'amount_tax': fields.function(_amount_tax, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Taxes', readonly=True),
-        'amount_total': fields.function(_amount_total, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Total', readonly=True),
+        'currency_id': fields.related(
+            'sale_id', 'currency_id', type="many2one", relation="res.currency",
+            store=True, string='Sale currency', readonly=True),
+        'amount_untaxed': fields.function(
+            _amount_untaxed, type="float", string='Untaxed amount',
+            digits_compute=dp.get_precision('Account'), method=True,
+            readonly=True),
+        'amount_tax': fields.function(
+            _amount_tax, type="float", method=True, string='Taxes',
+            digits_compute=dp.get_precision('Account'), readonly=True),
+        'amount_total': fields.function(
+            _amount_total, type="float", method=True, string='Total',
+            digits_compute=dp.get_precision('Account'), readonly=True),
     }
+
 
 class StockPickingOut(orm.Model):
     _inherit = "stock.picking.out"

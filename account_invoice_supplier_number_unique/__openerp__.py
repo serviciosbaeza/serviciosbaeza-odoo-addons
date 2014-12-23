@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -26,9 +26,9 @@
     'category': 'Account',
     'description': """
 Adds a constraint to avoid duplicated supplier invoice number on invoices.
-""",
+    """,
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
-    'website' : 'http://www.serviciosbaeza.com',
+    'website': 'http://www.serviciosbaeza.com',
     'depends': [
         'account',
     ],
@@ -36,4 +36,3 @@ Adds a constraint to avoid duplicated supplier invoice number on invoices.
     ],
     "installable": True,
 }
-

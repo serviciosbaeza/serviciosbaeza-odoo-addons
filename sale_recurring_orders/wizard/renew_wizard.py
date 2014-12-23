@@ -2,8 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com) All Rights Reserved.
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#    Copyright (c) 2012 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,52 +20,50 @@
 #
 ##############################################################################
 
-from osv import osv, fields
-from tools.translate import _
+from openerp.osv import orm, fields
 
-class renew_wizard(osv.osv_memory):
 
+class RenewWizard(orm.TransientModel):
     _name = "sale.recurring_orders.renew_wizard"
 
     def _get_renovation_date(self, cr, uid, context=None):
-        """
-        It returns the next expiration date of the active agreement.
+        """It returns the next expiration date of the active agreement.
         @rtype: string with date
         @return: Next expiration date of the agreement.
         """
-        agreements = self.pool.get('sale.recurring_orders.agreement').browse(cr, uid, context.get('active_ids',[]), context=context)
+        agreements = self.pool['sale.recurring_orders.agreement'].browse(
+            cr, uid, context.get('active_ids', []), context=context)
         return agreements[0].next_expiration_date
 
     _columns = {
-        'date': fields.date('Renewal date', help="Effective date of the renewal. This date is the one taken into account in the next renewal", required=True),
+        'date': fields.date(
+            'Renewal date',
+            help="Effective date of the renewal. This date is the one taken "
+                 "into account in the next renewal", required=True),
         'comments': fields.char('Comments', size=200, help='Renewal comments'),
     }
 
     _defaults = {
         'date': _get_renovation_date,
     }
-    
+
     def create_renewal(self, cr, uid, ids, context=None):
+        """It creates agreement renewal records with data given in this wizard.
         """
-        It creates agreement renewal records with data given in this wizard.
-        """
-        if context is None: context = {}
-        
+        if context is None:
+            context = {}
         # Create agreement renewal record
         renew_wizard = self.browse(cr, uid, ids[0], context=context)
-        agreement_ids = context.get('active_ids',[])
+        agreement_ids = context.get('active_ids', [])
         for agreement_id in agreement_ids:
-            self.pool.get('sale.recurring_orders.agreement.renewal').create(cr, uid, {
-                'agreement_id': agreement_id,
-                'date': renew_wizard.date,
-                'comments': renew_wizard.comments,
-            }, context=context)
-        
+            self.pool['sale.recurring_orders.agreement.renewal'].create(
+                cr, uid, {'agreement_id': agreement_id,
+                          'date': renew_wizard.date,
+                          'comments': renew_wizard.comments},
+                context=context)
         # Change last renovation date and state in agreement
-        self.pool.get('sale.recurring_orders.agreement').write(cr, uid, agreement_ids, { 'last_renovation_date': renew_wizard.date, 'renewal_state': 'renewed' }, context=context)
-                    
+        self.pool['sale.recurring_orders.agreement'].write(
+            cr, uid, agreement_ids,
+            {'last_renovation_date': renew_wizard.date,
+             'renewal_state': 'renewed'}, context=context)
         return {'type': 'ir.actions.act_window_close'}
-
-renew_wizard()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

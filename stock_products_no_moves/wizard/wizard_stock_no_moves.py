@@ -18,10 +18,11 @@
 ##############################################################################
 from openerp.osv import fields, orm
 
+
 class StockReportNoMoves(orm.TransientModel):
     _name = "stock.report.no_moves"
 
-    _columns ={
+    _columns = {
         'date_from': fields.date('Date from'),
         'date_to': fields.date('Date to'),
     }
