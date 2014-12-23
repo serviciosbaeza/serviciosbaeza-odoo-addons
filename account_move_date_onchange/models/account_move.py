@@ -27,7 +27,7 @@ class AccountMove(orm.Model):
 
     def onchange_date(self, cr, uid, ids, date, company_id, context=None):
         if context is None:
-            context ={}
+            context = {}
         res = {'value': {}}
         period_model = self.pool['account.period']
         ctx = context.copy()

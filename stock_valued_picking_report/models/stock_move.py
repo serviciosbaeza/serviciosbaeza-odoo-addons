@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,32 +21,32 @@
 ##############################################################################
 from openerp.osv import fields, orm
 
+
 class StockMove(orm.Model):
     _inherit = "stock.move"
 
     def _get_sale_price_subtotal(self, cr, uid, ids, field_name, arg,
-                                  context=None):
+                                 context=None):
         res = {}
         cur_obj = self.pool['res.currency']
         for move in self.browse(cr, uid, ids, context=context):
             res[move.id] = False
             if move.sale_line_id:
-                subtotal = move.sale_price_unit * move.product_qty * \
-                                    (1 - (move.sale_discount or 0.0) / 100.0)
+                subtotal = (move.sale_price_unit * move.product_qty *
+                            (1 - (move.sale_discount or 0.0) / 100.0))
                 # Round by currency precision
                 cur = move.sale_line_id.order_id.currency_id
                 res[move.id] = cur_obj.round(cr, uid, cur, subtotal)
         return res
 
     _columns = {
-        'sale_price_unit': fields.related('sale_line_id', 'price_unit',
-                                      type="float", readonly=True,
-                                      string="Sale price unit"),
-        'sale_discount': fields.related('sale_line_id', 'discount',
-                                    type="float", readonly=True,
-                                    string="Sale discount (%)"),
-        'sale_price_subtotal': fields.function(_get_sale_price_subtotal,
-                                               string='Price subtotal',
-                                               type='float', method=True,
-                                               readonly=True),
+        'sale_price_unit': fields.related(
+            'sale_line_id', 'price_unit', type="float", readonly=True,
+            string="Sale price unit"),
+        'sale_discount': fields.related(
+            'sale_line_id', 'discount', type="float", readonly=True,
+            string="Sale discount (%)"),
+        'sale_price_subtotal': fields.function(
+            _get_sale_price_subtotal, string='Price subtotal', type='float',
+            method=True, readonly=True),
     }

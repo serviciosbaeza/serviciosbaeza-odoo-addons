@@ -2,12 +2,11 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012 Pedro Manuel Baeza Romero All Rights Reserved.
-#    $Id$
+#    Copyright (c) 2012 Pedro Manuel Baeza Romero
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -24,22 +23,23 @@
     'name': 'Periodical invoicing',
     'version': '1.2',
     'category': 'Accounting',
-    'description': """Module for making easily periodical invoices to customers from agreements that allow to set:
+    'description': """
+Module for making easily periodical invoices to customers from agreements that
+allows to set:
     * Agreement term
     * Products and quantities to invoice
     * Special prices and discounts
     """,
     'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
-    'website' : 'http://www.serviciosbaeza.com',
+    'website': 'http://www.serviciosbaeza.com',
     'depends': ['account', 'sale'],
     'data': [
         'security/ir.model.access.csv',
-        'wizard/renew_wizard_view.xml', 
-        'periodical_invoicing_data.xml', 
+        'wizard/renew_wizard_view.xml',
+        'periodical_invoicing_data.xml',
         'periodical_invoicing_view.xml',
         'sale_order_view.xml',
     ],
     'auto_install': False,
     "installable": True,
 }
-

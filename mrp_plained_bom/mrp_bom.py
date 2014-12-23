@@ -3,12 +3,11 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2013 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
-#    $Id$
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -22,7 +21,8 @@
 ##############################################################################
 from openerp.osv import fields, orm
 
-class mrp_bom(orm.Model):
+
+class MrpBom(orm.Model):
     _inherit = "mrp.bom"
 
     def _get_plained_qty(self, cr, uid, ids, name, arg, context=None):
@@ -60,9 +60,8 @@ class mrp_bom(orm.Model):
         return result
 
     def _plained_child_compute(self, cr, uid, ids, name, arg, context=None):
-        """
-        Gets BoMs ids unfolded for all descendants. When a product is
-        duplicated across BoM, only first BoM occurrence is added. This is to 
+        """Gets BoMs ids unfolded for all descendants. When a product is
+        duplicated across BoM, only first BoM occurrence is added. This is to
         allow the calculation of the special field _get_plained_quantity.
         @param self: The object pointer
         @param cr: The current row, from the database cursor,
@@ -84,7 +83,7 @@ class mrp_bom(orm.Model):
                     return components
                 else:
                     for bom in bom_lines:
-                        if not bom.product_id.id in products:
+                        if bom.product_id.id not in products:
                             products.append(bom.product_id.id)
                             components.append(bom.id)
                     product_ids = map(lambda x: x.product_id.id, bom_lines)
@@ -93,8 +92,8 @@ class mrp_bom(orm.Model):
                                        ('product_id', 'in', product_ids)
                                        ])
                     for bom in self.browse(cr, uid, sids):
-                        addMaterialsRecursive(components, products, bom.bom_lines)
-
+                        addMaterialsRecursive(components, products,
+                                              bom.bom_lines)
             bom_parent = self.browse(cr, uid, bom_id, context=context)
             components = []
             products = []
@@ -103,11 +102,9 @@ class mrp_bom(orm.Model):
         return result
 
     _columns = {
-        'child_plained_ids': fields.function(_plained_child_compute,
-                                             relation='mrp.bom',
-                                             string="Plained BoM Hierarchy",
-                                             type='many2many'),
-        'plained_qty': fields.function(_get_plained_qty,
-                                       string="Plained quantity",
-                                       type='float'),
+        'child_plained_ids': fields.function(
+            _plained_child_compute, relation='mrp.bom',
+            string="Plained BoM Hierarchy", type='many2many'),
+        'plained_qty': fields.function(
+            _get_plained_qty, string="Plained quantity", type='float'),
     }

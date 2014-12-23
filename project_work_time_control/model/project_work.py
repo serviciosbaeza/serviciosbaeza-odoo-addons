@@ -17,7 +17,8 @@
 ##############################################################################
 from openerp.osv import orm
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from datetime import datetime, timedelta
+from datetime import datetime
+
 
 class project_work(orm.Model):
     _inherit = "project.task.work"
@@ -25,8 +26,7 @@ class project_work(orm.Model):
     def button_end_work(self, cr, uid, ids, context=None):
         end_date = datetime.now()
         for work in self.browse(cr, uid, ids, context=context):
-            date = datetime.strptime(work.date,
-                                      DEFAULT_SERVER_DATETIME_FORMAT)
+            date = datetime.strptime(work.date, DEFAULT_SERVER_DATETIME_FORMAT)
             hours = (end_date - date).total_seconds() / 3600
             self.write(cr, uid, [work.id], {'hours': hours}, context=context)
         return True

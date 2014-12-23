@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2011 Servicios Tecnológicos Avanzados Pedro Manuel Baeza Romero
-#                         (http://www.serviciosbaeza.es) All rights reserved.
+#    Copyright (c) 2011 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.es)
 #                  Pedro Manuel Baeza Romero <pedro.baeza@serviciosbaeza.es>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,5 +20,4 @@
 #
 ##############################################################################
 
-import renew_wizard
-
+from . import renew_wizard
