@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sale_order_general_discount" model="ir.ui.view">
+            <field name="name">Sales order general discount</field>
+            <field name="model">sale.order.general_discount</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set general discount">
+                <separator colspan="4" string="Select general discount to apply" />
+                <group colspan="4" col="2">
+                    <field name="discount"/>
+                </group>
+                <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                <button name="set_general_discount" string="Set general discount" type="object" icon="terp-gtk-go-back-rtl"/>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_view_sale_order_general_discount" model="ir.actions.act_window">
+            <field name="name">Set general discount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.general_discount</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sale_order_general_discount"/>
+            <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="sale_order_line_general_discount">
+            <field name="model_id" ref="sale.model_sale_order" />
+            <field name="object" eval="1" />
+            <field name="name">Set general discount</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_view_sale_order_general_discount'))" />
+            <field name="key">action</field>
+            <field name="model">sale.order</field>
+        </record>
+    </data>
+</openerp>
