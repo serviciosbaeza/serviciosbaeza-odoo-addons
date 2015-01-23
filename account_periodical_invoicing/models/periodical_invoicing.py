@@ -345,9 +345,10 @@ class Agreement(orm.Model):
             cr, uid, [('code', '=', agreement.partner_id.lang)])
         lang = lang_obj.browse(cr, uid, lang_ids)[0]
         # Create invoice object
-        context['company_id'] = agreement.company_id.id
-        context['force_company'] = agreement.company_id.id
-        context['type'] = 'out_invoice'
+        ctx = context.copy()
+        ctx['company_id'] = agreement.company_id.id
+        ctx['force_company'] = agreement.company_id.id
+        ctx['type'] = 'out_invoice'
         invoice = {
             'origin': agreement.number,
             'partner_id': agreement.partner_id.id,
@@ -379,7 +380,7 @@ class Agreement(orm.Model):
                 uom_id=False, qty=agreement_line.quantity,
                 partner_id=agreement.partner_id.id,
                 fposition_id=invoice['fiscal_position'],
-                context=context)['value'])
+                context=ctx)['value'])
             if agreement_line.price > 0:
                 invoice_line['price_unit'] = agreement_line.price
             # Put line taxes
@@ -408,16 +409,16 @@ class Agreement(orm.Model):
             agreement_lines_ids.append(agreement_line.id)
         # Add lines to invoice and create it
         invoice['invoice_line'] = [(0, 0, x) for x in invoice_lines]
-        invoice_id = invoice_obj.create(cr, uid, invoice, context=context)
+        invoice_id = invoice_obj.create(cr, uid, invoice, context=ctx)
         # Update last invoice date for lines
         self.pool['account.periodical_invoicing.agreement.line'].write(
             cr, uid, agreement_lines_ids,
-            {'last_invoice_date': now.strftime('%Y-%m-%d')}, context=context)
+            {'last_invoice_date': now.strftime('%Y-%m-%d')}, context=ctx)
         # Update agreement state
         if agreement.state != 'invoices':
             self.pool['account.periodical_invoicing.agreement'].write(
                 cr, uid, [agreement.id], {'state': 'invoices'},
-                context=context)
+                context=ctx)
         # Create invoice agreement record
         agreement_invoice = {
             'agreement_id': agreement.id,
@@ -425,7 +426,7 @@ class Agreement(orm.Model):
             'invoice_id': invoice_id
         }
         self.pool['account.periodical_invoicing.agreement.invoice'].create(
-            cr, uid, agreement_invoice, context=context)
+            cr, uid, agreement_invoice, context=ctx)
         return invoice_id
 
 
@@ -511,7 +512,7 @@ class AgreementInvoice(orm.Model):
             'account.periodical_invoicing.agreement', 'Agreement reference',
             ondelete='cascade'),
         'date': fields.related(
-            'invoice_id', 'date_invoice', type='date',
+            'invoice_id', 'create_date', type='date',
             relation='account.invoice', string="Date of invoice creation",
             store=False),
         'invoice_id': fields.many2one('account.invoice', 'Invoice',
