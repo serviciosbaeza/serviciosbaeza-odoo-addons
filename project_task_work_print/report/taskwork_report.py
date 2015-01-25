@@ -1,0 +1,70 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+import time
+from openerp.report import report_sxw
+
+
+class TaskWorkReport(report_sxw.rml_parse):
+
+    def __init__(self, cr, uid, name, context=None):
+        super(TaskWorkReport, self).__init__(cr, uid, name, context)
+        self.localcontext.update({
+            'time': time,
+        })
+        self.context = context
+
+    def set_context(self, objects, data, ids, report_type=None):
+        tw_lines = {}
+        for o in objects:
+            tw_lines[o.id] = []
+            for task in o.tasks:
+                tw_lines[o.id].extend(x for x in task.work_ids)
+        self.localcontext['tw_lines'] = tw_lines
+        super(TaskWorkReport, self).set_context(objects, data, ids,
+                                                report_type)
+
+    def _get_tot_hours(self, ts_lines):
+        tot = 0.0
+        deduced = 0.0
+        for line in ts_lines:
+            if line.product_uom_id:
+                factor = line.product_uom_id.factor
+                if factor == 0.0:
+                    factor = 1.0
+            else:
+                factor = 1.0
+            factor_invoicing = 1.0
+            if line.to_invoice and line.to_invoice.factor != 0.0:
+                factor_invoicing = 1.0 - line.to_invoice.factor / 100
+            if factor_invoicing > 1.0:
+                deduced += ((line.unit_amount / factor) * factor_invoicing)
+                tot += ((line.unit_amount / factor) * factor_invoicing)
+            elif factor_invoicing <= 1.0:
+                tot += (line.unit_amount / factor)
+                deduced += ((line.unit_amount / factor) * factor_invoicing)
+        return {'total': tot, 'deduced': deduced}
+
+report_sxw.report_sxw(
+    'report.project.task.work', 'project.project',
+    'addons/project_task_work_print/report/taskwork_report.rml',
+    parser=TaskWorkReport)
