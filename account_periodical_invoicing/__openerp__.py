@@ -23,7 +23,7 @@
     'name': 'Periodical invoicing',
     'version': '1.0',
     'category': 'Accounting',
-    'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['account', 'sale'],
     'data': [
