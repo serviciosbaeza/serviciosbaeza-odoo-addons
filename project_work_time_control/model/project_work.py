@@ -15,13 +15,32 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp.osv import orm, fields
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 
 
 class project_work(orm.Model):
     _inherit = "project.task.work"
+
+    _columns = {
+        'project': fields.related(
+            'task_id', 'project_id', type="many2one", string="Project",
+            relation="project.project"),
+    }
+
+    def onchange_project(self, cr, uid, ids, project_id, context=None):
+        domain = "[]"
+        if project_id:
+            domain = "[('project_id', '=', %s)]" % project_id
+        return {
+            'domain': {'task_id': domain},
+        }
+
+    def onchange_task_id(self, cr, uid, ids, task_id, context=None):
+        task = self.pool['project.task'].browse(cr, uid, task_id,
+                                                context=context)
+        return {'value': {'project': task.project_id.id}}
 
     def button_end_work(self, cr, uid, ids, context=None):
         end_date = datetime.now()
