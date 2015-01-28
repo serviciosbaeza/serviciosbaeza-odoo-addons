@@ -3,7 +3,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+#    Copyright (c) 2015 Antiun Ingenieria (http://www.antiun.com)
+#                       Antonio Espinosa <antonioea@antiun.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,13 +21,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import fields, orm
+from openerp import fields, models, api
 from openerp.addons.decimal_precision import decimal_precision as dp
 
-class StockPicking(orm.Model):
+class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    def _get_currency_id(self, cr, uid, ids, field_name, arg, context=None):
+    @api.multi
+    def _get_currency_id(self, field_name, arg):
         res = {}
         for picking in self.browse(cr, uid, ids, context=context):
             res[picking.id] = False
@@ -34,7 +37,7 @@ class StockPicking(orm.Model):
                 if not move.sale_line_id:
                     continue
                 # Take one of the sale order lines currencies (it would be
-                # alwaysthe same for all) 
+                # alwaysthe same for all)
                 res[picking.id] = move.sale_line_id.order_id.currency_id.id
                 break
         return res
@@ -76,6 +79,15 @@ class StockPicking(orm.Model):
         for picking in self.browse(cr, uid, ids, context=context):
             res[picking.id] = picking.amount_untaxed + picking.amount_tax
         return res
+
+    currency_id = fields.Many2one(string='Sale currency',
+                                  related='sale_id.currency_id',
+                                  store=True, readonly=True)
+    amount_untaxed = fields.Float(string='Untaxed amount',
+                                  compute='_amount_untaxed',
+                                  digits=)
+    amount_tax =
+    amount_total =
 
     _columns = {
         'currency_id': fields.related('sale_id', 'currency_id',

@@ -3,7 +3,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+#    Copyright (c) 2015 Antiun Ingenieria (http://www.antiun.com)
+#                       Antonio Espinosa <antonioea@antiun.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -35,7 +37,9 @@ Add amount information to picking list report and delivery order view.
 You can select at partner level if picking list report must be valued or not.
 
 Inspired in stock_valued 6.x module by Acysos S.L., Pablo Rocandio, NaN·tic and
-Zikzakmedia SL.""",
+Zikzakmedia SL.
+Migrated to v8 by Antonio Espinosa at Antiun Ingenieria.
+""",
     "license" : "GPL-3",
     "depends" : [
         "base",
