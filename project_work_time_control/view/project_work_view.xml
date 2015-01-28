@@ -22,7 +22,7 @@
             <field name="model">project.task.work</field>
             <field name="priority">99</field>
             <field name="arch" type="xml">
-                <tree editable="bottom" string="Task work">
+                <tree editable="top" string="Task work">
                     <field name="project"
                            on_change="onchange_project(project, context)"
                            attrs="{'readonly': [('task_id', '!=', False)]}" />
