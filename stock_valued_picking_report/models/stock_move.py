@@ -23,9 +23,10 @@
 ##############################################################################
 from openerp import fields, models, api
 
-from pprint import pformat
-import logging
-_logger = logging.getLogger(__name__)
+# Uncomment for debug proposes
+# from pprint import pformat
+# import logging
+# _logger = logging.getLogger(__name__)
 
 
 class StockMove(models.Model):
@@ -50,18 +51,19 @@ class StockMove(models.Model):
         'procurement_id.sale_line_id.order_id.currency_id',
     )
     def _get_sale_price_subtotal(self):
-        _logger.info('_get_sale_price_subtotal')
         st = 0.0
 
+        price = self.sale_price_unit
+        qty = self.product_qty
+        discount = self.sale_discount
+        subtotal = price * qty * (1 - (discount or 0.0) / 100.0)
+        # Only get subtotal if this stock.move belongs to a
+        # stock.picking created from a sale.order
         if self.procurement_id and self.procurement_id.sale_line_id:
-            price = self.sale_price_unit
-            qty = self.product_qty
-            discount = self.sale_discount
-            subtotal = price * qty * (1 - (discount or 0.0) / 100.0)
             # Round by currency precision
             order = self.procurement_id.sale_line_id.order_id
             currency = order.currency_id
             if currency:
-                st = self.env['res.currency'].round(currency, subtotal)
+                st = currency.round(subtotal)
 
         self.sale_price_subtotal = st

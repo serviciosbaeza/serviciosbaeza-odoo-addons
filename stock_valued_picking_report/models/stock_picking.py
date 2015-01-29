@@ -24,9 +24,10 @@
 from openerp import fields, models, api
 from openerp.addons.decimal_precision import decimal_precision as dp
 
-from pprint import pformat
-import logging
-_logger = logging.getLogger(__name__)
+# Uncomment for debug proposes
+# from pprint import pformat
+# import logging
+# _logger = logging.getLogger(__name__)
 
 
 class StockPicking(models.Model):
@@ -53,33 +54,26 @@ class StockPicking(models.Model):
         'move_lines.procurement_id.sale_line_id.order_id.partner_id',
     )
     def _compute_amounts(self):
-        _logger.info('_compute_amounts')
         untaxed = 0.0
         for move in self.move_lines:
-            _logger.info('_compute_amounts : sale_price_subtotal = %f' % move.sale_price_subtotal)
             untaxed += move.sale_price_subtotal
 
         tax = 0.0
-        tax_obj = self.env['account.tax']
-        cur_obj = self.env['res.currency']
         for move in self.move_lines:
             if not (move.procurement_id and
                     move.procurement_id.sale_line_id):
-                _logger.info('_compute_amounts : no sale_line_id found')
                 continue
             sale_line = move.procurement_id.sale_line_id
             price_unit = (move.sale_price_unit *
                           (100 - move.sale_discount or 0.0) / 100.0)
-            for c in tax_obj.compute_all(sale_line.tax_id,
-                                     price_unit,
-                                     move.product_qty, move.product_id,
-                                     sale_line.order_id.partner_id
-                                     )['taxes']:
-                _logger.info('_compute_amounts : tax = %f' % c.get('amount', 0.0))
+            for c in sale_line.tax_id.compute_all(price_unit,
+                                      move.product_qty,
+                                      move.product_id,
+                                      sale_line.order_id.partner_id)['taxes']:
                 tax += c.get('amount', 0.0)
         currency = self.currency_id
         if currency:
-            tax = cur_obj.round(currency, tax)
+            tax = currency.round(tax)
 
         self.amount_untaxed = untaxed
         self.amount_tax = tax
