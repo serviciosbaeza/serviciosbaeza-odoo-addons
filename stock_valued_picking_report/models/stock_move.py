@@ -23,32 +23,45 @@
 ##############################################################################
 from openerp import fields, models, api
 
+from pprint import pformat
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    @api.multi
-    def _get_sale_price_subtotal(self, field_name, arg):
-        res = {}
-        for move in self:
-            res[move.id] = False
-            if move.sale_line_id:
-                price = move.sale_price_unit
-                qty = move.product_qty
-                discount = move.sale_discount
-                subtotal = price * qty * (1 - (discount or 0.0) / 100.0)
-                # Round by currency precision
-                currency = move.sale_line_id.order_id.currency_id
-                res[move.id] = self.env['res.currency'].round(
-                    self.env.cr, self.env.uid, currency, subtotal)
-        return res
-
     sale_price_unit = fields.Float(string="Sale price unit",
-                                   related='sale_line_id.price_unit',
-                                   readonly=True)
+                            related='procurement_id.sale_line_id.price_unit',
+                            readonly=True)
     sale_discount = fields.Float(string="Sale discount (%)",
-                                 related='sale_line_id.discount',
-                                 readonly=True)
+                            related='procurement_id.sale_line_id.discount',
+                            readonly=True)
     sale_price_subtotal = fields.Float(string="Price subtotal",
                                        compute='_get_sale_price_subtotal',
                                        readonly=True)
+
+    @api.one
+    @api.depends(
+        'sale_price_unit',
+        'sale_discount',
+        'product_qty',
+        'product_id',
+        'procurement_id.sale_line_id.order_id.currency_id',
+    )
+    def _get_sale_price_subtotal(self):
+        _logger.info('_get_sale_price_subtotal')
+        st = 0.0
+
+        if self.procurement_id and self.procurement_id.sale_line_id:
+            price = self.sale_price_unit
+            qty = self.product_qty
+            discount = self.sale_discount
+            subtotal = price * qty * (1 - (discount or 0.0) / 100.0)
+            # Round by currency precision
+            order = self.procurement_id.sale_line_id.order_id
+            currency = order.currency_id
+            if currency:
+                st = self.env['res.currency'].round(currency, subtotal)
+
+        self.sale_price_subtotal = st

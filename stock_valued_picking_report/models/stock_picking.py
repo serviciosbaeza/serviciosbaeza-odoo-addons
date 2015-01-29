@@ -24,92 +24,63 @@
 from openerp import fields, models, api
 from openerp.addons.decimal_precision import decimal_precision as dp
 
+from pprint import pformat
+import logging
+_logger = logging.getLogger(__name__)
+
+
 class StockPicking(models.Model):
     _inherit = "stock.picking"
-
-    @api.multi
-    def _get_currency_id(self, field_name, arg):
-        res = {}
-        for picking in self.browse(cr, uid, ids, context=context):
-            res[picking.id] = False
-            total_tax = 0.0
-            for move in picking.move_lines:
-                if not move.sale_line_id:
-                    continue
-                # Take one of the sale order lines currencies (it would be
-                # alwaysthe same for all)
-                res[picking.id] = move.sale_line_id.order_id.currency_id.id
-                break
-        return res
-
-    def _amount_untaxed(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        for picking in self.browse(cr, uid, ids, context=context):
-            res[picking.id] = 0.0
-            for move in picking.move_lines:
-                res[picking.id] += move.sale_price_subtotal
-        return res
-
-    def _amount_tax(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        tax_obj = self.pool['account.tax']
-        cur_obj = self.pool['res.currency']
-        for picking in self.browse(cr, uid, ids, context=context):
-            cur = False
-            total_tax = 0.0
-            for move in picking.move_lines:
-                if not move.sale_line_id:
-                    continue
-                price_unit = (move.sale_price_unit *
-                              (100 - move.sale_discount or 0.0) / 100.0)
-                for c in tax_obj.compute_all(cr, uid, move.sale_line_id.tax_id,
-                                         price_unit,
-                                         move.product_qty, move.product_id,
-                                         move.sale_line_id.order_id.partner_id
-                                         )['taxes']:
-                    total_tax += c.get('amount', 0.0)
-            res[picking.id] = (picking.currency_id and
-                               cur_obj.round(cr, uid, picking.currency_id,
-                                             total_tax)
-                               or 0.0)
-        return res
-
-    def _amount_total(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        for picking in self.browse(cr, uid, ids, context=context):
-            res[picking.id] = picking.amount_untaxed + picking.amount_tax
-        return res
 
     currency_id = fields.Many2one(string='Sale currency',
                                   related='sale_id.currency_id',
                                   store=True, readonly=True)
     amount_untaxed = fields.Float(string='Untaxed amount',
-                                  compute='_amount_untaxed',
-                                  digits=)
-    amount_tax =
-    amount_total =
+                                  compute='_compute_amounts',
+                                  digits=dp.get_precision('Account'),
+                                  readonly=True)
+    amount_tax = fields.Float(string='Taxes', compute='_compute_amounts',
+                              digits=dp.get_precision('Account'),
+                              readonly=True)
+    amount_total = fields.Float(string='Total', compute='_compute_amounts',
+                                digits=dp.get_precision('Account'),
+                                readonly=True)
 
-    _columns = {
-        'currency_id': fields.related('sale_id', 'currency_id',
-                       type="many2one", relation="res.currency",
-                       store=True, string='Sale currency', readonly=True),
-        'amount_untaxed': fields.function(_amount_untaxed, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Untaxed amount', readonly=True),
-        'amount_tax': fields.function(_amount_tax, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Taxes', readonly=True),
-        'amount_total': fields.function(_amount_total, type="float",
-                        digits_compute=dp.get_precision('Account'),
-                        method=True, string='Total', readonly=True),
-    }
+    @api.one
+    @api.depends(
+        'move_lines.sale_price_subtotal',
+        'move_lines.procurement_id.sale_line_id.tax_id',
+        'move_lines.procurement_id.sale_line_id.order_id.partner_id',
+    )
+    def _compute_amounts(self):
+        _logger.info('_compute_amounts')
+        untaxed = 0.0
+        for move in self.move_lines:
+            _logger.info('_compute_amounts : sale_price_subtotal = %f' % move.sale_price_subtotal)
+            untaxed += move.sale_price_subtotal
 
-class StockPickingOut(orm.Model):
-    _inherit = "stock.picking.out"
+        tax = 0.0
+        tax_obj = self.env['account.tax']
+        cur_obj = self.env['res.currency']
+        for move in self.move_lines:
+            if not (move.procurement_id and
+                    move.procurement_id.sale_line_id):
+                _logger.info('_compute_amounts : no sale_line_id found')
+                continue
+            sale_line = move.procurement_id.sale_line_id
+            price_unit = (move.sale_price_unit *
+                          (100 - move.sale_discount or 0.0) / 100.0)
+            for c in tax_obj.compute_all(sale_line.tax_id,
+                                     price_unit,
+                                     move.product_qty, move.product_id,
+                                     sale_line.order_id.partner_id
+                                     )['taxes']:
+                _logger.info('_compute_amounts : tax = %f' % c.get('amount', 0.0))
+                tax += c.get('amount', 0.0)
+        currency = self.currency_id
+        if currency:
+            tax = cur_obj.round(currency, tax)
 
-    def __init__(self, pool, cr):
-        super(StockPickingOut, self).__init__(pool, cr)
-        picking_obj = self.pool['stock.picking']
-        for field_name in ('currency_id', 'amount_untaxed', 'amount_tax',
-                           'amount_total'):
-            self._columns[field_name] = picking_obj._columns[field_name]
+        self.amount_untaxed = untaxed
+        self.amount_tax = tax
+        self.amount_total = untaxed + tax
