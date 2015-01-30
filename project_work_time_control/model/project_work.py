@@ -38,6 +38,8 @@ class project_work(orm.Model):
         }
 
     def onchange_task_id(self, cr, uid, ids, task_id, context=None):
+        if not task_id:
+            return {}
         task = self.pool['project.task'].browse(cr, uid, task_id,
                                                 context=context)
         return {'value': {'project': task.project_id.id}}
