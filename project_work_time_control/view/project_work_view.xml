@@ -25,9 +25,11 @@
                 <tree editable="top" string="Task work">
                     <field name="project"
                            on_change="onchange_project(project, context)"
+                           domain="[('state', 'in', ('open', 'pending'))]"
                            attrs="{'readonly': [('task_id', '!=', False)]}" />
                     <field name="task_id"
                            on_change="onchange_task_id(task_id, context)"
+                           domain="[('state', 'in', ('open', 'pending'))]"
                            context="{'default_project_id': project}"/>
                     <field name="user_id"/>
                     <field name="name"/>
