@@ -33,19 +33,25 @@ from openerp.addons.decimal_precision import decimal_precision as dp
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    currency_id = fields.Many2one(string='Sale currency',
-                                  related='sale_id.currency_id',
-                                  store=True, readonly=True)
-    amount_untaxed = fields.Float(string='Untaxed amount',
-                                  compute='_compute_amounts',
-                                  digits=dp.get_precision('Account'),
-                                  readonly=True)
-    amount_tax = fields.Float(string='Taxes', compute='_compute_amounts',
-                              digits=dp.get_precision('Account'),
-                              readonly=True)
-    amount_total = fields.Float(string='Total', compute='_compute_amounts',
-                                digits=dp.get_precision('Account'),
-                                readonly=True)
+    currency_id = fields.Many2one(
+        string='Sale currency',
+        related='sale_id.currency_id',
+        store=True, readonly=True)
+    amount_untaxed = fields.Float(
+        string='Untaxed amount',
+        compute='_compute_amounts',
+        digits=dp.get_precision('Account'),
+        store=True, readonly=True)
+    amount_tax = fields.Float(
+        string='Taxes',
+        compute='_compute_amounts',
+        digits=dp.get_precision('Account'),
+        store=True, readonly=True)
+    amount_total = fields.Float(
+        string='Total',
+        compute='_compute_amounts',
+        digits=dp.get_precision('Account'),
+        store=True, readonly=True)
 
     @api.one
     @api.depends(
@@ -54,10 +60,11 @@ class StockPicking(models.Model):
         'move_lines.procurement_id.sale_line_id.order_id.partner_id',
     )
     def _compute_amounts(self):
+        # Calculate untaxed amount
         untaxed = 0.0
         for move in self.move_lines:
             untaxed += move.sale_price_subtotal
-
+        # Calculate taxed amount
         tax = 0.0
         for move in self.move_lines:
             if not (move.procurement_id and
@@ -74,7 +81,7 @@ class StockPicking(models.Model):
         currency = self.currency_id
         if currency:
             tax = currency.round(tax)
-
+        # Write calculated amounts into recorrd
         self.amount_untaxed = untaxed
         self.amount_tax = tax
         self.amount_total = untaxed + tax

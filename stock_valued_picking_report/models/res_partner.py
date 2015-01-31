@@ -26,9 +26,5 @@ from openerp import fields, models
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
-
-    valued_picking = fields.Boolean(string='Valued picking')
-
-    _defaults = {
-        'valued_picking': True,
-    }
+    # You can select which partners has valued pickings
+    valued_picking = fields.Boolean(string='Valued picking', default=True)
