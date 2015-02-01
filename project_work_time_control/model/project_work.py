@@ -30,7 +30,7 @@ class project_work(orm.Model):
     }
 
     def onchange_project(self, cr, uid, ids, project_id, context=None):
-        domain = [('state', 'in', ('open', 'pending'))]
+        domain = [('state', 'in', ('draft', 'open', 'pending'))]
         if project_id:
             domain.append(('project_id', '=', project_id))
         return {
