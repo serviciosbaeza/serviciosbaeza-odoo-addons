@@ -22,36 +22,27 @@
 #
 ##############################################################################
 from openerp import models, fields, api
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
 
 
-class project_work(models.Model):
+class ProjectWork(models.Model):
     _inherit = 'project.task.work'
 
     project = fields.Many2one(string='Project', related='task_id.project_id')
 
-    @api.multi()
     @api.onchange('project')
     def onchange_project(self):
-        domain = '[]'
+        domain = [('kanban_state', '=', 'normal')]
         if self.project:
-            domain = "[('project', '=', %s)]" % self.project
+            domain.append(('project_id', '=', self.project.id))
         return {
             'domain': {'task_id': domain},
         }
-
-    @api.multi()
-    @api.onchange('task_id')
-    def onchange_task_id(self):
-        self.project = self.task_id.project_id
 
     @api.multi
     def button_end_work(self):
         end_date = datetime.now()
         for work in self:
-            date = datetime.strptime(
-                work.date,
-                DEFAULT_SERVER_DATETIME_FORMAT)
+            date = fields.Datetime.from_string(work.date)
             work.hours = (end_date - date).total_seconds() / 3600
         return True
