@@ -22,13 +22,8 @@
     'name': 'Project task works time control',
     'version': '1.0',
     'category': 'Project management',
-    'description': """
-Adds a button at task work level to compute minutes lasted from start date to
-the current moment.
-
-It also adds a direct meny entry for task works fast encoding.
-    """,
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
+              'Antiun Ingeniería S.L.',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['project'],
     'data': [
