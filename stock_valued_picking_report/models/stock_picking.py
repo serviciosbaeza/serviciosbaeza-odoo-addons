@@ -24,38 +24,30 @@
 from openerp import fields, models, api
 from openerp.addons.decimal_precision import decimal_precision as dp
 
-# Uncomment for debug proposes
-# from pprint import pformat
-# import logging
-# _logger = logging.getLogger(__name__)
-
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
+    valued = fields.Boolean(
+        string='Valued', related='partner_id.valued_picking', store=True,
+        readonly=True)
     currency_id = fields.Many2one(
-        string='Sale currency',
-        related='sale_id.currency_id',
-        store=True, readonly=True)
+        string='Sale currency', related='sale_id.currency_id', store=True,
+        readonly=True)
     amount_untaxed = fields.Float(
-        string='Untaxed amount',
-        compute='_compute_amounts',
-        digits=dp.get_precision('Account'),
-        store=True, readonly=True)
+        string='Untaxed amount', compute='_compute_amounts',
+        digits=dp.get_precision('Account'), store=True, readonly=True)
     amount_tax = fields.Float(
-        string='Taxes',
-        compute='_compute_amounts',
-        digits=dp.get_precision('Account'),
-        store=True, readonly=True)
+        string='Taxes', compute='_compute_amounts',
+        digits=dp.get_precision('Account'), store=True, readonly=True)
     amount_total = fields.Float(
-        string='Total',
-        compute='_compute_amounts',
-        digits=dp.get_precision('Account'),
-        store=True, readonly=True)
+        string='Total', compute='_compute_amounts',
+        digits=dp.get_precision('Account'), store=True, readonly=True)
 
     @api.one
     @api.depends(
         'move_lines.sale_price_subtotal',
+        'move_lines.product_id',
         'move_lines.procurement_id.sale_line_id.tax_id',
         'move_lines.procurement_id.sale_line_id.order_id.partner_id',
     )
@@ -71,12 +63,9 @@ class StockPicking(models.Model):
                     move.procurement_id.sale_line_id):
                 continue
             sale_line = move.procurement_id.sale_line_id
-            price_unit = (move.sale_price_unit *
-                          (100 - move.sale_discount or 0.0) / 100.0)
-            for c in sale_line.tax_id.compute_all(price_unit,
-                                      move.product_qty,
-                                      move.product_id,
-                                      sale_line.order_id.partner_id)['taxes']:
+            for c in sale_line.tax_id.compute_all(
+                    move.sale_price_subtotal, move.product_qty,
+                    move.product_id, sale_line.order_id.partner_id)['taxes']:
                 tax += c.get('amount', 0.0)
         currency = self.currency_id
         if currency:
