@@ -24,7 +24,7 @@
     "name": "Back to draft on sales orders",
     "version": "1.0",
     "category": "Sale",
-    "author": "Serv. Tecnológ. Avanzados - Pedro M. Baeza",
+    "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "http://www.serviciosbaeza.com",
     "contributors": [
         "Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>",
