@@ -130,25 +130,25 @@
     </blockTableStyle>
 
     <paraStyle
-      name="Level5" 
+      name="Level5"
       fontName="Helvetica"
       fontSize="8.0" />
     <paraStyle
-      name="Level4" 
-      fontName="Helvetica" 
+      name="Level4"
+      fontName="Helvetica"
       fontSize="8.0" />
     <paraStyle
-      name="Level3" 
-      fontName="Helvetica" 
+      name="Level3"
+      fontName="Helvetica"
       fontSize="8.0" />
     <paraStyle
-      name="Level2" 
+      name="Level2"
       firstLineIndent="-0.03cm"
-      fontName="Helvetica-Bold" 
+      fontName="Helvetica-Bold"
       fontSize="8.0" />
     <paraStyle name="Level1"
       fontSize="8.0"
-      fontName="Helvetica-Bold" 
+      fontName="Helvetica-Bold"
       />
     <paraStyle name="Caption" fontName="Helvetica" fontSize="10.0" leading="13" spaceBefore="6.0" spaceAfter="6.0"/>
     <paraStyle name="Index" fontName="Helvetica"/>
@@ -185,7 +185,7 @@
           <para style="P12a">Planned/Signed hours:</para>
         </td>
         <td>
-          <para style="P2">[[ o.planned_hours or o.analytic_account_id.quantity_max or 0.0 ]]</para>
+          <para style="P2">[[ o.analytic_account_id.quantity_max or o.planned_hours or 0.0 ]]</para>
         </td>
       </tr>
       <tr>
@@ -193,7 +193,7 @@
           <para style="P12a">Total hours:</para>
         </td>
         <td>
-          <para style="P2">[[ o.effective_hours or 0.0 ]]</para>
+          <para style="P2">[[ o.analytic_account_id.hours_quantity or o.effective_hours or 0.0 ]]</para>
         </td>
       </tr>
       <tr>
