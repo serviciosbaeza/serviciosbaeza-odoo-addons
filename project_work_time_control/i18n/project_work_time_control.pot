@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 09:06+0000\n"
-"PO-Revision-Date: 2015-01-28 09:06+0000\n"
+"POT-Creation-Date: 2015-02-25 22:58+0000\n"
+"PO-Revision-Date: 2015-02-25 22:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,35 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Date"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Group By..."
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:0
 #: field:project.task.work,project:0
 msgid "Project"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Search task work"
 msgstr ""
 
 #. module: project_work_time_control
 #: view:project.task:0
 #: view:project.task.work:0
 msgid "Stop"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Task"
 msgstr ""
 
 #. module: project_work_time_control
@@ -35,5 +56,10 @@ msgstr ""
 #: model:ir.actions.act_window,name:project_work_time_control.project_task_work_action
 #: model:ir.ui.menu,name:project_work_time_control.project_task_work_menu
 msgid "Tasks works"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "User"
 msgstr ""
 

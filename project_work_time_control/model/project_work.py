@@ -26,7 +26,7 @@ class project_work(orm.Model):
     _columns = {
         'project': fields.related(
             'task_id', 'project_id', type="many2one", string="Project",
-            relation="project.project"),
+            relation="project.project", store=True),
     }
 
     def onchange_project(self, cr, uid, ids, project_id, context=None):

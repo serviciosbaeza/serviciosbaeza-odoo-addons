@@ -16,15 +16,36 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: project_work_time_control
+#: view:project.task.work:0
 #: field:project.task.work,project:0
 msgid "Project"
 msgstr "Proyecto"
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Search task work"
+msgstr "Buscar trabajo de tarea"
 
 #. module: project_work_time_control
 #: view:project.task:0
 #: view:project.task.work:0
 msgid "Stop"
 msgstr "Parar"
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Task"
+msgstr "Tarea"
 
 #. module: project_work_time_control
 #: view:project.task.work:0
@@ -36,4 +57,10 @@ msgstr "Trabajo de tarea"
 #: model:ir.ui.menu,name:project_work_time_control.project_task_work_menu
 msgid "Tasks works"
 msgstr "Trabajos de las tareas"
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "User"
+msgstr "Usuario"
+
 
