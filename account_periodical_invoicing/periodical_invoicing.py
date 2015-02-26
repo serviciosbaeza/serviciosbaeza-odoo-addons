@@ -298,8 +298,7 @@ class Agreement(orm.Model):
             agreement_start_date = datetime.strptime(
                 agreement.start_date, DEFAULT_SERVER_DATE_FORMAT)
             if (agreement_start_date < now and
-                    (agreement.prolong == 'unlimited'
-                     or now <=
+                    (agreement.prolong == 'unlimited' or now <=
                      datetime.strptime(agreement.next_expiration_date,
                                        DEFAULT_SERVER_DATE_FORMAT))):
                 # Agreement is still valid

@@ -478,8 +478,8 @@ class Agreement(orm.Model):
         wf_service = netsvc.LocalService("workflow")
         for agreement in self.browse(cr, uid, ids, context=context):
             for agreement_order in agreement.order_line:
-                if (datetime.strptime(agreement_order['date'], '%Y-%m-%d')
-                        <= now and not agreement_order.confirmed):
+                if (datetime.strptime(agreement_order['date'], '%Y-%m-%d') <=
+                        now and not agreement_order.confirmed):
                     order = agreement_order.order_id
                     if order:
                         wf_service.trg_validate(uid, 'sale.order', order.id,
@@ -574,14 +574,11 @@ class AgreementOrder(orm.Model):
     _name = 'sale.recurring_orders.agreement.order'
 
     def __get_confirm_state(self, cr, uid, ids, field_name, arg, context=None):
-        """
-        Get confirmed state of the order.
-        """
+        """Get confirmed state of the order."""
         res = {}
-        for agreement_order in self.browse(cr, uid, ids, context=context):
-            if agreement_order.order_id:
-                res[agreement_order.id] = (agreement_order.order_id.state
-                                           != 'draft')
+        for ag_order in self.browse(cr, uid, ids, context=context):
+            if ag_order.order_id:
+                res[ag_order.id] = ag_order.order_id.state != 'draft'
         return res
 
     _columns = {

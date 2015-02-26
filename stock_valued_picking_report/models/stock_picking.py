@@ -65,8 +65,7 @@ class StockPicking(orm.Model):
                     total_tax += c.get('amount', 0.0)
             res[picking.id] = (picking.currency_id and
                                cur_obj.round(cr, uid, picking.currency_id,
-                                             total_tax)
-                               or 0.0)
+                                             total_tax) or 0.0)
         return res
 
     def _amount_total(self, cr, uid, ids, field_name, arg, context=None):
