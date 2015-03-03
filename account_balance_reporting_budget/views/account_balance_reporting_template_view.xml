@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_reporting_template_budget_line_tree">
+            <field name="name">account.balance.reporting.template.line.budget.tree</field>
+            <field name="model">account.balance.reporting.template.line.budget</field>
+            <field name="arch" type="xml">
+                <tree string="Budget lines" editable="bottom">
+                    <field name="line_id" invisible="1"/>
+                    <field name="period_id"/>
+                    <field name="estimated_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Template form view -->
+        <record model="ir.ui.view" id="view_reporting_template_budget_form">
+            <field name="name">account.balance.reporting.template.form.budget</field>
+            <field name="model">account.balance.reporting.template</field>
+            <field name="inherit_id" ref="account_balance_reporting.view_account_balance_reporting_template_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree//field[@name='css_class']" position="after">
+                    <button name="view_budget_lines" string="View budget lines" type="object" icon="gtk-justify-fill"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_account_balance_reporting_form_budget">
+            <field name="name">account.balance.reporting.form.budget</field>
+            <field name="model">account.balance.reporting</field>
+            <field name="inherit_id" ref="account_balance_reporting.view_account_balance_reporting_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree//field[@name='current_value']" position="after">
+                    <field name="estimated_value"/>
+                    <field name="difference"/>
+                    <field name="deviation"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
