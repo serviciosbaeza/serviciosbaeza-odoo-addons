@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,8 +19,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm,fields
+from openerp.osv import orm, fields
 import openerp.addons.decimal_precision as dp
+
 
 class TemplateLine(orm.Model):
     _inherit = "account.balance.reporting.line"
@@ -49,17 +50,15 @@ class TemplateLine(orm.Model):
         return res
 
     _columns = {
-        'estimated_value': fields.function(_get_estimated_value, store=True,
-                                string='Estimated value', type="float",
-                                digits_compute= dp.get_precision('Account')),
+        'estimated_value': fields.function(
+            _get_estimated_value, store=True, string='Estimated value',
+            type="float", digits_compute=dp.get_precision('Account')),
         'difference': fields.function(
-                            _get_difference, string='Difference',
-                            multi=True, store=True, type="float",
-                            digits_compute=dp.get_precision('Account'),
-                            help="Variation between real value and estimated"),
-        'deviation': fields.function(_get_difference, multi=True,
-                                      string='Deviation (%)', store=True,
-                                      type="float", help="Percentage of "
-                                      "deviation between calculated "
-                                      "difference and the real value."),
+            _get_difference, string='Difference', multi=True, store=True,
+            type="float", digits_compute=dp.get_precision('Account'),
+            help="Variation between real value and estimated"),
+        'deviation': fields.function(
+            _get_difference, multi=True, string='Deviation (%)', store=True,
+            type="float", help="Percentage of deviation between calculated "
+                               "difference and the real value."),
     }

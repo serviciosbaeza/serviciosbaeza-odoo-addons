@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,17 +19,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm,fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
+
 
 class TemplateLine(orm.Model):
     _inherit = "account.balance.reporting.template.line"
 
     _columns = {
         'budget_lines': fields.one2many(
-                'account.balance.reporting.template.line.budget',
-                'line_id', 'Budget lines'),
+            'account.balance.reporting.template.line.budget', 'line_id',
+            'Budget lines'),
     }
 
     def view_budget_lines(self, cr, uid, ids, context=None):
@@ -45,7 +46,6 @@ class TemplateLine(orm.Model):
             'view_mode': 'tree',
             'res_model': 'account.balance.reporting.template.line.budget',
             'context': ctx,
-            #'target': 'new',
             'type': 'ir.actions.act_window',
         }
 
@@ -58,8 +58,9 @@ class TemplateLineBudget(orm.Model):
                                    'Report line reference', required=True),
         'period_id': fields.many2one('account.period',
                                      'Period', required=True),
-        'estimated_value': fields.float(string='Estimated value',
-                                digits_compute= dp.get_precision('Account')),
+        'estimated_value': fields.float(
+            string='Estimated value',
+            digits_compute=dp.get_precision('Account')),
     }
 
     _sql_constraints = [('unique budget line',
