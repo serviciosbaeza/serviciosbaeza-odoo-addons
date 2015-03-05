@@ -17,6 +17,7 @@ class SaleOrder(models.Model):
                 raise exceptions.Warning(
                     _("You can't back any order that it's not on cancel "
                       "state"))
+            order.order_line.write({'state': 'draft'})
             order.write({'state': 'draft'})
             order.delete_workflow()
             order.create_workflow()
