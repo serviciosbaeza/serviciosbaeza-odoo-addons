@@ -444,8 +444,8 @@ class AgreementLine(orm.Model):
         'name': fields.related(
             'product_id', 'name', type="char", relation='product.product',
             string='Description', store=False),
-        'additional_description': fields.char(
-            'Add. description', size=30,
+        'additional_description': fields.text(
+            'Add. description',
             help='Additional description that will be added to the product '
                  'description on invoices.'),
         'quantity': fields.float(
