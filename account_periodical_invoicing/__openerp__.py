@@ -30,7 +30,7 @@ allows to set:
     * Products and quantities to invoice
     * Special prices and discounts
     """,
-    'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['account', 'sale'],
     'data': [

@@ -32,7 +32,7 @@ This module adds an onchange over date field on account moves screen that
 changes period to the corresponding one, avoiding to commit errors due to
 forgetfulness.
     """,
-    'author': 'Serv. Tecnológ. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': [
         'account',

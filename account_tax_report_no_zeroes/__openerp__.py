@@ -31,7 +31,7 @@ Account tax report without zeroes
 Replace current taxes report that lies on Accounting > Reporting > Generic
 Reporting > Taxes with one that doesn't print lines with zero in taxes amount.
     """,
-    'author': 'Serv. Tecnológ. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': [
         'account',

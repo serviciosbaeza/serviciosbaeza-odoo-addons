@@ -30,7 +30,7 @@ Get back sales orders to draft
 
 Allows to get back to draft any cancelled sale order.
     """,
-    'author': 'Serv. Tecnológ. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': [
         'sale',

@@ -33,7 +33,7 @@ allows to set:
 * Custom description in agreement lines
 * Ordering intervals for each product
     """,
-    'author': 'Serv. Tecnolog. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['sale'],
     'data': [
