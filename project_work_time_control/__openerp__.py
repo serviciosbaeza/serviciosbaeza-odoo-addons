@@ -32,6 +32,7 @@ It also adds a direct meny entry for task works fast encoding.
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['project'],
     'data': [
+        'security/project_security.xml',
         'view/project_work_view.xml',
     ],
     'installable': True,
