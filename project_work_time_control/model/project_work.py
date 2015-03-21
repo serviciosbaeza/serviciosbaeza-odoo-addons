@@ -17,6 +17,7 @@
 ##############################################################################
 from openerp.osv import orm, fields
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.addons.project.project import _TASK_STATE
 from datetime import datetime
 
 
@@ -27,6 +28,9 @@ class project_work(orm.Model):
         'project': fields.related(
             'task_id', 'project_id', type="many2one", string="Project",
             relation="project.project", store=True),
+        'task_state': fields.related(
+            'task_id', 'state', type="selection", string="Task state",
+            selection=_TASK_STATE, readonly=True),
     }
 
     def onchange_project(self, cr, uid, ids, project_id, context=None):
@@ -51,3 +55,11 @@ class project_work(orm.Model):
             hours = (end_date - date).total_seconds() / 3600
             self.write(cr, uid, [work.id], {'hours': hours}, context=context)
         return True
+
+    def button_open_task(self, cr, uid, ids, context=None):
+        for task_work in self.browse(cr, uid, ids, context=context):
+            task_work.task_id.project_task_reevaluate(context=context)
+
+    def button_close_task(self, cr, uid, ids, context=None):
+        for task_work in self.browse(cr, uid, ids, context=context):
+            task_work.task_id.action_close(context=context)

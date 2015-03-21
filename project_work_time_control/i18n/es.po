@@ -37,6 +37,16 @@ msgid "Search task work"
 msgstr "Buscar trabajo de tarea"
 
 #. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Open task"
+msgstr "Abrir tarea"
+
+#. module: project_work_time_control
+#: view:project.task.work:0
+msgid "Close task"
+msgstr "Cerrar tarea"
+
+#. module: project_work_time_control
 #: view:project.task:0
 #: view:project.task.work:0
 msgid "Stop"
