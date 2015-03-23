@@ -56,7 +56,7 @@ class SaleOrder(orm.Model):
             default={'origin': quotation.name,
                      'quotation': quotation.id,
                      'name': self.pool['ir.sequence'].next_by_code(
-                         cr, uid, 'sale.order.proforma'),})
+                         cr, uid, 'sale.order.proforma')})
         # Remove reference of previous proformas
         del proforma['proformas']
         proforma_id = self.create(cr, uid, proforma, context=context)
