@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="mrp.prod_trans_draft_ready" model="workflow.transition">
+            <field name="condition">not test_if_product() and not no_confirm</field>
+        </record>
+        <record id="mrp.prod_trans_draft_picking" model="workflow.transition">
+            <field name="condition">test_if_product() and not no_confirm</field>
+        </record>
+
+    </data>
+</openerp>
