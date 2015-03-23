@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Informe de pedido de venta -->
+
+        <record model="ir.actions.report.xml" id="sale.report_sale_order">
+            <field name="report_file">sale_order_proforma_copy/report/sale_order.rml</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_order_form_proforma" model="ir.ui.view">
+            <field name="name">sale.order.form.proforma</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <button name="print_quotation" position="after">
+                    <button name="action_proforma"
+                            class="oe_highlight"
+                            string="Pro-forma"
+                            type="object"
+                            states="draft,sent"
+                            groups="base.group_user"/>
+                    <button name="button_show_proformas"
+                            class="oe_highlight"
+                            string="Show pro-formas"
+                            type="object"
+                            attrs="{'invisible': [ ('state', 'not in', ['draft', 'sent'])]}"
+                            groups="base.group_user"/>
+                </button>
+                <label string="Sales Order " position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', 'in', ('draft','sent','proforma'))]}</attribute>
+                </label>
+                <label string="Sales Order " position="after">
+                    <label string="Pro-forma " attrs="{'invisible': [('state', '!=', 'proforma')]}"/>
+                </label>
+                <field name="shop_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="date_order" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="partner_invoice_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="partner_shipping_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="pricelist_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="project_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+                <field name="order_line" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', 'not in', ['draft', 'sent', 'proforma'])]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel', 'proforma'))]</field>
+        </record>
+
+        <record id="view_proforma_tree" model="ir.ui.view">
+            <field name="name">sale.order.tree.proforma</field>
+            <field name="model">sale.order</field>
+            <field name="priority">4</field>
+            <field name="arch" type="xml">
+                <tree string="Proforma" fonts="bold:message_unread==True">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Proforma Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="user_id"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_proforma" model="ir.actions.act_window">
+            <field name="name">Pro-formas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="view_id" ref="view_proforma_tree"/>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{'search_default_my_sale_orders_filter': 1}
+            </field>
+            <field name="domain">[('state', '=', 'proforma')]</field>
+            <field name="help" type="html">
+                <p>
+                    See here sales orders converted to pro-forma.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_proforma"
+                  id="menu_sale_proforma"
+                  parent="base.menu_sales"
+                  sequence="4"
+                  groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+    </data>
+</openerp>
