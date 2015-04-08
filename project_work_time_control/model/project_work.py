@@ -18,6 +18,7 @@
 from openerp.osv import orm, fields
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.addons.project.project import _TASK_STATE
+from openerp import SUPERUSER_ID
 from datetime import datetime
 
 
@@ -44,7 +45,9 @@ class project_work(orm.Model):
     def onchange_task_id(self, cr, uid, ids, task_id, context=None):
         if not task_id:
             return {}
-        task = self.pool['project.task'].browse(cr, uid, task_id,
+        # This is read as root to avoid errors if you don't have access to
+        # the project itself
+        task = self.pool['project.task'].browse(cr, SUPERUSER_ID, task_id,
                                                 context=context)
         return {'value': {'project': task.project_id.id}}
 
