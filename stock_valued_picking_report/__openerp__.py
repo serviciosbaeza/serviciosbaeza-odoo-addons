@@ -28,14 +28,6 @@
     "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "www.serviciosbaeza.com",
     "category": "Warehouse Management",
-    "description": """
-Valued pickings
-===============
-
-Add amount information to picking list report and delivery order view.
-
-You can select at partner level if picking list report must be valued or not.
-""",
     "license": "GPL-3",
     "depends": [
         "base",
@@ -43,11 +35,11 @@ You can select at partner level if picking list report must be valued or not.
         "stock",
         "sale",
         "delivery",
+        "stock_picking_taxes",
     ],
     "data": [
         'views/res_partner_view.xml',
-        'views/stock_picking_view.xml',
-        'report/stock_valued_report.xml',
+        'report/stock_picking_valued_report.xml',
     ],
     "installable": True
 }
