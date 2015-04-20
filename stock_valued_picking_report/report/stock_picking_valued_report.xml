@@ -3,13 +3,12 @@
     <data>
         <template id="valued_report_picking" inherit_id="stock.report_picking">
             <xpath expr="//table[@t-if='not o.pack_operation_ids']//strong[.='Destination']/../.."
-                position="after">
+                   position="after">
                 <t t-if="o.partner_id.valued_picking">
                     <th><strong>Subtotal</strong></th>
                 </t>
             </xpath>
-            <xpath
-                expr="//span[@t-field='move.location_dest_id']/../.." position="after">
+            <xpath expr="//span[@t-field='move.location_dest_id']/../.." position="after">
                 <t t-if="o.partner_id.valued_picking">
                     <td><span t-field="move.sale_price_subtotal" /></td>
                 </t>
