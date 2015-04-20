@@ -3,7 +3,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+#    Copyright (c) 2015 Antiun Ingenieria (http://www.antiun.com)
+#                       Antonio Espinosa <antonioea@antiun.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -21,34 +23,23 @@
 ##############################################################################
 
 {
-    "name" : "Valued picking list",
-    "version" : "1.0",
-    "author" : "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    "website" : "www.serviciosbaeza.com",
+    "name": "Valued picking list",
+    "version": "1.0",
+    "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "website": "www.serviciosbaeza.com",
     "category": "Warehouse Management",
-    "description": """
-Valued pickings
-===============
-
-Add amount information to picking list report and delivery order view.
-
-You can select at partner level if picking list report must be valued or not.
-
-Inspired in stock_valued 6.x module by Acysos S.L., Pablo Rocandio, NaN·tic and
-Zikzakmedia SL.""",
-    "license" : "GPL-3",
-    "depends" : [
+    "license": "GPL-3",
+    "depends": [
         "base",
         "account",
         "stock",
         "sale",
         "delivery",
+        "stock_picking_taxes",
     ],
-    "data" : [
+    "data": [
         'views/res_partner_view.xml',
-        'views/stock_picking_view.xml',
-        'report/stock_valued_report.xml',
+        'report/stock_picking_valued_report.xml',
     ],
     "installable": True
 }
-

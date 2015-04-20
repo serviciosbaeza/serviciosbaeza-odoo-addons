@@ -3,7 +3,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2014 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+#    Copyright (c) 2015 Antiun Ingenieria (http://www.antiun.com)
+#                       Antonio Espinosa <antonioea@antiun.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,13 +21,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import fields, orm
+from openerp import fields, models
 
-class ResPartner(orm.Model):
+
+class ResPartner(models.Model):
     _inherit = 'res.partner'
-    _columns = {
-        'valued_picking': fields.boolean('Valued picking'),
-    }
-    _defaults = {
-        'valued_picking': True,
-    }
+    # You can select which partners has valued pickings
+    valued_picking = fields.Boolean(string='Valued picking', default=True)
