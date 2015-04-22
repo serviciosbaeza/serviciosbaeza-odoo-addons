@@ -15,7 +15,6 @@
                             states="draft,sent"
                             groups="base.group_user"/>
                     <button name="button_show_proformas"
-                            class="oe_highlight"
                             string="Show pro-formas"
                             type="object"
                             attrs="{'invisible': [ ('state', 'not in', ['draft', 'sent'])]}"
