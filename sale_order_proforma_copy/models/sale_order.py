@@ -42,19 +42,20 @@ class SaleOrder(orm.Model):
                  "Exception).\nThe 'Waiting Schedule' status is set when the "
                  "invoice is confirmed but waiting for the scheduler to run "
                  "on the order date."),
-        'quotation': fields.many2one(
-            'sale.order', string="Quotation reference",
-            help="This field indicates the quotation source for the proforma"),
-        'proformas': fields.one2many('sale.order', 'quotation', "Proformas"),
+        'source_order': fields.many2one(
+            'sale.order', string="Order reference", old_name="quotation",
+            help="This field indicates the source for the proforma"),
+        'proformas': fields.one2many(
+            'sale.order', 'source_order', "Proformas"),
     }
 
     def action_proforma(self, cr, uid, ids, context=None):
         wf_service = netsvc.LocalService("workflow")
-        quotation = self.browse(cr, uid, ids[0], context=context)
+        order = self.browse(cr, uid, ids[0], context=context)
         proforma = self.copy_data(
             cr, uid, ids[0], context=context,
-            default={'origin': quotation.name,
-                     'quotation': quotation.id,
+            default={'origin': order.name,
+                     'source_order': order.id,
                      'name': self.pool['ir.sequence'].next_by_code(
                          cr, uid, 'sale.order.proforma')})
         # Remove reference of previous proformas
@@ -71,17 +72,25 @@ class SaleOrder(orm.Model):
         }
 
     def button_show_proformas(self, cr, uid, ids, context=None):
-        quotation = self.browse(cr, uid, ids[0], context=context)
-        if quotation.proformas:
+        order = self.browse(cr, uid, ids[0], context=context)
+        if order.proformas:
             act_window = {
                 'type': 'ir.actions.act_window',
                 'res_model': 'sale.order',
                 'view_type': 'form',
-                'domain': [('id', 'in', [x.id for x in quotation.proformas])]
+                'domain': [('id', 'in', [x.id for x in order.proformas])]
             }
-            if len(quotation.proformas) == 1:
+            if len(order.proformas) == 1:
                 act_window['view_mode'] = 'form'
-                act_window['res_id'] = quotation.proformas[0].id
+                act_window['res_id'] = order.proformas[0].id
             else:
                 act_window['view_mode'] = 'tree,form'
             return act_window
+
+    def copy(self, cr, uid, rec_id, default=None, context=None):
+        if not default:
+            default = {}
+        default['source_order'] = False
+        default['proformas'] = []
+        return super(SaleOrder, self).copy(cr, uid, rec_id, default,
+                                           context=context)
