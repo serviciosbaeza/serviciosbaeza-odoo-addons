@@ -28,16 +28,22 @@ from datetime import datetime
 class ProjectWork(models.Model):
     _inherit = 'project.task.work'
 
-    project = fields.Many2one(string='Project', related='task_id.project_id')
+    project = fields.Many2one(string='Project', related='task_id.project_id',
+                              store=True)
 
     @api.onchange('project')
     def onchange_project(self):
-        domain = [('kanban_state', '=', 'normal')]
-        if self.project:
-            domain.append(('project_id', '=', self.project.id))
+        if not self.project:
+            return {}
         return {
-            'domain': {'task_id': domain},
+            'domain': {'task_id': [('project_id', '=', self.project.id)]},
         }
+
+    @api.onchange('task_id')
+    def onchange_task_id(self):
+        if not self.task_id:
+            return {}
+        return {'value': {'project': self.task_id.project_id.id}}
 
     @api.multi
     def button_end_work(self):
