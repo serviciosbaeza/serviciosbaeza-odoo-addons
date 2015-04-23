@@ -27,6 +27,7 @@
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['project'],
     'data': [
+        'security/project_security.xml',
         'view/project_work_view.xml',
     ],
     'installable': True,
