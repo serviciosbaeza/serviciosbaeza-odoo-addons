@@ -30,7 +30,6 @@ class ProductCategory(orm.Model):
         if not args:
             args = []
         args = args[:]
-        ids = []
         if name:
             # Get children categories with that name
             ids = self.search(cr, uid, [('name', operator, name)] + args,
@@ -44,6 +43,7 @@ class ProductCategory(orm.Model):
                                               parent_ids)] + args,
                                    context=context, limit=limit)
                 ids += ids2
+                ids = list(set(ids))
         else:
             ids = self.search(cr, uid, args, context=context, limit=limit)
         if ids:
