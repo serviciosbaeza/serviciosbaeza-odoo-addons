@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="view_partner_form_agreement" model="ir.ui.view">
+			<field name="name">res.partner.form.agreement</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<field name="user_id" position="after">
+                    <field name="group_agreement_invoices"
+                           attrs="{'invisible': [('customer', '=', False)]}"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>

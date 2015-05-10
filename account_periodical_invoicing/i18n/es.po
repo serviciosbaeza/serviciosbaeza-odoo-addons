@@ -579,3 +579,14 @@ msgstr "Nombre que ayuda a identificar el contrato"
 #: help:account.periodical_invoicing.agreement,end_date:0
 msgid "End date of the agreement"
 msgstr "Fecha de finalización del contrato"
+
+#. module: account_periodical_invoicing
+#: field:res.partner,group_agreement_invoices:0
+msgid "Group agreement invoices"
+msgstr "Agrupar facturas de los contratos"
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,currency_id:0
+msgid "Currency"
+msgstr "Moneda"
+

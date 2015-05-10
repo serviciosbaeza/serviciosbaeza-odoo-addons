@@ -168,7 +168,16 @@ class Agreement(orm.Model):
              ('renewed', 'Agreement renewed')], 'Renewal state',
             readonly=True),
         'notes': fields.text('Notes'),
+        'currency_id': fields.many2one(
+            'res.currency', 'Currency', required=True),
     }
+
+    def _get_default_currency_id(self, cr, uid, context=None):
+        company_obj = self.pool['res.company']
+        company_id = company_obj._company_default_get(
+            cr, uid, 'account', context=context)
+        company = company_obj.browse(cr, uid, company_id, context=context)
+        return company.currency_id.id
 
     _defaults = {
         'active': True,
@@ -181,6 +190,7 @@ class Agreement(orm.Model):
         'prolong_unit': 'years',
         'state': 'empty',
         'renewal_state': 'not_renewed',
+        "currency_id": _get_default_currency_id,
     }
 
     def _check_dates(self, cr, uid, ids, context=None):
@@ -291,6 +301,7 @@ class Agreement(orm.Model):
             context = {}
         ids = self.search(cr, uid, [])
         now = datetime.now()
+        grouped_invoices = {}
         for agreement in self.browse(cr, uid, ids, context=context):
             if not agreement.active:
                 continue
@@ -321,14 +332,35 @@ class Agreement(orm.Model):
                 # Invoice all pending lines
                 if len(lines_to_invoice) > 0:
                     invoice_id = self.create_invoice(
-                        cr, uid, agreement, lines_to_invoice, context=context)
+                        cr, uid, agreement, lines_to_invoice, grouped_invoices,
+                        context=context)
                     # Call 'event' method
                     self._invoice_created(
                         cr, uid, agreement, lines_to_invoice, invoice_id,
                         context=context)
 
+    def _prepare_invoice(self, cr, uid, agreement, context=None):
+        invoice_vals = {
+            'origin': agreement.number,
+            'partner_id': agreement.partner_id.id,
+            'type': 'out_invoice',
+            'state': 'draft',
+            'currency_id': agreement.currency_id.id,
+            'company_id': agreement.company_id.id,
+            'reference_type': 'none',
+            'check_total': 0.0,
+            'internal_number': False,
+            'user_id': agreement.partner_id.user_id.id,
+        }
+        # Get other invoice values from agreement partner
+        invoice_vals.update(self.pool['account.invoice'].onchange_partner_id(
+            cr, uid, [], type=invoice_vals['type'],
+            partner_id=agreement.partner_id.id,
+            company_id=agreement.company_id.id)['value'], context=context)
+        return invoice_vals
+
     def create_invoice(self, cr, uid, agreement, agreement_lines,
-                       context=None):
+                       grouped_invoices, context=None):
         """Method that creates an invoice from given data.
         @param agreement: Agreement from which invoice is going to be
           generated.
@@ -343,30 +375,14 @@ class Agreement(orm.Model):
         lang_ids = lang_obj.search(
             cr, uid, [('code', '=', agreement.partner_id.lang)])
         lang = lang_obj.browse(cr, uid, lang_ids)[0]
-        # Create invoice object
         ctx = context.copy()
         ctx['company_id'] = agreement.company_id.id
         ctx['force_company'] = agreement.company_id.id
         ctx['type'] = 'out_invoice'
-        invoice = {
-            'origin': agreement.number,
-            'partner_id': agreement.partner_id.id,
-            'type': 'out_invoice',
-            'state': 'draft',
-            'company_id': agreement.company_id.id,
-            'reference_type': 'none',
-            'check_total': 0.0,
-            'internal_number': False,
-            'user_id': agreement.partner_id.user_id.id,
-        }
-        # Get other invoice values from agreement partner
-        invoice.update(invoice_obj.onchange_partner_id(
-            cr, uid, [], type=invoice['type'],
-            partner_id=agreement.partner_id.id,
-            company_id=agreement.company_id.id)['value'])
+        invoice_vals = self._prepare_invoice(cr, uid, agreement, context=ctx)
         # Prepare invoice lines objects
         agreement_lines_ids = []
-        invoice_lines = []
+        invoice_lines_vals = []
         for agreement_line in agreement_lines.keys():
             invoice_line = {
                 'product_id': agreement_line.product_id.id,
@@ -378,7 +394,7 @@ class Agreement(orm.Model):
                 cr, uid, [], product=agreement_line.product_id.id,
                 uom_id=False, qty=agreement_line.quantity,
                 partner_id=agreement.partner_id.id,
-                fposition_id=invoice['fiscal_position'],
+                fposition_id=invoice_vals['fiscal_position'],
                 context=ctx)['value'])
             if agreement_line.price > 0:
                 invoice_line['price_unit'] = agreement_line.price
@@ -404,28 +420,45 @@ class Agreement(orm.Model):
             invoice_line['name'] += "\n" + _('Period: from %s to %s') % (
                 from_date.strftime(lang.date_format),
                 to_date.strftime(lang.date_format))
-            invoice_lines.append(invoice_line)
+            invoice_lines_vals.append(invoice_line)
             agreement_lines_ids.append(agreement_line.id)
-        # Add lines to invoice and create it
-        invoice['invoice_line'] = [(0, 0, x) for x in invoice_lines]
-        invoice_id = invoice_obj.create(cr, uid, invoice, context=ctx)
+        key = (agreement.partner_id.id, agreement.currency_id.id)
+        if (agreement.partner_id.group_agreement_invoices and
+                grouped_invoices.get(key)):
+            invoice_id = grouped_invoices[key]
+            # add lines to the existing invoice
+            for invoice_line_vals in invoice_lines_vals:
+                invoice_line_vals['invoice_id'] = invoice_id
+                invoice_line_obj.create(
+                    cr, uid, invoice_line_vals, context=ctx)
+                # Update origin field
+                invoice = invoice_obj.browse(cr, uid, invoice_id)
+                invoice_obj.write(
+                    cr, uid, invoice_id,
+                    {'origin': invoice.origin + ";" + agreement.number})
+        else:
+            # Add lines to the invoice dictionary
+            invoice_vals['invoice_line'] = [(0, 0, x) for x in
+                                            invoice_lines_vals]
+            invoice_id = invoice_obj.create(cr, uid, invoice_vals, context=ctx)
+            grouped_invoices[key] = invoice_id
         # Update last invoice date for lines
         self.pool['account.periodical_invoicing.agreement.line'].write(
             cr, uid, agreement_lines_ids,
             {'last_invoice_date': now.strftime('%Y-%m-%d')}, context=ctx)
+        # Create invoice agreement record
+        agreement_invoice = {
+            'agreement_id': agreement.id,
+            'date': now.strftime('%Y-%m-%d'),
+            'invoice_id': invoice_id,
+        }
+        self.pool['account.periodical_invoicing.agreement.invoice'].create(
+            cr, uid, agreement_invoice, context=ctx)
         # Update agreement state
         if agreement.state != 'invoices':
             self.pool['account.periodical_invoicing.agreement'].write(
                 cr, uid, [agreement.id], {'state': 'invoices'},
                 context=ctx)
-        # Create invoice agreement record
-        agreement_invoice = {
-            'agreement_id': agreement.id,
-            'date': now.strftime('%Y-%m-%d'),
-            'invoice_id': invoice_id
-        }
-        self.pool['account.periodical_invoicing.agreement.invoice'].create(
-            cr, uid, agreement_invoice, context=ctx)
         return invoice_id
 
 

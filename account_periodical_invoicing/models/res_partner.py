@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012 Pedro Manuel Baeza Romero
+#    Copyright (c) 2012-2015 Pedro Manuel Baeza Romero
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -18,22 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp import models, fields
 
-{
-    'name': 'Periodical invoicing',
-    'version': '1.0',
-    'category': 'Accounting',
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
-    'website': 'http://www.serviciosbaeza.com',
-    'depends': ['account', 'sale'],
-    'data': [
-        'security/ir.model.access.csv',
-        'wizard/renew_wizard_view.xml',
-        'data/periodical_invoicing_data.xml',
-        'views/periodical_invoicing_view.xml',
-        'views/sale_order_view.xml',
-        'views/res_partner_view.xml',
-    ],
-    'auto_install': False,
-    "installable": True,
-}
+
+class ResPartner(models.Model):
+    _inherit = "res.partner"
+
+    group_agreement_invoices = fields.Boolean(
+        string="Group agreement invoices", default=False)

@@ -1,102 +1,23 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* account_periodical_invoicing
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-06 10:55+0000\n"
-"PO-Revision-Date: 2014-02-06 11:55+0100\n"
-"Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
+"POT-Creation-Date: 2015-05-10 12:54+0000\n"
+"PO-Revision-Date: 2015-05-10 12:54+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.renewal,comments:0
-#: field:account.periodical_invoicing.renew_wizard,comments:0
-msgid "Comments"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong_unit:0
-#: selection:account.periodical_invoicing.agreement.line,invoicing_unit:0
-msgid "years"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.invoice,date:0
-msgid "Date of invoice creation"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.line,invoicing_interval:0
-msgid "Interval in time units for invoicing this product"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,last_renovation_date:0
-msgid "Last date when agreement was renewed (same as start date if not renewed)"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,message_unread:0
-msgid "Unread Messages"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,company_id:0
-msgid "Company"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong_unit:0
-#: selection:account.periodical_invoicing.agreement.line,invoicing_unit:0
-msgid "weeks"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: constraint:account.periodical_invoicing.agreement:0
-msgid "Agreement end date must be greater than start date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,notes:0
-msgid "Notes"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,message_ids:0
-msgid "Messages"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,message_unread:0
-msgid "If checked new messages require your attention."
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.renew_wizard:0
-msgid "Set renewal agreement data"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,number:0
-msgid "Agreement number"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,period_type:0
-msgid "Pre-paid"
-msgstr ""
-
-#. module: account_periodical_invoicing
 #: model:ir.actions.act_window,help:account_periodical_invoicing.action_account_periodical_invoicing_agreement
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
+msgid "<p class=\"oe_view_nocontent_create\">\n"
 "                Click to set a new agreement.\n"
 "                </p><p>\n"
 "                Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a periodical invoice.\n"
@@ -105,75 +26,14 @@ msgid ""
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,message_summary:0
-msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+#: field:account.periodical_invoicing.agreement,active:0
+#: field:account.periodical_invoicing.agreement.line,active_chk:0
+msgid "Active"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Renewals"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,last_invoice_date:0
-msgid "Last invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,renewal_line:0
-msgid "Renewal lines"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,prolong_interval:0
-msgid "Interval in time units to prolong the agreement until new renewall (that is automatic for unlimited term, manual for renewable fixed term)."
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong:0
-msgid "Unlimited term"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,state:0
-msgid "State"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,message_follower_ids:0
-msgid "Followers"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-#: model:ir.actions.act_window,name:account_periodical_invoicing.action_account_periodical_invoicing_agreement
-#: model:ir.ui.menu,name:account_periodical_invoicing.menu_periodicalinvoicing_agreements
-msgid "Agreements"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:sale.order:0
-msgid "Generate agreement"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: sql_constraint:account.periodical_invoicing.agreement.line:0
-msgid "All invoicing intervals must be greater than 0.\n"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,prolong_unit:0
-msgid "Time unit for the prolongation interval"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,start_date:0
-msgid "Start date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong:0
-msgid "Renewable fixed term"
+#: field:account.periodical_invoicing.agreement.line,additional_description:0
+msgid "Add. description"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -182,18 +42,86 @@ msgid "Additional description that will be added to the product description on i
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "View invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
 msgid "Agreement"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,active:0
-msgid "Unchecking this field, quotas are not generated"
+#: constraint:account.periodical_invoicing.agreement:0
+msgid "Agreement end date must be greater than start date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+#: field:account.periodical_invoicing.agreement,agreement_line:0
+msgid "Agreement lines"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,renewal_state:0
+msgid "Agreement not renewed"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,number:0
+msgid "Agreement number"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.invoice,agreement_id:0
+#: field:account.periodical_invoicing.agreement.line,agreement_id:0
+#: field:account.periodical_invoicing.agreement.renewal,agreement_id:0
+msgid "Agreement reference"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement.renewal:account_periodical_invoicing.view_account_periodical_invocing_agreement_renewal_tree
+msgid "Agreement renewals"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,renewal_state:0
+msgid "Agreement renewed"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_tree
+#: model:ir.actions.act_window,name:account_periodical_invoicing.action_account_periodical_invoicing_agreement
+#: model:ir.ui.menu,name:account_periodical_invoicing.menu_periodicalinvoicing_agreements
+msgid "Agreements"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: sql_constraint:account.periodical_invoicing.agreement.line:0
+msgid "All invoicing intervals must be greater than 0.\n"
+""
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: sql_constraint:account.periodical_invoicing.agreement.line:0
+msgid "All product quantities must be greater than 0.\n"
+""
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,start_date:0
+msgid "Beginning of the agreement. Keep empty to use the current date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.renew_wizard:account_periodical_invoicing.view_account_periodical_invoicing_renew_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.renewal,comments:0
+#: field:account.periodical_invoicing.renew_wizard,comments:0
+msgid "Comments"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,company_id:0
+msgid "Company"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -202,35 +130,61 @@ msgid "Company that signs the agreement"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Share a message..."
+#: field:account.periodical_invoicing.agreement,create_uid:0
+#: field:account.periodical_invoicing.agreement.invoice,create_uid:0
+#: field:account.periodical_invoicing.agreement.line,create_uid:0
+#: field:account.periodical_invoicing.agreement.renewal,create_uid:0
+#: field:account.periodical_invoicing.renew_wizard,create_uid:0
+msgid "Created by"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: code:addons/account_periodical_invoicing/periodical_invoicing.py:329
-#, python-format
-msgid "Period: from %s to %s"
+#: field:account.periodical_invoicing.agreement,create_date:0
+#: field:account.periodical_invoicing.agreement.invoice,create_date:0
+#: field:account.periodical_invoicing.agreement.line,create_date:0
+#: field:account.periodical_invoicing.agreement.renewal,create_date:0
+#: field:account.periodical_invoicing.renew_wizard,create_date:0
+msgid "Created on"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,state:0
-msgid "Without invoices"
+#: field:account.periodical_invoicing.agreement,currency_id:0
+msgid "Currency"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_agreement_renewal
-msgid "account.periodical_invoicing.agreement.renewal"
+#: field:account.periodical_invoicing.agreement,partner_id:0
+msgid "Customer"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_agreement
-msgid "Periodical invoicing agreement"
+#: help:account.periodical_invoicing.agreement,partner_id:0
+msgid "Customer you are making the agreement with"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-#: view:account.periodical_invoicing.renew_wizard:0
-msgid "Renew agreement"
+#: field:account.periodical_invoicing.agreement.renewal,date:0
+msgid "Date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.invoice,date:0
+msgid "Date of invoice creation"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.renewal,date:0
+msgid "Date of the renewal"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,name:0
+msgid "Description"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -239,13 +193,372 @@ msgid "Discount (%)"
 msgstr ""
 
 #. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.renew_wizard,date:0
+msgid "Effective date of the renewal. This date is the one taken into account in the next renewal"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,end_date:0
+msgid "End date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,end_date:0
+msgid "End date of the agreement"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong:0
+msgid "Fixed term"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:sale.order:account_periodical_invoicing.view_sale_order_form
+msgid "Generate agreement"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:res.partner,group_agreement_invoices:0
+msgid "Group agreement invoices"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,id:0
+#: field:account.periodical_invoicing.agreement.invoice,id:0
+#: field:account.periodical_invoicing.agreement.line,id:0
+#: field:account.periodical_invoicing.agreement.renewal,id:0
+#: field:account.periodical_invoicing.renew_wizard,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,prolong_interval:0
+#: field:account.periodical_invoicing.agreement.line,invoicing_interval:0
+msgid "Interval"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,invoicing_interval:0
+msgid "Interval in time units for invoicing this product"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,prolong_interval:0
+msgid "Interval in time units to prolong the agreement until new renewall (that is automatic for unlimited term, manual for renewable fixed term)."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,prolong_unit:0
+#: field:account.periodical_invoicing.agreement.line,invoicing_unit:0
+msgid "Interval unit"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.invoice,invoice_id:0
+msgid "Invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,invoice_line:0
+msgid "Invoice lines"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+msgid "Invoices"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,write_uid:0
+#: field:account.periodical_invoicing.agreement.invoice,write_uid:0
+#: field:account.periodical_invoicing.agreement.line,write_uid:0
+#: field:account.periodical_invoicing.agreement.renewal,write_uid:0
+#: field:account.periodical_invoicing.renew_wizard,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,write_date:0
+#: field:account.periodical_invoicing.agreement.invoice,write_date:0
+#: field:account.periodical_invoicing.agreement.line,write_date:0
+#: field:account.periodical_invoicing.agreement.renewal,write_date:0
+#: field:account.periodical_invoicing.renew_wizard,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,last_renovation_date:0
+msgid "Last date when agreement was renewed (same as start date if not renewed)"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,last_invoice_date:0
+msgid "Last invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,last_renovation_date:0
+msgid "Last renovation date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+msgid "Lines"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,name:0
+msgid "Name"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,name:0
+msgid "Name that helps to identify the agreement"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,next_expiration_date:0
+msgid "Next expiration date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,notes:0
+msgid "Notes"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,number:0
+msgid "Number of agreement. Keep empty to get the number assigned by a sequence."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: model:ir.model,name:account_periodical_invoicing.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,period_type:0
+msgid "Period type"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,period_type:0
+msgid "Period type for invoicing. 'Pre-paid': Invoices are generated for the upcoming period. 'Post-paid': Invoices are generated for the consumed period."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: code:addons/account_periodical_invoicing/models/periodical_invoicing.py:420
+#, python-format
+msgid "Period: from %s to %s"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: model:ir.ui.menu,name:account_periodical_invoicing.menu_periodicalinvoicing
+msgid "Periodical invoicing"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_agreement
+msgid "Periodical invoicing agreement"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,period_type:0
+msgid "Post-paid"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,period_type:0
+msgid "Pre-paid"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,price:0
+msgid "Product price"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,prolong:0
+msgid "Prolongation"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement.line,quantity:0
+msgid "Quantity"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,quantity:0
+msgid "Quantity of the product to invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+#: view:account.periodical_invoicing.renew_wizard:account_periodical_invoicing.view_account_periodical_invoicing_renew_wizard
+msgid "Renew agreement"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.renew_wizard:account_periodical_invoicing.view_account_periodical_invoicing_renew_wizard
+#: model:ir.actions.act_window,name:account_periodical_invoicing.action_account_periodical_invoicing_renew_wizard
+msgid "Renew agreement wizard"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong:0
+msgid "Renewable fixed term"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.renewal,comments:0
+#: help:account.periodical_invoicing.renew_wizard,comments:0
+msgid "Renewal comments"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.renew_wizard,date:0
+msgid "Renewal date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,renewal_line:0
+msgid "Renewal lines"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,renewal_state:0
+msgid "Renewal state"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+msgid "Renewals"
+msgstr ""
+
+#. module: account_periodical_invoicing
 #: model:ir.model,name:account_periodical_invoicing.model_sale_order
 msgid "Sales Order"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Invoices"
+#: view:account.periodical_invoicing.renew_wizard:account_periodical_invoicing.view_account_periodical_invoicing_renew_wizard
+msgid "Set renewal agreement data"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,prolong:0
+msgid "Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+msgid "Share a message..."
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,price:0
+msgid "Specific price for this product. Keep empty to use the current price while generating invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,start_date:0
+msgid "Start date"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,state:0
+msgid "State"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,prolong_unit:0
+msgid "Time unit for the prolongation interval"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement,active:0
+msgid "Unchecking this field, quotas are not generated"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: help:account.periodical_invoicing.agreement.line,active_chk:0
+msgid "Unchecking this field, this quota is not generated"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong:0
+msgid "Unlimited term"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: field:account.periodical_invoicing.agreement,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: view:account.periodical_invoicing.agreement:account_periodical_invoicing.view_account_periodical_invocing_agreement_form
+msgid "View invoice"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,state:0
+msgid "With invoices"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,state:0
+msgid "Without invoices"
+msgstr ""
+
+#. module: account_periodical_invoicing
+#: selection:account.periodical_invoicing.agreement,prolong_unit:0
+#: selection:account.periodical_invoicing.agreement.line,invoicing_unit:0
+msgid "days"
 msgstr ""
 
 #. module: account_periodical_invoicing
@@ -257,274 +570,12 @@ msgstr ""
 #. module: account_periodical_invoicing
 #: selection:account.periodical_invoicing.agreement,prolong_unit:0
 #: selection:account.periodical_invoicing.agreement.line,invoicing_unit:0
-msgid "days"
+msgid "weeks"
 msgstr ""
 
 #. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.renew_wizard,date:0
-msgid "Renewal date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: model:ir.ui.menu,name:account_periodical_invoicing.menu_periodicalinvoicing
-msgid "Periodical invoicing"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,number:0
-msgid "Number of agreement. Keep empty to get the number assigned by a sequence."
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,next_expiration_date:0
-msgid "Next expiration date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,additional_description:0
-msgid "Add. description"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement.renewal:0
-msgid "Agreement renewals"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-#: field:account.periodical_invoicing.agreement,agreement_line:0
-msgid "Agreement lines"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,last_renovation_date:0
-msgid "Last renovation date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,price:0
-msgid "Product price"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,prolong_unit:0
-#: field:account.periodical_invoicing.agreement.line,invoicing_unit:0
-msgid "Interval unit"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,period_type:0
-msgid "Period type for invoicing. 'Pre-paid': Invoices are generated for the upcoming period. 'Post-paid': Invoices are generated for the consumed period."
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,period_type:0
-msgid "Period type"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_agreement_line
-msgid "account.periodical_invoicing.agreement.line"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,message_is_follower:0
-msgid "Is a Follower"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,prolong:0
-msgid "Sets the term of the agreement. 'Renewable fixed term': It sets a fixed term, but with possibility of manual renew; 'Unlimited term': Renew is made automatically; 'Fixed term': The term is fixed and there is no possibility to renew."
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,active:0
-#: field:account.periodical_invoicing.agreement.line,active_chk:0
-msgid "Active"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,start_date:0
-msgid "Beginning of the agreement. Keep empty to use the current date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.renewal,date:0
-msgid "Date of the renewal"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,prolong:0
-msgid "Prolongation"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,prolong_interval:0
-#: field:account.periodical_invoicing.agreement.line,invoicing_interval:0
-msgid "Interval"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,message_summary:0
-msgid "Summary"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.renewal,date:0
-msgid "Date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.renewal,comments:0
-#: help:account.periodical_invoicing.renew_wizard,comments:0
-msgid "Renewal comments"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.renew_wizard,date:0
-msgid "Effective date of the renewal. This date is the one taken into account in the next renewal"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,quantity:0
-msgid "Quantity"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,end_date:0
-msgid "End date"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_agreement_invoice
-msgid "account.periodical_invoicing.agreement.invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.invoice,invoice_id:0
-msgid "Invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.renew_wizard:0
-msgid "Cancel"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: model:ir.model,name:account_periodical_invoicing.model_account_periodical_invoicing_renew_wizard
-msgid "account.periodical_invoicing.renew_wizard"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,prolong:0
-msgid "Fixed term"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.invoice,agreement_id:0
-#: field:account.periodical_invoicing.agreement.line,agreement_id:0
-#: field:account.periodical_invoicing.agreement.renewal,agreement_id:0
-msgid "Agreement reference"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.line,quantity:0
-msgid "Quantity of the product to invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,period_type:0
-msgid "Post-paid"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: sql_constraint:account.periodical_invoicing.agreement.line:0
-msgid "All product quantities must be greater than 0.\n"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,product_id:0
-msgid "Product"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement.line,name:0
-msgid "Description"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.line,price:0
-msgid "Specific price for this product. Keep empty to use the current price while generating invoice"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.renew_wizard:0
-#: model:ir.actions.act_window,name:account_periodical_invoicing.action_account_periodical_invoicing_renew_wizard
-msgid "Renew agreement wizard"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,renewal_state:0
-msgid "Agreement not renewed"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,invoice_line:0
-msgid "Invoice lines"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,partner_id:0
-msgid "Customer"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,name:0
-msgid "Name"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: view:account.periodical_invoicing.agreement:0
-msgid "Lines"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement.line,active_chk:0
-msgid "Unchecking this field, this quota is not generated"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,partner_id:0
-msgid "Customer you are making the agreement with"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,renewal_state:0
-msgid "Agreement renewed"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: field:account.periodical_invoicing.agreement,renewal_state:0
-msgid "Renewal state"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,message_ids:0
-msgid "Messages and communication history"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: selection:account.periodical_invoicing.agreement,state:0
-msgid "With invoices"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,name:0
-msgid "Name that helps to identify the agreement"
-msgstr ""
-
-#. module: account_periodical_invoicing
-#: help:account.periodical_invoicing.agreement,end_date:0
-msgid "End date of the agreement"
+#: selection:account.periodical_invoicing.agreement,prolong_unit:0
+#: selection:account.periodical_invoicing.agreement.line,invoicing_unit:0
+msgid "years"
 msgstr ""
 

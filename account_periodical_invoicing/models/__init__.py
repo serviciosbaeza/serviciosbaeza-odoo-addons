@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2012-2014 Pedro Manuel Baeza Romero
+#    Copyright (c) 2012-2015 Pedro Manuel Baeza Romero
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -21,3 +21,4 @@
 
 from . import periodical_invoicing
 from . import sale_order
+from . import res_partner

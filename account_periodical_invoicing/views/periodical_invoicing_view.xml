@@ -25,6 +25,7 @@
                     <field name="number"/>
                     <field name="name"/>
                     <field name="partner_id"/>
+                    <field name="currency_id"/>
                     <field name="start_date"/>
                     <field name="next_expiration_date"/>
                     <field name="company_id" groups="base.group_multi_company"/>
@@ -50,12 +51,13 @@
                                 <field name="name"/>
                                 <field name="number"/>
                                 <field name="partner_id"/>
-                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="currency_id"/>
                             </group>
                             <group>
                                 <field name="active"/>
                                 <field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
                                 <field name="period_type"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
                             </group>
                         </group>
                         <group>
@@ -69,7 +71,7 @@
                                     <field name="prolong_interval" attrs="{'required': [('prolong', '=', 'recurrent')]}"/>
                                     <field name="prolong_unit" attrs="{'required': [('prolong', '=', 'recurrent')]}"/>
                                 </group>
-                                <group attrs="{'invisible': [('prolong','!=', 'fixed')]}"> 
+                                <group attrs="{'invisible': [('prolong','!=', 'fixed')]}">
                                     <field name="end_date" attrs="{'required': [('prolong', '=', 'fixed')]}"/>
                                 </group>
                             </group>
@@ -118,9 +120,9 @@
                 </form>
             </field>
         </record>
-        
+
         <!-- Windows actions -->
-        
+
         <record model="ir.actions.act_window" id="action_account_periodical_invoicing_agreement">
             <field name="name">Agreements</field>
             <field name="res_model">account.periodical_invoicing.agreement</field>
@@ -134,27 +136,27 @@
                 </p>
             </field>
         </record>
-    
+
         <!-- Windows actions views -->
-    
+
         <record model="ir.actions.act_window.view" id="action_account_periodical_invoicing_agreement_view_tree">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_account_periodical_invocing_agreement_tree"/>
             <field name="act_window_id" ref="action_account_periodical_invoicing_agreement"/>
         </record>
-    
+
         <record model="ir.actions.act_window.view" id="action_account_periodical_invoicing_agreement_view_form">
             <field name="sequence" eval="2"/>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_account_periodical_invocing_agreement_form"/>
             <field name="act_window_id" ref="action_account_periodical_invoicing_agreement"/>
         </record>
-        
+
         <!-- Menu items -->
-        
+
         <menuitem name="Periodical invoicing" parent="account.menu_finance_periodical_processing" id="menu_periodicalinvoicing"/>
         <menuitem name="Agreements" id="menu_periodicalinvoicing_agreements" parent="menu_periodicalinvoicing" action="action_account_periodical_invoicing_agreement"/>
-      
+
     </data>
 </openerp>
