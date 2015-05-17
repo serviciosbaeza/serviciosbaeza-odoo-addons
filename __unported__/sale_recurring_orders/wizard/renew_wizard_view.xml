@@ -7,19 +7,19 @@
             <field name="model">sale.recurring_orders.renew_wizard</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Renew agreement wizard">
-                    <label string="Set renewal agreement data" colspan="4"/>
+               	<form string="Renew agreement wizard">
+               		<label string="Set renewal agreement data" colspan="4"/>
                     <newline/>
-                    <field name="date"/>
+					<field name="date"/>
                     <newline/>
-                    <field name="comments" default_focus="1"/>
+					<field name="comments" default_focus="1"/>
                     <separator string="" colspan="4" />
                     <button special="cancel" string="Cancel" icon="gtk-cancel"/>
                     <button name="create_renewal" string="Renew agreement" type="object" icon="gtk-ok"/>
                	</form>
             </field>
         </record>
-
+		
         <act_window name="Renew agreement wizard"
             res_model="sale.recurring_orders.renew_wizard"
             src_model="sale.recurring_orders.agreement"
@@ -29,5 +29,5 @@
             key2="client_action_multi"
             id="action_sale_recurring_orders_renew_wizard"/>
 
-    </data>
+	</data>
 </openerp>

@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
-        <!-- Views -->
-        <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_order_tree">
-            <field name="name">sale.recurring_orders.agreement.order.tree</field>
-            <field name="model">sale.recurring_orders.agreement.order</field>
-            <field name="type">tree</field>
-            <field name="priority" eval="6"/>
-            <field name="arch" type="xml">
-                <tree string="Agreement orders">
-                    <button name="view_order" string="View order" type="object" icon="terp-gtk-go-back-rtl"/>
-                    <field name="date"/>
-                    <field name="confirmed"/>
-                    <field name="order_id"/>
-                </tree>
-            </field>
-        </record>
+	<data>
+		<!-- Views -->
+	    <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_order_tree">
+	        <field name="name">sale.recurring_orders.agreement.order.tree</field>
+	        <field name="model">sale.recurring_orders.agreement.order</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="6"/>
+	        <field name="arch" type="xml">
+	            <tree string="Agreement orders">
+					<button name="view_order" string="View order" type="object" icon="terp-gtk-go-back-rtl"/>
+					<field name="date"/>
+					<field name="confirmed"/>
+	                <field name="order_id"/>
+	            </tree>
+	        </field>
+		</record>
 
-        <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_renewal_tree">
-            <field name="name">sale.recurring_orders.agreement.renewal.tree</field>
-            <field name="model">sale.recurring_orders.agreement.renewal</field>
-            <field name="type">tree</field>
-            <field name="priority" eval="6"/>
-            <field name="arch" type="xml">
-                <tree string="Agreement renewals">
-                    <field name="date"/>
-                    <field name="comments"/>
-                </tree>
-            </field>
-        </record>
+	    <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_renewal_tree">
+	        <field name="name">sale.recurring_orders.agreement.renewal.tree</field>
+	        <field name="model">sale.recurring_orders.agreement.renewal</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="6"/>
+	        <field name="arch" type="xml">
+	            <tree string="Agreement renewals">
+					<field name="date"/>
+	                <field name="comments"/>
+	            </tree>
+	        </field>
+		</record>
 
-        <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_tree">
-            <field name="name">sale.recurring_orders.agreement.tree</field>
-            <field name="model">sale.recurring_orders.agreement</field>
-            <field name="type">tree</field>
-            <field name="priority" eval="6"/>
-            <field name="arch" type="xml">
-                <tree string="Recurring orders agreements">
-                    <field name="number"/>
-                    <field name="name"/>
-                    <field name="partner_id"/>
-                    <field name="start_date"/>
-                    <field name="prolong"/>
-                    <field name="next_expiration_date"/>
+	    <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_tree">
+	        <field name="name">sale.recurring_orders.agreement.tree</field>
+	        <field name="model">sale.recurring_orders.agreement</field>
+	        <field name="type">tree</field>
+	        <field name="priority" eval="6"/>
+	        <field name="arch" type="xml">
+	            <tree string="Recurring orders agreements">
+	                <field name="number"/>
+	                <field name="name"/>
+	                <field name="partner_id"/>
+	                <field name="start_date"/>
+					<field name="prolong"/>
+	                <field name="next_expiration_date"/>
                     <field name="company_id" groups="base.group_multi_company"/>
-                </tree>
-            </field>
-        </record>
+	            </tree>
+	        </field>
+	    </record>
 
-        <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_form">
-            <field name="name">sale.recurring_orders.agreement.form</field>
-            <field name="model">sale.recurring_orders.agreement</field>
-            <field name="type">form</field>
-            <field name="priority" eval="6"/>
-            <field name="arch" type="xml">
-                <form string="Agreement" version="7.0">
+		<record model="ir.ui.view" id="view_sale_recurring_orders_agreement_form">
+			<field name="name">sale.recurring_orders.agreement.form</field>
+			<field name="model">sale.recurring_orders.agreement</field>
+			<field name="type">form</field>
+			<field name="priority" eval="6"/>
+			<field name="arch" type="xml">
+				<form string="Agreement" version="7.0">
                     <header>
-                        <button name="generate_initial_order" string="Generate initial order" class="oe_highlight" type="object" states="empty"/>
-                        <button name="generate_next_year_orders" string="Generate next year orders" type="object" icon="gtk-execute"/>
-                        <button name="%(action_sale_recurring_orders_renew_wizard)d" type="action" string="Renew agreement" attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>                        
+						<button name="generate_initial_order" string="Generate initial order" class="oe_highlight" type="object" states="empty"/>
+						<button name="generate_next_year_orders" string="Generate next year orders" type="object" icon="gtk-execute"/>
+	                    <button name="%(action_sale_recurring_orders_renew_wizard)d" type="action" string="Renew agreement" attrs="{'invisible': [('prolong','!=', 'recurrent')]}"/>                        
                     </header>
                     <sheet>
                         <group>
@@ -69,7 +69,7 @@
                             </group>
                             <group>
                                 <field name="active"/>
-                                <field name="number"/>
+                                <field name="number"/>                                
                                 <field name="start_date" on_change="onchange_start_date(start_date)" attrs="{'readonly':[('state','!=','empty')]}"/>
                             </group>
                         </group>
@@ -120,9 +120,9 @@
                         <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
                         <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
                     </div>
-                </form>
-            </field>
-        </record>
+				</form>
+			</field>
+		</record>
 
         <record id="view_sales_ro_agreement_filter" model="ir.ui.view">
             <field name="name">sale.recurring_orders.agreement.select</field>
@@ -130,49 +130,49 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="name" filter_domain="[('name','ilike',self)]"/>
-                    <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+					<field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
                </search>
             </field>
         </record>
-        
-        <!-- Windows actions -->
-        
-        <record model="ir.actions.act_window" id="action_sale_recurring_orders_agreement">
-            <field name="name">Recurring orders agreements</field>
-            <field name="res_model">sale.recurring_orders.agreement</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_sales_ro_agreement_filter"/>
-            <field name="help" type="html">
+		
+		<!-- Windows actions -->
+		
+		<record model="ir.actions.act_window" id="action_sale_recurring_orders_agreement">
+			<field name="name">Recurring orders agreements</field>
+			<field name="res_model">sale.recurring_orders.agreement</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_sales_ro_agreement_filter"/>
+			<field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                 Click to set a new agreement.
                 </p><p>
                 Agreements are the way you define the commercial relation with your customers which specify certain products/services that you are providing them that requires a recurring order.
                 </p>
             </field>
-        </record>
-    
-        <!-- Windows actions views -->
-    
-        <record model="ir.actions.act_window.view" id="action_sale_recurring_orders_agreement_view_tree">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_sale_recurring_orders_agreement_tree"/>
-            <field name="act_window_id" ref="action_sale_recurring_orders_agreement"/>
-        </record>
-    
-        <record model="ir.actions.act_window.view" id="action_sale_recurring_orders_agreement_view_form">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="view_sale_recurring_orders_agreement_form"/>
-            <field name="act_window_id" ref="action_sale_recurring_orders_agreement"/>
-        </record>
-        
-        <!-- Menu items -->
-        
-        <menuitem name="Recurring orders agreements" id="menu_recurring_orders_agreements" 
-            parent="base.menu_sales" action="action_sale_recurring_orders_agreement" 
-            sequence="4"/>
-      
-    </data>
+		</record>
+	
+		<!-- Windows actions views -->
+	
+		<record model="ir.actions.act_window.view" id="action_sale_recurring_orders_agreement_view_tree">
+			<field name="sequence" eval="1"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_sale_recurring_orders_agreement_tree"/>
+			<field name="act_window_id" ref="action_sale_recurring_orders_agreement"/>
+		</record>
+	
+		<record model="ir.actions.act_window.view" id="action_sale_recurring_orders_agreement_view_form">
+			<field name="sequence" eval="2"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_sale_recurring_orders_agreement_form"/>
+			<field name="act_window_id" ref="action_sale_recurring_orders_agreement"/>
+		</record>
+		
+		<!-- Menu items -->
+		
+		<menuitem name="Recurring orders agreements" id="menu_recurring_orders_agreements" 
+			parent="base.menu_sales" action="action_sale_recurring_orders_agreement" 
+			sequence="4"/>
+	  
+	</data>
 </openerp>
