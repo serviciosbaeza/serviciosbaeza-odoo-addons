@@ -266,7 +266,6 @@ class agreement(osv.osv):
         @param agreement_lines_ordered: List of agreement lines objects used in the creation of the order.
         @param order_id: ID of the created order.  
         """
-                
         pass
 
     def _order_confirmed(self, cr, uid, agreement, order_id, context={}):
