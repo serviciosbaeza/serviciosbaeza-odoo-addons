@@ -222,7 +222,7 @@ class agreement(osv.osv):
             'from_agreement': True,
         }
         # Get other order values from agreement partner
-        order.update(openerp.addons.sale.sale.sale_order.onchange_partner_id(order_obj, cr, uid, [], agreement.partner_id.id,context)['value'])                   
+        order.update(self.pool['sale.order'].onchange_partner_id(cr, uid, [], agreement.partner_id.id,context)['value'])                   
         order['user_id'] = agreement.partner_id.user_id.id
         order_id = order_obj.create(cr, uid, order, context=context)
         # Create order lines objects
@@ -235,7 +235,7 @@ class agreement(osv.osv):
                 'discount': agreement_line.discount,
             }
             # get other order line values from agreement line product
-            order_line.update(openerp.addons.sale.sale.sale_order_line.product_id_change(order_line_obj, cr, uid, [], order['pricelist_id'], \
+            order_line.update(self.pool['sale.order.line'].product_id_change(cr, uid, [], order['pricelist_id'], \
                 product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=1 or order['fiscal_position'])['value'])
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
@@ -266,6 +266,7 @@ class agreement(osv.osv):
         @param agreement_lines_ordered: List of agreement lines objects used in the creation of the order.
         @param order_id: ID of the created order.  
         """
+                
         pass
 
     def _order_confirmed(self, cr, uid, agreement, order_id, context={}):
@@ -374,6 +375,7 @@ class agreement(osv.osv):
     
     def confirm_current_orders_planned(self, cr, uid, context={}):
         if context is None: context = {}
+        cr._cnx.set_isolation_level(ISOLATION_LEVEL_READ_COMMITTED)       
         ids = self.search(cr, uid, [])
         now = datetime.now()
         wf_service = netsvc.LocalService("workflow")
@@ -454,7 +456,7 @@ class agreement_order(osv.osv):
         res = {}
         for agreement_order in self.browse(cr, uid, ids):
             if agreement_order.order_id:
-				res[agreement_order.id] = (agreement_order.order_id.state != 'draft')
+                res[agreement_order.id] = (agreement_order.order_id.state != 'draft')
         return res
 
     _name = 'sale.recurring_orders.agreement.order'
