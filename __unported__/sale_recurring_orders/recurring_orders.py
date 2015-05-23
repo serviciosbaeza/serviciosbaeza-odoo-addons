@@ -374,7 +374,6 @@ class agreement(osv.osv):
     
     def confirm_current_orders_planned(self, cr, uid, context={}):
         if context is None: context = {}
-        cr._cnx.set_isolation_level(ISOLATION_LEVEL_READ_COMMITTED)       
         ids = self.search(cr, uid, [])
         now = datetime.now()
         wf_service = netsvc.LocalService("workflow")
