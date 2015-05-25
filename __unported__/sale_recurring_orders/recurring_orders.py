@@ -197,7 +197,7 @@ class agreement(osv.osv):
                 revise_ids.append(agreement.id)
         if revise_ids:
             # force recalculate next_expiration_date
-            self.write(cr, uid, revise_ids, {}, context=context)
+            self.write(cr, uid, revise_ids, {'prolong':'unlimited'}, context=context)
         return True
 
     def create_order(self, cr, uid, agreement, date, agreement_lines, confirmed_flag, context={}):
