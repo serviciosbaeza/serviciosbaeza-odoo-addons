@@ -8,25 +8,13 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-                <field name="move_lines" position="after">
-                    <group class="oe_subtotal_footer oe_right"
-                           attrs="{'invisible': ['|', ('sale_id', '=', False),
-                                                 ('valued', '=', False)]}">
-                        <field name="sale_id" invisible="1"/>
-                        <field name="valued" invisible="1"/>
-                        <field name="amount_untaxed"
-                                widget="monetary"
-                                options="{'currency_field': 'currency_id'}"/>
-                        <field name="amount_tax"
-                                widget="monetary"
-                                options="{'currency_field': 'currency_id'}"/>
-                        <field name="amount_total"
-                                class="oe_subtotal_footer_separator"
-                                widget="monetary"
-                                options="{'currency_field': 'currency_id'}"/>
-                    </group>
-                    <div class="oe_clear"/>
+                <field name="amount_untaxed" position="before">
+                    <field name="sale_id" invisible="1"/>
+                    <field name="valued" invisible="1"/>
                 </field>
+                <group class="oe_subtotal_footer oe_right" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('sale_id', '=', False),('valued', '=', False)]}</attribute>
+                </group>
             </field>
         </record>
 
