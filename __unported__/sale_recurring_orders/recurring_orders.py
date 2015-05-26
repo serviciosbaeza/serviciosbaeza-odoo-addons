@@ -21,13 +21,13 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from openerp.tools.translate import _
-import decimal_precision as dp
-import sale
-import netsvc
+import openerp.addons.decimal_precision as dp
+import openerp.addons.sale
+import openerp.netsvc as netsvc
 
 class agreement(osv.osv):
     _name = 'sale.recurring_orders.agreement'
@@ -197,7 +197,7 @@ class agreement(osv.osv):
                 revise_ids.append(agreement.id)
         if revise_ids:
             # force recalculate next_expiration_date
-            self.write(cr, uid, revise_ids, {}, context=context)
+            self.write(cr, uid, revise_ids, {'prolong':'unlimited'}, context=context)
         return True
 
     def create_order(self, cr, uid, agreement, date, agreement_lines, confirmed_flag, context={}):
@@ -222,7 +222,7 @@ class agreement(osv.osv):
             'from_agreement': True,
         }
         # Get other order values from agreement partner
-        order.update(sale.sale.sale_order.onchange_partner_id(order_obj, cr, uid, [], agreement.partner_id.id)['value'])                   
+        order.update(self.pool['sale.order'].onchange_partner_id(cr, uid, [], agreement.partner_id.id,context)['value'])                   
         order['user_id'] = agreement.partner_id.user_id.id
         order_id = order_obj.create(cr, uid, order, context=context)
         # Create order lines objects
@@ -235,8 +235,8 @@ class agreement(osv.osv):
                 'discount': agreement_line.discount,
             }
             # get other order line values from agreement line product
-            order_line.update(sale.sale.sale_order_line.product_id_change(order_line_obj, cr, uid, [], order['pricelist_id'], \
-                product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=order['fiscal_position'])['value'])
+            order_line.update(self.pool['sale.order.line'].product_id_change(cr, uid, [], order['pricelist_id'], \
+                product=agreement_line.product_id.id, qty=agreement_line.quantity, partner_id=agreement.partner_id.id, fiscal_position=1 or order['fiscal_position'])['value'])
             # Put line taxes
             order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
             # Put custom description
@@ -316,7 +316,7 @@ class agreement(osv.osv):
         agreement_order_obj = self.pool.get('sale.recurring_orders.agreement.order')
         for date in dates: 
             # Check if an order exists for that date
-            if not len(agreement_order_obj.search(cr, uid, [ ('date', '=', date), ('agreement_id', '=', agreement['id']) ])):
+            if not len(agreement_order_obj.search(cr, uid, [ ('date', '=', str(date)), ('agreement_id', '=', agreement['id']) ])):
                 # create it if not exists
                 order_id = self.create_order(cr, uid, agreement, date, lines_to_order[date], False, context=context)
                 # Call 'event' method
@@ -454,7 +454,7 @@ class agreement_order(osv.osv):
         res = {}
         for agreement_order in self.browse(cr, uid, ids):
             if agreement_order.order_id:
-				res[agreement_order.id] = (agreement_order.order_id.state != 'draft')
+                res[agreement_order.id] = (agreement_order.order_id.state != 'draft')
         return res
 
     _name = 'sale.recurring_orders.agreement.order'

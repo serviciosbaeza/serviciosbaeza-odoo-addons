@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from osv import fields, osv
+from openerp.osv import fields, osv
 import datetime
 
 class sale_order(osv.osv):
