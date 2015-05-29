@@ -8,18 +8,17 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock_picking_taxes.view_picking_form"/>
             <field name="arch" type="xml">
+                <group name="subtotal_footer" position="before">
+                    <group class="oe_subtotal_footer oe_right" name="valued_info">
+                        <field name="valued" invisible="1"/>
+                    </group>
+                </group>
                 <group name="subtotal_footer" position="attributes">
                     <attribute name="attrs">{'invisible': ['|', ('sale_id', '=', False),('valued', '=', False)]}</attribute>
                 </group>
                 <page string="Taxes" position="attributes">
                     <attribute name="attrs">{'invisible': ['|', ('sale_id', '=', False),('valued', '=', False)]}</attribute>
                 </page>
-                <group name="subtotal_footer" position="before">
-                    <group class="oe_subtotal_footer oe_right" name="valued_info">
-                        <field name="sale_id" invisible="1"/>
-                        <field name="valued" invisible="1"/>
-                    </group>
-                </group>
             </field>
         </record>
 
