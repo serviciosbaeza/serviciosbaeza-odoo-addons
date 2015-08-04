@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+         <report id="taskwork_report"
+               string="Project task works report"
+               model="project.project"
+               name="project.task.work"
+               rml="project_task_work_print/report/taskwork_report.rml"/>
+
+        <record model="ir.values" id="taskwork_report_action">
+            <field name="name">Project task works report</field>
+            <field name="key">action</field>
+            <field name="key2">client_print_multi</field>
+            <field name="model">project.project</field>
+            <field name="value" eval="'ir.actions.report.xml,' + str(ref('taskwork_report'))"/>
+        </record>
+
+
+    </data>
+</openerp>
