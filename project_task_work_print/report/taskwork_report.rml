@@ -222,7 +222,7 @@
       </tr>
 
       <tr>
-        [[ repeatIn(tw_lines[o.id], 'w') ]]
+        [[ repeatIn(o.ordered_works, 'w') ]]
         <td>
           <para style="P2">[[ w.date and formatLang(w.date, date=True) or '' ]]</para>
         </td>
@@ -230,7 +230,7 @@
           <para style="P2">[[ w.task_id and w.task_id.name or '' ]] - [[ w.name or '' ]]</para>
         </td>
         <td>
-          <para style="P2c">[[ w.hours or 0.0 ]]</para>
+          <para style="P2c">[[ "%d:%02d" % (int(w.hours), divmod(w.hours, 1)[1] * 60) ]]</para>
         </td>
       </tr>
     </blockTable>

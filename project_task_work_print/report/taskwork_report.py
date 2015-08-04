@@ -33,16 +33,6 @@ class TaskWorkReport(report_sxw.rml_parse):
         })
         self.context = context
 
-    def set_context(self, objects, data, ids, report_type=None):
-        tw_lines = {}
-        for o in objects:
-            tw_lines[o.id] = []
-            for task in o.tasks:
-                tw_lines[o.id].extend(x for x in task.work_ids)
-        self.localcontext['tw_lines'] = tw_lines
-        super(TaskWorkReport, self).set_context(objects, data, ids,
-                                                report_type)
-
     def _get_tot_hours(self, ts_lines):
         tot = 0.0
         deduced = 0.0
