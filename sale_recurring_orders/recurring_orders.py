@@ -227,21 +227,16 @@ class Agreement(orm.Model):
         return super(Agreement, self).copy(cr, uid, orig_id, default, context)
 
     def unlink(self, cr, uid, ids, context=None):
-        unlink_ids = []
-        for agreement in self.browse(cr, uid, ids, context=context):
-            confirmedOrders = False
-            for order_line in agreement.order_line:
+        for agreement_record in self.browse(cr, uid, ids, context=context):
+            for order_line in agreement_record.order_line:
                 if order_line.confirmed:
-                    confirmedOrders = True
-            if not confirmedOrders:
-                unlink_ids.append(agreement.id)
-            else:
-                raise orm.except_orm(
-                    _('Invalid action!'),
-                    _('You cannot remove agreements with confirmed orders!'))
-        self.unlink_orders(cr, uid, unlink_ids, datetime.date(datetime.now()),
-                           context=context)
-        return orm.unlink(self, cr, uid, unlink_ids, context=context)
+                    raise orm.except_orm(
+                        _('Invalid action!'),
+                        _('You cannot remove agreements with confirmed '
+                          'orders!'))
+        self.unlink_orders(
+            cr, uid, ids, datetime.date(datetime.now()), context=context)
+        return super(Agreement, self).unlink(cr, uid, ids, context=context)
 
     def onchange_start_date(self, cr, uid, ids, start_date=False):
         """
