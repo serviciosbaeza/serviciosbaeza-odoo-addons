@@ -26,6 +26,7 @@
                     <field name="project"
                            attrs="{'readonly': [('task_id', '!=', False)]}" />
                     <field name="task_id"
+                           domain="[('include_in_task_work_view', '=', True)]"
                            context="{'default_project_id': project}"/>
                     <field name="user_id"/>
                     <field name="name"/>

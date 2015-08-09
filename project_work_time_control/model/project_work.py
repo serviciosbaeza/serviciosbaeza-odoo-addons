@@ -35,9 +35,11 @@ class ProjectWork(models.Model):
     @api.onchange('project')
     def onchange_project(self):
         if not self.project:
-            return {}
+            return {'domain': {'task_id': []}}
         return {
-            'domain': {'task_id': [('project_id', '=', self.project.id)]},
+            'domain': {
+                'task_id': [('project_id', '=', self.project.id),
+                            ('include_in_task_work_view', '=', True)]},
         }
 
     @api.onchange('task_id')

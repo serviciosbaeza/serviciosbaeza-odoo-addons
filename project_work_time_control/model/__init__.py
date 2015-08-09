@@ -20,3 +20,5 @@
 #
 ##############################################################################
 from . import project_work
+from . import project_task
+from . import project_task_type
