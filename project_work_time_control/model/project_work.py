@@ -28,8 +28,9 @@ from datetime import datetime
 class ProjectWork(models.Model):
     _inherit = 'project.task.work'
 
-    project = fields.Many2one(string='Project', related='task_id.project_id',
-                              store=True)
+    project = fields.Many2one(
+        string='Project', related='task_id.project_id', store=True,
+        domain="[('state', 'not in', ('template', 'cancelled', 'close'))]")
 
     @api.onchange('project')
     def onchange_project(self):
