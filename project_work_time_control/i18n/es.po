@@ -16,6 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Date"
+msgstr "Fecha"
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: project_work_time_control
+#: help:project.task.type,include_in_task_work_view:0
+msgid "If you mark this check, tasks that are in this stage will be selectable in the 'Tasks works' fast-encoding view."
+msgstr "Si marca esta casilla, las tareas que estén en esta etapa serán seleccionables en la vista de codificación rápida 'Trabajos de las tareas'."
+
+#. module: project_work_time_control
+#: field:project.task.type,include_in_task_work_view:0
+msgid "Include in the task work fast-encoding view"
+msgstr "Incluir en la vista de codificación rápida de trabajos de tareas"
+
+#. module: project_work_time_control
 #: field:project.task.work,project:0
 msgid "Project"
 msgstr "Proyecto"

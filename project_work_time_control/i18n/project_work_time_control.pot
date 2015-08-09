@@ -1,13 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* project_work_time_control
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 09:06+0000\n"
-"PO-Revision-Date: 2015-01-28 09:06+0000\n"
+"POT-Creation-Date: 2015-08-09 22:26+0000\n"
+"PO-Revision-Date: 2015-08-09 22:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,18 +16,60 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Date"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Group By..."
+msgstr ""
+
+#. module: project_work_time_control
+#: help:project.task.type,include_in_task_work_view:0
+msgid "If you mark this check, tasks that are in this stage will be selectable in the 'Tasks works' fast-encoding view."
+msgstr ""
+
+#. module: project_work_time_control
+#: field:project.task.type,include_in_task_work_view:0
+msgid "Include in the task work fast-encoding view"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
 #: field:project.task.work,project:0
 msgid "Project"
 msgstr ""
 
 #. module: project_work_time_control
-#: view:project.task:0
-#: view:project.task.work:0
+#: model:ir.model,name:project_work_time_control.model_project_task_work
+msgid "Project Task Work"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Search task work"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task:project_work_time_control.project_task_tree_time
+#: view:project.task.work:project_work_time_control.project_task_work_tree
 msgid "Stop"
 msgstr ""
 
 #. module: project_work_time_control
-#: view:project.task.work:0
+#: model:ir.model,name:project_work_time_control.model_project_task
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "Task"
+msgstr ""
+
+#. module: project_work_time_control
+#: model:ir.model,name:project_work_time_control.model_project_task_type
+msgid "Task Stage"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_tree
 msgid "Task work"
 msgstr ""
 
@@ -35,5 +77,10 @@ msgstr ""
 #: model:ir.actions.act_window,name:project_work_time_control.project_task_work_action
 #: model:ir.ui.menu,name:project_work_time_control.project_task_work_menu
 msgid "Tasks works"
+msgstr ""
+
+#. module: project_work_time_control
+#: view:project.task.work:project_work_time_control.project_task_work_search
+msgid "User"
 msgstr ""
 
