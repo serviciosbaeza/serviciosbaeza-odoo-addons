@@ -21,7 +21,7 @@
 
 {
     'name': 'Periodical invoicing',
-    'version': '1.0',
+    'version': '8.0.1.1.0',
     'category': 'Accounting',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
