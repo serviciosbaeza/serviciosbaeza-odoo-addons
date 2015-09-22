@@ -19,20 +19,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import openerp.addons.decimal_precision as dp
 
 
-class Agreement(orm.Model):
+class Agreement(models.Model):
     _name = 'account.periodical_invoicing.agreement'
     _inherit = 'mail.thread'
     _description = "Periodical invoicing agreement"
 
-    def __get_next_term_date(self, date, unit, interval):
+    def _get_next_term_date(self, date, unit, interval):
         """Get the date that results on incrementing given date an interval of
         time in time unit.
         @param date: Original date.
@@ -50,7 +49,7 @@ class Agreement(orm.Model):
         elif unit == 'years':
             return date + relativedelta(years=interval)
 
-    def __get_previous_term_date(self, date, unit, interval):
+    def _get_previous_term_date(self, date, unit, interval):
         """Get the date that results on decrementing given date an interval of
         time in time unit.
         @param date: Original date.
@@ -68,130 +67,116 @@ class Agreement(orm.Model):
         elif unit == 'years':
             return date - relativedelta(years=interval)
 
-    def __get_next_expiration_date(self, cr, uid, ids, field_name, arg,
-                                   context=None):
+    @api.multi
+    def _get_next_expiration_date(self):
         """Get next expiration date of the agreement. For unlimited agreements,
         get max date
         """
-        res = {}
-        for agreement in self.browse(cr, uid, ids):
+        for agreement in self:
             if agreement.prolong == 'fixed':
-                res[agreement.id] = agreement.end_date
+                agreement.next_expiration_date = agreement.end_date
             elif agreement.prolong == 'unlimited':
                 now = datetime.now()
-                date = self.__get_next_term_date(
-                    datetime.strptime(agreement.start_date, "%Y-%m-%d"),
+                date = self._get_next_term_date(
+                    fields.Date.from_string(agreement.start_date),
                     agreement.prolong_unit, agreement.prolong_interval)
                 while date < now:
-                    date = self.__get_next_term_date(
+                    date = self._get_next_term_date(
                         date, agreement.prolong_unit,
                         agreement.prolong_interval)
-                res[agreement.id] = date
+                agreement.next_expiration_date = date
             else:
                 # for renewable fixed term
-                res[agreement.id] = self.__get_next_term_date(
-                    datetime.strptime(agreement.last_renovation_date if
-                                      agreement.last_renovation_date else
-                                      agreement.start_date, "%Y-%m-%d"),
+                agreement.next_expiration_date = self._get_next_term_date(
+                    fields.Date.to_string(agreement.last_renovation_date or
+                                          agreement.start_date),
                     agreement.prolong_unit, agreement.prolong_interval)
-        return res
 
-    _columns = {
-        'name': fields.char(
-            'Name', size=100, select=1, required=True,
-            help='Name that helps to identify the agreement'),
-        'number': fields.char(
-            'Agreement number', select=1, size=32,
-            help="Number of agreement. Keep empty to get the number "
-                 "assigned by a sequence."),
-        'active': fields.boolean(
-            'Active', help='Unchecking this field, quotas are not generated'),
-        'partner_id': fields.many2one(
-            'res.partner', 'Customer', select=1, change_default=True,
-            required=True, help="Customer you are making the agreement with"),
-        'company_id': fields.many2one(
-            'res.company', 'Company', required=True,
-            help="Company that signs the agreement"),
-        'start_date': fields.date(
-            'Start date', select=1,
-            help="Beginning of the agreement. Keep empty to use the current "
-                 "date"),
-        'prolong': fields.selection(
-            [('recurrent', 'Renewable fixed term'),
-             ('unlimited', 'Unlimited term'),
-             ('fixed', 'Fixed term')], 'Prolongation',
-            help="Sets the term of the agreement. 'Renewable fixed term': It "
-                 "sets a fixed term, but with possibility of manual renew; "
-                 "'Unlimited term': Renew is made automatically; 'Fixed "
-                 "term': The term is fixed and there is no possibility to "
-                 "renew."),
-        'end_date': fields.date('End date', help="End date of the agreement"),
-        'prolong_interval': fields.integer(
-            'Interval',
-            help="Interval in time units to prolong the agreement until new "
-                 "renewall (that is automatic for unlimited term, manual for "
-                 "renewable fixed term)."),
-        'prolong_unit': fields.selection(
-            [('days', 'days'),
-             ('weeks', 'weeks'),
-             ('months', 'months'),
-             ('years', 'years')], 'Interval unit',
-            help='Time unit for the prolongation interval'),
-        'agreement_line': fields.one2many(
-            'account.periodical_invoicing.agreement.line', 'agreement_id',
-            'Agreement lines'),
-        'invoice_line': fields.one2many(
-            'account.periodical_invoicing.agreement.invoice', 'agreement_id',
-            'Invoice lines', readonly=True),
-        'renewal_line': fields.one2many(
-            'account.periodical_invoicing.agreement.renewal', 'agreement_id',
-            'Renewal lines', readonly=True),
-        'last_renovation_date': fields.date(
-            'Last renovation date',
-            help="Last date when agreement was renewed (same as start date if "
-                 "not renewed)"),
-        'next_expiration_date': fields.function(
-            __get_next_expiration_date, string='Next expiration date',
-            type='date', method=True, store=True),
-        'period_type': fields.selection(
-            [('pre-paid', 'Pre-paid'),
-             ('post-paid', 'Post-paid')], "Period type", required=True,
-            help="Period type for invoicing. 'Pre-paid': Invoices are "
-                 "generated for the upcoming period. 'Post-paid': Invoices "
-                 "are generated for the consumed period."),
-        # TODO: Añadir seguimiento al generar una factura con _track = {}
-        'state': fields.selection(
-            [('empty', 'Without invoices'),
-             ('invoices', 'With invoices')], 'State', readonly=True),
-        'renewal_state': fields.selection(
-            [('not_renewed', 'Agreement not renewed'),
-             ('renewed', 'Agreement renewed')], 'Renewal state',
-            readonly=True),
-        'notes': fields.text('Notes'),
-        'currency_id': fields.many2one(
-            'res.currency', 'Currency', required=True),
-    }
-
-    def _get_default_currency_id(self, cr, uid, context=None):
-        company_obj = self.pool['res.company']
+    def _get_default_currency_id(self):
+        company_obj = self.env['res.company']
         company_id = company_obj._company_default_get(
-            cr, uid, 'account', context=context)
-        company = company_obj.browse(cr, uid, company_id, context=context)
-        return company.currency_id.id
+            'account.periodical_invoicing.agreement')
+        company = company_obj.browse(company_id)
+        return company.currency_id
 
-    _defaults = {
-        'active': True,
-        'company_id': (lambda s, cr, uid, c:
-                       s.pool['res.company']._company_default_get(
-                           cr, uid, 'account', context=c)),
-        'period_type': 'pre-paid',
-        'prolong': 'unlimited',
-        'prolong_interval': 1,
-        'prolong_unit': 'years',
-        'state': 'empty',
-        'renewal_state': 'not_renewed',
-        "currency_id": _get_default_currency_id,
-    }
+    name = fields.Char(
+        'Name', index=True, required=True,
+        help='Name that helps to identify the agreement')
+    number = fields.Char(
+        'Agreement number', select=1, size=32,
+        help="Number of agreement. Keep empty to get the number "
+             "assigned by a sequence.")
+    active = fields.Boolean(
+        string='Active', default=True,
+        help='Unchecking this field, quotas are not generated')
+    partner_id = fields.Many2one(
+        'res.partner', 'Customer', select=1, change_default=True,
+        required=True, help="Customer you are making the agreement with")
+    company_id = fields.Many2one(
+        'res.company', 'Company', required=True,
+        help="Company that signs the agreement",
+        default=lambda self: self.env['res.company']._company_default_get(
+            'account.periodical_invoicing.agreement'))
+    start_date = fields.Date(
+        'Start date', index=True,
+        help="Beginning of the agreement. Keep empty to use the current date")
+    prolong = fields.Selection(
+        [('recurrent', 'Renewable fixed term'),
+         ('unlimited', 'Unlimited term'),
+         ('fixed', 'Fixed term')], string='Prolongation', default='unlimited',
+        help="Sets the term of the agreement. 'Renewable fixed term': It "
+             "sets a fixed term, but with possibility of manual renew; "
+             "'Unlimited term': Renew is made automatically; 'Fixed "
+             "term': The term is fixed and there is no possibility to "
+             "renew.")
+    end_date = fields.Date('End date', help="End date of the agreement")
+    prolong_interval = fields.Integer(
+        string='Interval', default=1,
+        help="Interval in time units to prolong the agreement until new "
+             "renewall (that is automatic for unlimited term, manual for "
+             "renewable fixed term).")
+    prolong_unit = fields.Selection(
+        [('days', 'days'),
+         ('weeks', 'weeks'),
+         ('months', 'months'),
+         ('years', 'years')], string='Interval unit', default='years',
+        help='Time unit for the prolongation interval')
+    agreement_line = fields.One2many(
+        'account.periodical_invoicing.agreement.line', 'agreement_id',
+        'Agreement lines')
+    invoice_line = fields.One2many(
+        'account.periodical_invoicing.agreement.invoice', 'agreement_id',
+        'Invoice lines', readonly=True)
+    renewal_line = fields.One2many(
+        'account.periodical_invoicing.agreement.renewal', 'agreement_id',
+        string='Renewal lines', readonly=True)
+    last_renovation_date = fields.Date(
+        string='Last renovation date',
+        help="Last date when agreement was renewed (same as start date if "
+             "not renewed)")
+    next_expiration_date = fields.Date(
+        compute="_get_next_expiration_date", string='Next expiration date',
+        store=True)
+    period_type = fields.Selection(
+        selection=[('pre-paid', 'Pre-paid'),
+                   ('post-paid', 'Post-paid')],
+        string="Period type", required=True, default='pre-paid',
+        help="Period type for invoicing. 'Pre-paid': Invoices are "
+             "generated for the upcoming period. 'Post-paid': Invoices "
+             "are generated for the consumed period.")
+    # TODO: Añadir seguimiento al generar una factura con _track = {}
+    state = fields.Selection(
+        selection=[('empty', 'Without invoices'),
+                   ('invoices', 'With invoices')],
+        string='State', readonly=True, default='empty')
+    renewal_state = fields.Selection(
+        selection=[('not_renewed', 'Agreement not renewed'),
+                   ('renewed', 'Agreement renewed')],
+        string='Renewal state', readonly=True, default='not_renewed')
+    notes = fields.Text('Notes')
+    currency_id = fields.Many2one(
+        comodel_name='res.currency', string='Currency', required=True,
+        default=_get_default_currency_id)
 
     def _check_dates(self, cr, uid, ids, context=None):
         """Check correct dates. When prolongation is unlimited or renewal,
@@ -290,7 +275,7 @@ class Agreement(orm.Model):
         """
         next_date = datetime.strptime(agreement.start_date, '%Y-%m-%d')
         while next_date <= startDate:
-            next_date = self.__get_next_term_date(
+            next_date = self._get_next_term_date(
                 next_date, line.invoicing_unit, line.invoicing_interval)
         return next_date
 
@@ -388,6 +373,7 @@ class Agreement(orm.Model):
                 'product_id': agreement_line.product_id.id,
                 'quantity': agreement_line.quantity,
                 'discount': agreement_line.discount,
+                'sequence': agreement_line.sequence,
             }
             # get other invoice line values from agreement line product
             invoice_line.update(invoice_line_obj.product_id_change(
@@ -409,11 +395,11 @@ class Agreement(orm.Model):
             next_invoice_date = agreement_lines[agreement_line]
             if agreement.period_type == 'pre-paid':
                 from_date = next_invoice_date
-                to_date = (self.__get_next_term_date(
+                to_date = (self._get_next_term_date(
                     next_invoice_date, agreement_line.invoicing_unit,
                     agreement_line.invoicing_interval) - timedelta(days=1))
             else:
-                from_date = self.__get_previous_term_date(
+                from_date = self._get_previous_term_date(
                     next_invoice_date, agreement_line.invoicing_unit,
                     agreement_line.invoicing_interval)
                 to_date = next_invoice_date - timedelta(days=1)
@@ -442,6 +428,7 @@ class Agreement(orm.Model):
                                             invoice_lines_vals]
             invoice_id = invoice_obj.create(cr, uid, invoice_vals, context=ctx)
             grouped_invoices[key] = invoice_id
+        invoice_obj.button_reset_taxes(cr, uid, invoice_id, context=context)
         # Update last invoice date for lines
         self.pool['account.periodical_invoicing.agreement.line'].write(
             cr, uid, agreement_lines_ids,
@@ -462,50 +449,43 @@ class Agreement(orm.Model):
         return invoice_id
 
 
-class AgreementLine(orm.Model):
-
+class AgreementLine(models.Model):
     _name = 'account.periodical_invoicing.agreement.line'
-    _columns = {
-        'active_chk': fields.boolean(
-            'Active',
-            help='Unchecking this field, this quota is not generated'),
-        'agreement_id': fields.many2one(
-            'account.periodical_invoicing.agreement', 'Agreement reference',
-            ondelete='cascade'),
-        'product_id': fields.many2one(
-            'product.product', 'Product', ondelete='set null', required=True),
-        'name': fields.related(
-            'product_id', 'name', type="char", relation='product.product',
-            string='Description', store=False),
-        'additional_description': fields.text(
-            'Add. description',
-            help='Additional description that will be added to the product '
-                 'description on invoices.'),
-        'quantity': fields.float(
-            'Quantity', required=True,
-            help='Quantity of the product to invoice'),
-        'price': fields.float(
-            'Product price', digits_compute=dp.get_precision('Account'),
-            help='Specific price for this product. Keep empty to use the '
-                 'current price while generating invoice'),
-        'discount': fields.float('Discount (%)', digits=(16, 2)),
-        'invoicing_interval': fields.integer(
-            'Interval', required=True,
-            help="Interval in time units for invoicing this product"),
-        'invoicing_unit': fields.selection(
-            [('days', 'days'),
-             ('weeks', 'weeks'),
-             ('months', 'months'),
-             ('years', 'years')], 'Interval unit', required=True),
-        'last_invoice_date': fields.date('Last invoice'),
-    }
+    _order = 'sequence, id'
 
-    _defaults = {
-        'active_chk': True,
-        'quantity': 1,
-        'invoicing_interval': 1,
-        'invoicing_unit': 'months',
-    }
+    sequence = fields.Integer(default=10)
+    active_chk = fields.Boolean(
+        string='Active', default=True,
+        help='Unchecking this field, this quota is not generated')
+    agreement_id = fields.Many2one(
+        'account.periodical_invoicing.agreement', 'Agreement reference',
+        ondelete='cascade')
+    product_id = fields.Many2one(
+        'product.product', 'Product', ondelete='set null', required=True)
+    name = fields.Char(
+        related='product_id.name', string='Description', store=False)
+    additional_description = fields.Text(
+        string='Add. description',
+        help='Additional description that will be added to the product '
+             'description on invoices.')
+    quantity = fields.Float(
+        string='Quantity', required=True, default=1,
+        help='Quantity of the product to invoice')
+    price = fields.Float(
+        'Product price', digits_compute=dp.get_precision('Account'),
+        help='Specific price for this product. Keep empty to use the '
+             'current price while generating invoice')
+    discount = fields.Float('Discount (%)', digits=(16, 2))
+    invoicing_interval = fields.Integer(
+        string='Interval', required=True, default=1,
+        help="Interval in time units for invoicing this product")
+    invoicing_unit = fields.Selection(
+        selection=[('days', 'days'),
+                   ('weeks', 'weeks'),
+                   ('months', 'months'),
+                   ('years', 'years')],
+        string='Interval unit', required=True, default='months')
+    last_invoice_date = fields.Date(string='Last invoice')
 
     _sql_constraints = [
         ('line_qty_zero', 'CHECK (quantity > 0)',
@@ -534,22 +514,20 @@ class AgreementLine(orm.Model):
         return result
 
 
-class AgreementInvoice(orm.Model):
+class AgreementInvoice(models.Model):
     """Class for recording each invoice created for each line of the agreement.
     It keeps only reference to the agreement, not to the line.
     """
     _name = 'account.periodical_invoicing.agreement.invoice'
-    _columns = {
-        'agreement_id': fields.many2one(
-            'account.periodical_invoicing.agreement', 'Agreement reference',
-            ondelete='cascade'),
-        'date': fields.related(
-            'invoice_id', 'create_date', type='date',
-            relation='account.invoice', string="Date of invoice creation",
-            store=False),
-        'invoice_id': fields.many2one('account.invoice', 'Invoice',
-                                      ondelete='cascade'),
-    }
+
+    agreement_id = fields.Many2one(
+        'account.periodical_invoicing.agreement', 'Agreement reference',
+        ondelete='cascade')
+    date = fields.Datetime(
+        related='invoice_id.create_date', string="Date of invoice creation",
+        store=False)
+    invoice_id = fields.Many2one(
+        comodel_name='account.invoice', string='Invoice', ondelete='cascade')
 
     def view_invoice(self, cr, uid, ids, context=None):
         """
@@ -577,13 +555,11 @@ class AgreementInvoice(orm.Model):
         }
 
 
-class AgreementRenewal(orm.Model):
+class AgreementRenewal(models.Model):
     _name = 'account.periodical_invoicing.agreement.renewal'
 
-    _columns = {
-        'agreement_id': fields.many2one(
-            'account.periodical_invoicing.agreement', 'Agreement reference',
-            ondelete='cascade', select=True),
-        'date': fields.date('Date', help="Date of the renewal"),
-        'comments': fields.char('Comments', size=200, help='Renewal comments'),
-    }
+    agreement_id = fields.Many2one(
+        'account.periodical_invoicing.agreement', 'Agreement reference',
+        ondelete='cascade', index=True)
+    date = fields.Date('Date', help="Date of the renewal")
+    comments = fields.Char('Comments', size=200, help='Renewal comments')
