@@ -20,9 +20,10 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from datetime import datetime, timedelta
+from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+from collections import OrderedDict
+import datetime
 import openerp.addons.decimal_precision as dp
 
 
@@ -76,11 +77,11 @@ class Agreement(models.Model):
             if agreement.prolong == 'fixed':
                 agreement.next_expiration_date = agreement.end_date
             elif agreement.prolong == 'unlimited':
-                now = datetime.now()
+                today = datetime.date.today()
                 date = self._get_next_term_date(
                     fields.Date.from_string(agreement.start_date),
                     agreement.prolong_unit, agreement.prolong_interval)
-                while date < now:
+                while date < today:
                     date = self._get_next_term_date(
                         date, agreement.prolong_unit,
                         agreement.prolong_interval)
@@ -203,7 +204,7 @@ class Agreement(models.Model):
         # Set start date if empty
         if (('start_date' in vals and not vals['start_date']) or
                 ('start_date' not in vals)):
-            vals['start_date'] = datetime.now()
+            vals['start_date'] = fields.Date.today()
         # Set agreement number if empty
         if ('number' in vals and not vals['number']) or ('number' not in vals):
             vals['number'] = self.pool['ir.sequence'].get(
@@ -273,56 +274,50 @@ class Agreement(models.Model):
         @rtype: datetime.
         @return: Next invoice date starting from the given date.
         """
-        next_date = datetime.strptime(agreement.start_date, '%Y-%m-%d')
+        next_date = fields.Date.from_string(agreement.start_date)
         while next_date <= startDate:
             next_date = self._get_next_term_date(
                 next_date, line.invoicing_unit, line.invoicing_interval)
         return next_date
 
-    def make_invoices_planned(self, cr, uid, context=None):
+    @api.model
+    def make_invoices_planned(self):
         """Check if there is any pending invoice to create from each agreement.
         """
-        if context is None:
-            context = {}
-        ids = self.search(cr, uid, [])
-        now = datetime.now()
+        agreements = self.search([])
+        today = datetime.date.today()
         grouped_invoices = {}
-        for agreement in self.browse(cr, uid, ids, context=context):
-            if not agreement.active:
-                continue
+        for agreement in agreements:
             # check dates
-            agreement_start_date = datetime.strptime(
-                agreement.start_date, DEFAULT_SERVER_DATE_FORMAT)
-            if (agreement_start_date < now and
-                    (agreement.prolong == 'unlimited' or now <=
-                     datetime.strptime(agreement.next_expiration_date,
-                                       DEFAULT_SERVER_DATE_FORMAT))):
+            agreement_start_date = fields.Date.from_string(
+                agreement.start_date)
+            if (agreement_start_date <= today and
+                    (agreement.prolong == 'unlimited' or today <=
+                     fields.Date.from_string(agreement.next_expiration_date))):
                 # Agreement is still valid
-                lines_to_invoice = {}
+                lines_to_invoice = OrderedDict()
                 # Check if there is any agreement line to invoice
                 for line in agreement.agreement_line:
-                    if line.active_chk:
-                        # Check next date of invoicing for this line
-                        if line.last_invoice_date:
-                            last_invoice_date = datetime.strptime(
-                                line.last_invoice_date,
-                                DEFAULT_SERVER_DATE_FORMAT)
-                            next_invoice_date = self._get_next_invoice_date(
-                                agreement, line, last_invoice_date)
-                        else:
-                            next_invoice_date = agreement_start_date
-                        if next_invoice_date <= now:
-                            # Add to a dictionary to invoice all lines together
-                            lines_to_invoice[line] = next_invoice_date
+                    if not line.active_chk:
+                        continue
+                    # Check next date of invoicing for this line
+                    if line.last_invoice_date:
+                        last_invoice_date = fields.Date.from_string(
+                            line.last_invoice_date)
+                        next_invoice_date = self._get_next_invoice_date(
+                            agreement, line, last_invoice_date)
+                    else:
+                        next_invoice_date = agreement_start_date
+                    if next_invoice_date <= today:
+                        # Add to a dictionary to invoice all lines together
+                        lines_to_invoice[line] = next_invoice_date
                 # Invoice all pending lines
-                if len(lines_to_invoice) > 0:
+                if lines_to_invoice:
                     invoice_id = self.create_invoice(
-                        cr, uid, agreement, lines_to_invoice, grouped_invoices,
-                        context=context)
+                        agreement, lines_to_invoice, grouped_invoices)
                     # Call 'event' method
                     self._invoice_created(
-                        cr, uid, agreement, lines_to_invoice, invoice_id,
-                        context=context)
+                        agreement, lines_to_invoice, invoice_id)
 
     def _prepare_invoice(self, cr, uid, agreement, context=None):
         invoice_vals = {
@@ -352,7 +347,6 @@ class Agreement(models.Model):
         @param agreement_lines: Dictionary with agreement lines as keys and
           next invoice date of that line as values.
         """
-        now = datetime.now()
         invoice_obj = self.pool['account.invoice']
         invoice_line_obj = self.pool['account.invoice.line']
         lang_obj = self.pool['res.lang']
@@ -432,11 +426,11 @@ class Agreement(models.Model):
         # Update last invoice date for lines
         self.pool['account.periodical_invoicing.agreement.line'].write(
             cr, uid, agreement_lines_ids,
-            {'last_invoice_date': now.strftime('%Y-%m-%d')}, context=ctx)
+            {'last_invoice_date': fields.Date.today()}, context=ctx)
         # Create invoice agreement record
         agreement_invoice = {
             'agreement_id': agreement.id,
-            'date': now.strftime('%Y-%m-%d'),
+            'date': fields.Date.today(),
             'invoice_id': invoice_id,
         }
         self.pool['account.periodical_invoicing.agreement.invoice'].create(
