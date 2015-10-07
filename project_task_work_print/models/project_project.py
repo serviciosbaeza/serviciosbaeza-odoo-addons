@@ -14,5 +14,8 @@ class ProjectProject(models.Model):
 
     @api.one
     def _compute_ordered_works(self):
-        works = self.mapped('task_ids.work_ids')
+        # Search for all tasks because task_ids field only contains open tasks
+        tasks = self.env['project.task'].search(
+            [('project_id', 'in', self.ids)])
+        works = tasks.mapped('work_ids')
         self.ordered_works = works.sorted(key=lambda x: x.date, reverse=True)

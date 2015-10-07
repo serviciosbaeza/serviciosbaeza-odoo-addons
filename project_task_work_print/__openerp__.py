@@ -21,7 +21,7 @@
 ##############################################################################
 {
     "name": "Project task works printing",
-    "version": "1.0",
+    "version": "8.0.1.0.1",
     "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "category": "Generic Modules/Projects & Services",
     "website": "http://www.serviciosbaeza.com",
