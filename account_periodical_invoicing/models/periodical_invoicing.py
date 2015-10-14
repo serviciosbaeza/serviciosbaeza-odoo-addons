@@ -397,9 +397,15 @@ class Agreement(models.Model):
                     next_invoice_date, agreement_line.invoicing_unit,
                     agreement_line.invoicing_interval)
                 to_date = next_invoice_date - timedelta(days=1)
-            invoice_line['name'] += "\n" + _('Period: from %s to %s') % (
-                from_date.strftime(lang.date_format),
-                to_date.strftime(lang.date_format))
+
+            def _get_period_text(cr, uid, context=None):
+                """Method for getting the text in the partner language"""
+                return _('Period: from %s to %s')
+
+            invoice_line['name'] += (
+                "\n" + _get_period_text(cr, uid, context=ctx) % (
+                    from_date.strftime(lang.date_format),
+                    to_date.strftime(lang.date_format)))
             invoice_lines_vals.append(invoice_line)
             agreement_lines_ids.append(agreement_line.id)
         key = (agreement.partner_id.id, agreement.currency_id.id)
