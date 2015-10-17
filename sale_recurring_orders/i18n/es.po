@@ -484,7 +484,7 @@ msgstr "Producto"
 
 #. module: sale_recurring_orders
 #: field:sale.order,from_agreement:0
-msgid "From agrement?"
+msgid "From agreement?"
 msgstr "¿Desde contrato?"
 
 #. module: sale_recurring_orders
