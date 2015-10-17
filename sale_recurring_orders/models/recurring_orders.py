@@ -54,6 +54,11 @@ class Agreement(models.Model):
                                             agreement.start_date),
                     agreement.prolong_unit, agreement.prolong_interval)
 
+    def _default_company_id(self):
+        company_model = self.env['res.company']
+        company_id = company_model._company_default_get('sale')
+        return company_model.browse(company_id)
+
     name = fields.Char(
         string='Name', size=100, index=True, required=True,
         help='Name that helps to identify the agreement')
@@ -70,9 +75,7 @@ class Agreement(models.Model):
         help="Customer you are making the agreement with")
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
-        help="Company that signs the agreement",
-        default=lambda self: self.env['res.company']._company_default_get(
-            'sale'))
+        help="Company that signs the agreement", default=_default_company_id)
     start_date = fields.Date(
         string='Start date', index=True, copy=False,
         help="Beginning of the agreement. Keep empty to use the current date")
