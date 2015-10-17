@@ -5,6 +5,7 @@
 from openerp import models, fields, api, exceptions, workflow, _
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+import openerp.addons.decimal_precision as dp
 
 
 class Agreement(models.Model):
@@ -218,6 +219,32 @@ class Agreement(models.Model):
         order_vals['user_id'] = agreement.partner_id.user_id.id
         return order_vals
 
+    @api.model
+    def _prepare_sale_order_line_vals(self, agreement_line, order):
+        order_line_obj = self.env['sale.order.line'].with_context(
+            company_id=self.company_id.id)
+        order_line_vals = {
+            'order_id': order.id,
+            'product_id': agreement_line.product_id.id,
+            'product_uom_qty': agreement_line.quantity,
+            'discount': agreement_line.discount,
+        }
+        # get other order line values from agreement line product
+        order_line_vals.update(order_line_obj.product_id_change(
+            order.pricelist_id.id, product=agreement_line.product_id.id,
+            qty=agreement_line.quantity,
+            partner_id=self.partner_id.id,
+            fiscal_position=1 or order.fiscal_position.id)['value'])
+        if agreement_line.specific_price:
+            order_line_vals['price_unit'] = agreement_line.specific_price
+        # Put line taxes
+        order_line_vals['tax_id'] = [(6, 0, tuple(order_line_vals['tax_id']))]
+        # Put custom description
+        if agreement_line.additional_description:
+            order_line_vals['name'] += " %s" % (
+                agreement_line.additional_description)
+        return order_line_vals
+
     @api.multi
     def create_order(self, date, agreement_lines):
         """Method that creates an order from given data.
@@ -234,26 +261,9 @@ class Agreement(models.Model):
         order = order_obj.create(order_vals)
         # Create order lines objects
         for agreement_line in agreement_lines:
-            order_line = {
-                'order_id': order.id,
-                'product_id': agreement_line.product_id.id,
-                'product_uom_qty': agreement_line.quantity,
-                'discount': agreement_line.discount,
-            }
-            # get other order line values from agreement line product
-            order_line.update(order_line_obj.product_id_change(
-                order_vals['pricelist_id'],
-                product=agreement_line.product_id.id,
-                qty=agreement_line.quantity,
-                partner_id=self.partner_id.id,
-                fiscal_position=1 or order_vals['fiscal_position'])['value'])
-            # Put line taxes
-            order_line['tax_id'] = [(6, 0, tuple(order_line['tax_id']))]
-            # Put custom description
-            if agreement_line.additional_description:
-                order_line['name'] += " %s" % (
-                    agreement_line.additional_description)
-            order_line_obj.create(order_line)
+            order_line_vals = self._prepare_sale_order_line_vals(
+                agreement_line, order)
+            order_line_obj.create(order_line_vals)
         # Update last order date for lines
         agreement_lines.write({'last_order_date': fields.Date.today()})
         # Update agreement state
@@ -420,6 +430,12 @@ class AgreementLine(models.Model):
         string='Interval unit', required=True, default='months')
     last_order_date = fields.Date(
         string='Last order', help='Date of the last sale order generated')
+    specific_price = fields.Float(
+        string='Specific price', digits_compute=dp.get_precision('Sale Price'),
+        help='Specific price for this product. Keep empty to use the list '
+             'price while generating order')
+    list_price = fields.Float(
+        related='product_id.list_price', string="List price", readonly=True)
 
     _sql_constraints = [
         ('line_qty_zero', 'CHECK (quantity > 0)',

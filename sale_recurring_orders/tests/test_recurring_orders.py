@@ -21,7 +21,7 @@ class TestRecurringOrder(common.TransactionCase):
     def test_order_creation_next_year(self):
         self.assertEqual(len(self.agreement.order_line), 12)
 
-    def test_order_creation_three_years(self):
+    def test_order_creation_two_years(self):
         self.agreement.generate_next_orders(years=2)
         self.assertEqual(len(self.agreement.order_line), 24)
 
