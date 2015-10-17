@@ -200,6 +200,25 @@ class Agreement(models.Model):
         return True
 
     @api.model
+    def _prepare_sale_order_vals(self, agreement, date):
+        order_obj = self.env['sale.order'].with_context(
+            company_id=agreement.company_id.id)
+        order_vals = {
+            'date_order': date,
+            'date_confirm': date,
+            'origin': agreement.number,
+            'partner_id': agreement.partner_id.id,
+            'state': 'draft',
+            'company_id': agreement.company_id.id,
+            'from_agreement': True,
+        }
+        # Get other order values from agreement partner
+        order_vals.update(order_obj.onchange_partner_id(
+            agreement.partner_id.id)['value'])
+        order_vals['user_id'] = agreement.partner_id.user_id.id
+        return order_vals
+
+    @api.multi
     def create_order(self, date, agreement_lines):
         """Method that creates an order from given data.
         @param agreement: Agreement method get data from.
@@ -211,20 +230,7 @@ class Agreement(models.Model):
             company_id=self.company_id.id)
         order_line_obj = self.env['sale.order.line'].with_context(
             company_id=self.company_id.id)
-        # Create order object
-        order_vals = {
-            'date_order': date,
-            'date_confirm': date,
-            'origin': self.number,
-            'partner_id': self.partner_id.id,
-            'state': 'draft',
-            'company_id': self.company_id.id,
-            'from_agreement': True,
-        }
-        # Get other order values from agreement partner
-        order_vals.update(order_obj.onchange_partner_id(
-            self.partner_id.id)['value'])
-        order_vals['user_id'] = self.partner_id.user_id.id
+        order_vals = self._prepare_sale_order_vals(self, date)
         order = order_obj.create(order_vals)
         # Create order lines objects
         for agreement_line in agreement_lines:
