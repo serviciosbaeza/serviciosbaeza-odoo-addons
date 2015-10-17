@@ -49,8 +49,8 @@
 			<field name="numbercall">-1</field>
 			<field name="doall" eval="False"/>
 			<field name="model" eval="'sale.recurring_orders.agreement'"/>
-			<field name="function" eval="'generate_next_year_orders_planned'"/>
-			<field name="args" eval="'()'"/>
+			<field name="function" eval="'generate_next_orders_planned'"/>
+			<field name="args" eval="'(1, )'"/>
 		</record>
 
 	</data>
