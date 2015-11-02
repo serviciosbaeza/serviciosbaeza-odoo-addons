@@ -52,15 +52,19 @@ class SaleOrder(orm.Model):
     def action_proforma(self, cr, uid, ids, context=None):
         wf_service = netsvc.LocalService("workflow")
         order = self.browse(cr, uid, ids[0], context=context)
-        proforma = self.copy_data(
+        proforma_vals = self.copy_data(
             cr, uid, ids[0], context=context,
             default={'origin': order.name,
                      'source_order': order.id,
                      'name': self.pool['ir.sequence'].next_by_code(
                          cr, uid, 'sale.order.proforma')})
-        # Remove reference of previous proformas
-        del proforma['proformas']
-        proforma_id = self.create(cr, uid, proforma, context=context)
+        # Remove reference of previous proformas and other one2many/many2many
+        del proforma_vals['proformas']
+        del proforma_vals['picking_ids']
+        del proforma_vals['invoice_ids']
+        if 'sale_orders' in proforma_vals:
+            del proforma_vals['sale_orders']
+        proforma_id = self.create(cr, uid, proforma_vals, context=context)
         wf_service.trg_validate(uid, 'sale.order', proforma_id,
                                 'quotation_proforma', cr)
         return {
