@@ -355,6 +355,7 @@ class Agreement(models.Model):
             cr, uid, [('code', '=', agreement.partner_id.lang)])
         lang = lang_obj.browse(cr, uid, lang_ids)[0]
         ctx = context.copy()
+        ctx['lang'] = agreement.partner_id.lang
         ctx['company_id'] = agreement.company_id.id
         ctx['force_company'] = agreement.company_id.id
         ctx['type'] = 'out_invoice'
