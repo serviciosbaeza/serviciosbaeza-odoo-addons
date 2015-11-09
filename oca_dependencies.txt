@@ -1,0 +1,2 @@
+l10n-spain
+odoomrp https://github.com/odoomrp/odoomrp-wip
