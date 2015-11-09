@@ -31,6 +31,9 @@ class ProjectWork(models.Model):
     project = fields.Many2one(
         string='Project', related='task_id.project_id', store=True,
         domain="[('state', 'not in', ('template', 'cancelled', 'close'))]")
+    include_in_task_work_view = fields.Boolean(
+        related='task_id.stage_id.include_in_task_work_view', readonly=True,
+        store=True)
 
     @api.onchange('project')
     def onchange_project(self):
@@ -55,3 +58,15 @@ class ProjectWork(models.Model):
             date = fields.Datetime.from_string(work.date)
             work.hours = (end_date - date).total_seconds() / 3600
         return True
+
+    @api.multi
+    def button_open_task(self):
+        stage = self.env['project.task.type'].search(
+            [('include_in_task_work_view', '=', True)], limit=1)
+        self.mapped('task_id').write({'stage_id': stage.id})
+
+    @api.multi
+    def button_close_task(self):
+        stage = self.env['project.task.type'].search(
+            [('include_in_task_work_view', '=', False)], limit=1)
+        self.mapped('task_id').write({'stage_id': stage.id})

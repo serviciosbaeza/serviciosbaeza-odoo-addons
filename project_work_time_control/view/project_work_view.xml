@@ -28,6 +28,19 @@
                     <field name="task_id"
                            domain="[('include_in_task_work_view', '=', True)]"
                            context="{'default_project_id': project}"/>
+                    <field name="include_in_task_work_view" invisible="True"/>
+                    <button name="button_close_task"
+                            string="Close task"
+                            type="object"
+                            icon="gtk-apply"
+                            attrs="{'invisible': [('include_in_task_work_view', '=', False)]}"
+                            />
+                    <button name="button_open_task"
+                            string="Open task"
+                            type="object"
+                            icon="gtk-redo"
+                            attrs="{'invisible': [('include_in_task_work_view', '=', True)]}"
+                            />
                     <field name="user_id"/>
                     <field name="name"/>
                     <field name="date"/>
