@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/serviciosbaeza/serviciosbaeza-odoo-addons.svg?branch=8.0)](https://travis-ci.org/serviciosbaeza/serviciosbaeza-odoo-addons)
-[![Coverage Status](https://img.shields.io/coveralls/serviciosbaeza/odoo-addons/badge.png?branch=8.0)](https://coveralls.io/r/serviciosbaeza/odoo-addons?branch=8.0)
+[![Build Status](https://travis-ci.org/serviciosbaeza/serviciosbaeza-odoo-addons.svg?branch=9.0)](https://travis-ci.org/serviciosbaeza/serviciosbaeza-odoo-addons)
+[![Coverage Status](https://img.shields.io/coveralls/serviciosbaeza/odoo-addons/badge.png?branch=9.0)](https://coveralls.io/r/serviciosbaeza/odoo-addons?branch=9.0)
 
 Serv. Tecnol. Baeza - Odoo addons
 =================================
