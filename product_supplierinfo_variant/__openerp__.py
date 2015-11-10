@@ -26,6 +26,6 @@
     'data': [
         'views/product_template_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     "post_init_hook": "duplicate_supplierinfo_per_variant",
 }

@@ -34,5 +34,5 @@
         'views/account_balance_reporting_template_view.xml',
         'views/account_balance_reporting_view.xml',
     ],
-    "installable": True,
+    'installable': False,
 }

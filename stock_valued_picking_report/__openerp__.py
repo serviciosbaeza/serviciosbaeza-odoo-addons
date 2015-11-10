@@ -42,5 +42,5 @@
         'views/stock_picking_view.xml',
         'report/stock_picking_valued_report.xml',
     ],
-    "installable": True
+    'installable': False
 }

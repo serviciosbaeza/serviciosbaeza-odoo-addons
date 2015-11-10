@@ -31,5 +31,5 @@
         'view/project_work_view.xml',
         'view/project_task_type_view.xml',
     ],
-    'installable': True,
+    'installable': False,
 }

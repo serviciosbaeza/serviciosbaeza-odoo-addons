@@ -39,5 +39,5 @@ It also makes the analytic account to be required on purchase order screen.
     'data': [
         'views/purchase_order_view.xml',
     ],
-    "installable": True,
+    'installable': False,
 }

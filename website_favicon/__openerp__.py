@@ -11,5 +11,5 @@
     'data': [
         'views/website_favicon.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
