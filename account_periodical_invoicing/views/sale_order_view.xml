@@ -6,7 +6,7 @@
 			<field name="model">sale.order</field>
 			<field name="inherit_id" ref="sale.view_order_form"/>
 			<field name="arch" type="xml">
-				<button name="invoice_cancel" position="after">
+				<button name="action_done" position="after">
                     <button name="action_button_generate_agreement_invoicing" string="Generate agreement" type="object"/>
 				</button>
 			</field>
