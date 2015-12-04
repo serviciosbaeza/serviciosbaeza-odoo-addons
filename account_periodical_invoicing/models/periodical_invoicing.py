@@ -375,6 +375,7 @@ class Agreement(models.Model):
         if (agreement.partner_id.group_agreement_invoices and
                 grouped_invoices.get(key)):
             invoice_id = grouped_invoices[key]
+            invoice = invoice_obj.browse(cr, uid, invoice_id)
             invoice_obj.write(
                 cr, uid, invoice_id,
                 {'origin': invoice.origin + ";" + agreement.number})
@@ -389,7 +390,6 @@ class Agreement(models.Model):
 
         # Prepare invoice lines objects
         agreement_lines_ids = []
-        invoice_lines_vals = []
         for agreement_line in agreement_lines.keys():
             invoice_line_vals = {
                 'product_id': agreement_line.product_id.id,
