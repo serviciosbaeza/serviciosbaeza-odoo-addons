@@ -95,9 +95,8 @@ class Agreement(models.Model):
 
     def _get_default_currency_id(self):
         company_obj = self.env['res.company']
-        company_id = company_obj._company_default_get(
+        company = company_obj._company_default_get(
             'account.periodical_invoicing.agreement')
-        company = company_obj.browse(company_id)
         return company.currency_id
 
     name = fields.Char(
@@ -319,6 +318,18 @@ class Agreement(models.Model):
                     self._invoice_created(
                         agreement, lines_to_invoice, invoice_id)
 
+    def _run_onchange(self, cr, uid, model, vals, fields):
+        obj = self.pool[model]
+        empty_obj = obj.browse(cr, uid, [])
+        onchange_vals = obj.onchange(cr, uid, empty_obj, vals, fields,
+                                     dict.fromkeys(fields, '1'))
+        new_vals = {}
+        for key, value in onchange_vals['value'].items():
+            if isinstance(value, tuple):
+                value = value[0]
+            new_vals[key] = value
+        return new_vals
+
     def _prepare_invoice(self, cr, uid, agreement, context=None):
         invoice_vals = {
             'origin': agreement.number,
@@ -328,15 +339,15 @@ class Agreement(models.Model):
             'currency_id': agreement.currency_id.id,
             'company_id': agreement.company_id.id,
             'reference_type': 'none',
-            'check_total': 0.0,
-            'internal_number': False,
             'user_id': agreement.partner_id.user_id.id,
+            'account_id': False,
+            'payment_term_id': False,
+            'fiscal_position_id': False,
+            'partner_bank_id': False,
         }
-        # Get other invoice values from agreement partner
-        invoice_vals.update(self.pool['account.invoice'].onchange_partner_id(
-            cr, uid, [], type=invoice_vals['type'],
-            partner_id=agreement.partner_id.id,
-            company_id=agreement.company_id.id)['value'], context=context)
+        onchange_vals = self._run_onchange(
+            cr, uid, 'account.invoice', invoice_vals, ['partner_id'])
+        invoice_vals.update(onchange_vals)
         return invoice_vals
 
     def create_invoice(self, cr, uid, agreement, agreement_lines,
@@ -359,33 +370,50 @@ class Agreement(models.Model):
         ctx['company_id'] = agreement.company_id.id
         ctx['force_company'] = agreement.company_id.id
         ctx['type'] = 'out_invoice'
-        invoice_vals = self._prepare_invoice(cr, uid, agreement, context=ctx)
+
+        key = (agreement.partner_id.id, agreement.currency_id.id)
+        if (agreement.partner_id.group_agreement_invoices and
+                grouped_invoices.get(key)):
+            invoice_id = grouped_invoices[key]
+            invoice = invoice_obj.browse(cr, uid, invoice_id)
+            invoice_obj.write(
+                cr, uid, invoice_id,
+                {'origin': invoice.origin + ";" + agreement.number})
+            invoice = invoice_obj.browse(cr, uid, invoice_id, context=context)
+        else:
+            invoice_vals = self._prepare_invoice(
+                cr, uid, agreement, context=ctx)
+            invoice_id = invoice_obj.create(
+                cr, uid, invoice_vals, context=ctx)
+            invoice = invoice_obj.browse(cr, uid, invoice_id, context=context)
+            grouped_invoices[key] = invoice_id
+
         # Prepare invoice lines objects
         agreement_lines_ids = []
-        invoice_lines_vals = []
         for agreement_line in agreement_lines.keys():
-            invoice_line = {
+            invoice_line_vals = {
                 'product_id': agreement_line.product_id.id,
                 'quantity': agreement_line.quantity,
                 'discount': agreement_line.discount,
                 'sequence': agreement_line.sequence,
+                'invoice_id': invoice.id,
+                'name': False,
+                'account_id': False,
+                'invoice_line_tax_ids': False,
+                'price_unit': False,
+                'uom_id': False,
             }
+            onchange_vals = self._run_onchange(
+                cr, uid, 'account.invoice.line', invoice_line_vals,
+                ['product_id'])
+            invoice_line_vals.update(onchange_vals)
             # get other invoice line values from agreement line product
-            invoice_line.update(invoice_line_obj.product_id_change(
-                cr, uid, [], product=agreement_line.product_id.id,
-                uom_id=False, qty=agreement_line.quantity,
-                partner_id=agreement.partner_id.id,
-                fposition_id=invoice_vals['fiscal_position'],
-                context=ctx)['value'])
             if agreement_line.price > 0:
-                invoice_line['price_unit'] = agreement_line.price
-            # Put line taxes
-            invoice_line['invoice_line_tax_id'] = \
-                [(6, 0, tuple(invoice_line['invoice_line_tax_id']))]
+                invoice_line_vals['price_unit'] = agreement_line.price
             # Put custom description
             if agreement_line.additional_description:
-                invoice_line['name'] += (" " +
-                                         agreement_line.additional_description)
+                additional = (u" " + agreement_line.additional_description)
+                invoice_line_vals['name'] += additional
             # Put period string
             next_invoice_date = agreement_lines[agreement_line]
             if agreement.period_type == 'pre-paid':
@@ -403,33 +431,15 @@ class Agreement(models.Model):
                 """Method for getting the text in the partner language"""
                 return _('Period: from %s to %s')
 
-            invoice_line['name'] += (
+            invoice_line_vals['name'] += (
                 "\n" + _get_period_text(cr, uid, context=ctx) % (
                     from_date.strftime(lang.date_format),
                     to_date.strftime(lang.date_format)))
-            invoice_lines_vals.append(invoice_line)
+
+            invoice_line_obj.create(cr, uid, invoice_line_vals)
             agreement_lines_ids.append(agreement_line.id)
-        key = (agreement.partner_id.id, agreement.currency_id.id)
-        if (agreement.partner_id.group_agreement_invoices and
-                grouped_invoices.get(key)):
-            invoice_id = grouped_invoices[key]
-            # add lines to the existing invoice
-            for invoice_line_vals in invoice_lines_vals:
-                invoice_line_vals['invoice_id'] = invoice_id
-                invoice_line_obj.create(
-                    cr, uid, invoice_line_vals, context=ctx)
-                # Update origin field
-                invoice = invoice_obj.browse(cr, uid, invoice_id)
-                invoice_obj.write(
-                    cr, uid, invoice_id,
-                    {'origin': invoice.origin + ";" + agreement.number})
-        else:
-            # Add lines to the invoice dictionary
-            invoice_vals['invoice_line'] = [(0, 0, x) for x in
-                                            invoice_lines_vals]
-            invoice_id = invoice_obj.create(cr, uid, invoice_vals, context=ctx)
-            grouped_invoices[key] = invoice_id
-        invoice_obj.button_reset_taxes(cr, uid, invoice_id, context=context)
+
+        invoice.compute_taxes()
         # Update last invoice date for lines
         self.pool['account.periodical_invoicing.agreement.line'].write(
             cr, uid, agreement_lines_ids,

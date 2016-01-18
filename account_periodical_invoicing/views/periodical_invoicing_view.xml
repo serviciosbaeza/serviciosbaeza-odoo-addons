@@ -156,7 +156,8 @@
 
         <!-- Menu items -->
 
-        <menuitem name="Periodical invoicing" parent="account.menu_finance_periodical_processing" id="menu_periodicalinvoicing"/>
+        <menuitem id="menu_finance_periodical_processing" name="Periodic Processing" parent="account.menu_finance" sequence="13" groups="account.group_account_user,account.group_account_manager"/>
+        <menuitem name="Periodical invoicing" parent="menu_finance_periodical_processing" id="menu_periodicalinvoicing"/>
         <menuitem name="Agreements" id="menu_periodicalinvoicing_agreements" parent="menu_periodicalinvoicing" action="action_account_periodical_invoicing_agreement"/>
 
     </data>

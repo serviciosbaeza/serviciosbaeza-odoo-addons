@@ -21,9 +21,9 @@
 
 {
     'name': 'Periodical invoicing',
-    'version': '8.0.1.1.0',
+    'version': '9.0.1.1.0',
     'category': 'Accounting',
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
+    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza,ThinkOpen Solutions',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['account', 'sale'],
     'data': [
@@ -35,5 +35,5 @@
         'views/res_partner_view.xml',
     ],
     'auto_install': False,
-    'installable': False,
+    'installable': True,
 }
