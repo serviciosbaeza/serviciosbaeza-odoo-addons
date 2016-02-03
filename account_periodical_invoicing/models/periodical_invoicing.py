@@ -319,7 +319,8 @@ class Agreement(models.Model):
                     self._invoice_created(
                         agreement, lines_to_invoice, invoice_id)
 
-    def _prepare_invoice(self, cr, uid, agreement, context=None):
+    @api.model
+    def _prepare_invoice(self, agreement):
         invoice_vals = {
             'origin': agreement.number,
             'partner_id': agreement.partner_id.id,
@@ -333,10 +334,13 @@ class Agreement(models.Model):
             'user_id': agreement.partner_id.user_id.id,
         }
         # Get other invoice values from agreement partner
-        invoice_vals.update(self.pool['account.invoice'].onchange_partner_id(
-            cr, uid, [], type=invoice_vals['type'],
-            partner_id=agreement.partner_id.id,
-            company_id=agreement.company_id.id)['value'], context=context)
+        obj = self.env['account.invoice'].with_context(
+            company_id=agreement.company_id.id,
+            force_company=agreement.company_id.id)
+        onchange_vals = obj.onchange_partner_id(
+            type=invoice_vals['type'], partner_id=agreement.partner_id.id,
+            company_id=agreement.company_id.id)
+        invoice_vals.update(onchange_vals['value'])
         return invoice_vals
 
     def create_invoice(self, cr, uid, agreement, agreement_lines,
