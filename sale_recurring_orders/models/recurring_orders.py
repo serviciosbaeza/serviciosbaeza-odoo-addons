@@ -106,8 +106,8 @@ class Agreement(models.Model):
         comodel_name='sale.recurring_orders.agreement.line',
         inverse_name='agreement_id', string='Agreement lines')
     order_line = fields.One2many(
-        comodel_name='sale.recurring_orders.agreement.order', copy=False,
-        inverse_name='agreement_id', string='Order lines', readonly=True)
+        comodel_name='sale.order', copy=False, inverse_name='agreement_id',
+        string='Orders', readonly=True)
     renewal_line = fields.One2many(
         comodel_name='sale.recurring_orders.agreement.renewal', copy=False,
         inverse_name='agreement_id', string='Renewal lines', readonly=True)
@@ -215,6 +215,7 @@ class Agreement(models.Model):
             'state': 'draft',
             'company_id': agreement.company_id.id,
             'from_agreement': True,
+            'agreement_id': agreement.id,
         }
         # Get other order values from agreement partner
         order_vals.update(order_obj.onchange_partner_id(
@@ -272,13 +273,6 @@ class Agreement(models.Model):
         # Update agreement state
         if self.state != 'orders':
             self.write({'state': 'orders'})
-        # Create order agreement record
-        agreement_order_vals = {
-            'agreement_id': self.id,
-            'order_id': order.id,
-        }
-        self.env['sale.recurring_orders.agreement.order'].create(
-            agreement_order_vals)
         return order
 
     @api.multi

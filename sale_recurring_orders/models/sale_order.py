@@ -58,3 +58,6 @@ class SaleOrder(models.Model):
     from_agreement = fields.Boolean(
         string='From agreement?', copy=False,
         help='This field indicates if the sale order comes from an agreement.')
+    agreement_id = fields.Many2one(
+        comodel_name='sale.recurring_orders.agreement',
+        string='Agreement reference', ondelete='restrict')

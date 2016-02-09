@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <!-- Views -->
-        <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_order_tree">
-            <field name="name">sale.recurring_orders.agreement.order.tree</field>
-            <field name="model">sale.recurring_orders.agreement.order</field>
-            <field name="type">tree</field>
-            <field name="priority" eval="6"/>
-            <field name="arch" type="xml">
-                <tree string="Agreement orders">
-                    <button name="view_order" string="View order" type="object" icon="terp-gtk-go-back-rtl"/>
-                    <field name="date"/>
-                    <field name="confirmed"/>
-                    <field name="order_id"/>
-                </tree>
-            </field>
-        </record>
-
         <record model="ir.ui.view" id="view_sale_recurring_orders_agreement_renewal_tree">
             <field name="name">sale.recurring_orders.agreement.renewal.tree</field>
             <field name="model">sale.recurring_orders.agreement.renewal</field>
@@ -109,7 +93,13 @@
                                 </field>
                             </page>
                             <page string="Orders">
-                                <field colspan="4" mode="tree" name="order_line" widget="one2many_list" nolabel="1"/>
+                                <field colspan="4" mode="tree" name="order_line" widget="one2many_list" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="date_order"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Renewals" attrs="{'invisible': [('prolong','!=', 'recurrent')]}">
                                 <field colspan="4" mode="tree" name="renewal_line" widget="one2many_list" nolabel="1"/>

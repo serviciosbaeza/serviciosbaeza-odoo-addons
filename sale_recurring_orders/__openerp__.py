@@ -4,17 +4,21 @@
 
 {
     'name': 'Recurring orders',
-    'version': '1.2',
+    'version': '8.0.2.0.0',
     'category': 'Sales & Purchase',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['sale'],
+    'external_dependencies': {
+        'python': ['openupgradelib'],
+    },
     'data': [
         'security/ir.model.access.csv',
         'data/recurring_orders_data.xml',
         'wizard/renew_wizard_view.xml',
         'views/recurring_orders_view.xml',
         'views/sale_order_view.xml',
+        'views/res_partner_view.xml',
     ],
     "installable": True,
 }
