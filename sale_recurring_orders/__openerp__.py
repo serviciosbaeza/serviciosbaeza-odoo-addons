@@ -9,9 +9,6 @@
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',
     'depends': ['sale'],
-    'external_dependencies': {
-        'python': ['openupgradelib'],
-    },
     'data': [
         'security/ir.model.access.csv',
         'data/recurring_orders_data.xml',
