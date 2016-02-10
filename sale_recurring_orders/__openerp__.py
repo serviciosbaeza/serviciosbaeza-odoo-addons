@@ -4,7 +4,7 @@
 
 {
     'name': 'Recurring orders',
-    'version': '8.0.2.0.0',
+    'version': '8.0.2.0.1',
     'category': 'Sales & Purchase',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
     'website': 'http://www.serviciosbaeza.com',

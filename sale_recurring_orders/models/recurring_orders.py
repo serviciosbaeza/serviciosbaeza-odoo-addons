@@ -380,11 +380,10 @@ class Agreement(models.Model):
     @api.model
     def confirm_current_orders_planned(self):
         orders = self.search([]).mapped('order_line').filtered(
-            lambda x: not x.confirmed and x.date <= fields.Date.today())
+            lambda x: (x.state in ('draft', 'sent') and
+                       x.date_order <= fields.Date.today()))
         for order in orders:
-            workflow.trg_validate(
-                self.env.uid, 'sale.order', order.id, 'order_confirm',
-                self.env.cr)
+            order.signal_workflow('order_confirm')
 
     @api.multi
     def unlink_orders(self, start_date):
