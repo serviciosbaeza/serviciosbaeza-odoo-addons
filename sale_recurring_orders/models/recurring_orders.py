@@ -389,7 +389,8 @@ class Agreement(models.Model):
     def unlink_orders(self, start_date):
         """Remove generated orders from given date."""
         orders = self.mapped('order_line').filtered(
-            lambda x: not x.confirmed and x.date >= start_date)
+            lambda x: (x.state in ('draft', 'sent') and
+                       x.date >= start_date))
         orders.unlink()
 
 
@@ -448,44 +449,6 @@ class AgreementLine(models.Model):
             if product:
                 result['value'] = {'name': product['name']}
         return result
-
-
-# TODO: Impedir que se haga doble clic sobre el registro order
-class AgreementOrder(models.Model):
-    """Class for recording each order created for each line of the agreement.
-    It keeps only reference to the agreement, not to the line.
-    """
-    _name = 'sale.recurring_orders.agreement.order'
-
-    @api.multi
-    def _compute_confirmed(self):
-        for record in self:
-            record.confirmed = record.order_id.state != 'draft'
-
-    agreement_id = fields.Many2one(
-        comodel_name='sale.recurring_orders.agreement',
-        string='Agreement reference', ondelete='cascade')
-    order_id = fields.Many2one(
-        comodel_name='sale.order', string='Order', ondelete='cascade')
-    date = fields.Datetime(
-        related="order_id.date_order", string="Order date", store=False)
-    confirmed = fields.Boolean(compute="_compute_confirmed", store=False)
-
-    @api.multi
-    def view_order(self):
-        """Method for viewing orders associated to an agreement"""
-        self.ensure_one()
-        view = self.env.ref('sale.view_order_form')
-        # Return view with order created
-        return {
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'sale.order',
-            'res_id': self.order_id.id,
-            'view_id': [view.id],
-            'type': 'ir.actions.act_window',
-            'nodestroy': True
-        }
 
 
 class AgreementRenewal(models.Model):
