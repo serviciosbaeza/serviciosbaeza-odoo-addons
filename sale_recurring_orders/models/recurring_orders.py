@@ -237,8 +237,8 @@ class Agreement(models.Model):
         order_line_vals.update(order_line_obj.product_id_change(
             order.pricelist_id.id, product=agreement_line.product_id.id,
             qty=agreement_line.quantity,
-            partner_id=self.partner_id.id,
-            fiscal_position=1 or order.fiscal_position.id)['value'])
+            partner_id=order.partner_id.id,
+            fiscal_position=order.fiscal_position.id)['value'])
         if agreement_line.specific_price:
             order_line_vals['price_unit'] = agreement_line.specific_price
         # Put line taxes
