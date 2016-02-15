@@ -318,12 +318,11 @@ class Agreement(models.Model):
         # Order all pending lines
         dates = lines_to_order.keys()
         dates.sort()
-        agreement_order_obj = self.env['sale.recurring_orders.agreement.order']
         for date in dates:
             # Check if an order exists for that date
-            if not len(agreement_order_obj.search(
-                    [('date', '=', fields.Date.to_string(date)),
-                     ('agreement_id', '=', self['id'])])):
+            order = self.order_line.filtered(
+                lambda x: x.date == fields.Date.to_string(date))
+            if not order:
                 # create it if not exists
                 self.create_order(
                     fields.Date.to_string(date), lines_to_order[date])
