@@ -390,7 +390,7 @@ class Agreement(models.Model):
         """Remove generated orders from given date."""
         orders = self.mapped('order_line').filtered(
             lambda x: (x.state in ('draft', 'sent') and
-                       x.date >= start_date))
+                       x.date_order >= start_date))
         orders.unlink()
 
 
