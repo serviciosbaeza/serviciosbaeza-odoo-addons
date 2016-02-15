@@ -95,6 +95,10 @@
                             <page string="Orders">
                                 <field colspan="4" mode="tree" name="order_line" widget="one2many_list" nolabel="1">
                                     <tree editable="bottom">
+                                        <button name="view_order"
+                                                string="View order"
+                                                type="object"
+                                                icon="terp-gtk-go-back-rtl"/>
                                         <field name="name"/>
                                         <field name="date_order"/>
                                         <field name="state"/>

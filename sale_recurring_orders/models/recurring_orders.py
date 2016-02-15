@@ -2,7 +2,7 @@
 # (c) 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import models, fields, api, exceptions, workflow, _
+from openerp import models, fields, api, exceptions, _
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 import openerp.addons.decimal_precision as dp
@@ -334,23 +334,18 @@ class Agreement(models.Model):
         self.ensure_one()
         # Add only active lines
         agreement_lines = self.mapped('agreement_line').filtered('active_chk')
-        order_id = self.create_order(self.start_date, agreement_lines)
-        # Update agreement state
+        order = self.create_order(self.start_date, agreement_lines)
         self.write({'state': 'first'})
-        # Confirm order
-        workflow.trg_validate(
-            self.env.uid, 'sale.order', order_id, 'order_confirm', self.env.cr)
-        # Get view to show
-        view = self.env.ref('sale.view_order_form')
+        order.signal_workflow('order_confirm')
         # Return view with order created
         return {
-            'domain': "[('id', '=', %s)]" % order_id,
+            'domain': "[('id', '=', %s)]" % order.id,
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'sale.order',
             'context': self.env.context,
-            'res_id': order_id,
-            'view_id': [view.id],
+            'res_id': order.id,
+            'view_id': [self.env.ref('sale.view_order_form').id],
             'type': 'ir.actions.act_window',
             'nodestroy': True
         }
