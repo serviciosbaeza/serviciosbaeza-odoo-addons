@@ -373,9 +373,11 @@ class Agreement(models.Model):
 
     @api.model
     def confirm_current_orders_planned(self):
+        today = fields.Date.today()
+        # Strip the datetime field to get only complete days
         orders = self.search([]).mapped('order_line').filtered(
             lambda x: (x.state in ('draft', 'sent') and
-                       x.date_order <= fields.Date.today()))
+                       x.date_order[:len(today)] <= today))
         for order in orders:
             order.signal_workflow('order_confirm')
 
