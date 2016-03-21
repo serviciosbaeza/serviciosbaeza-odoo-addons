@@ -9,6 +9,11 @@ Project TimeSheet time Control
 This module adds a button at account analytic line level to compute minutes
 lasted from start date to the current moment.
 
+Adds a datetime field that replaces ``date`` field in tree view, and write date
+field with datetime field value.
+
+Adds filters by user and groups by tasks and user.
+
 Also allow open and close tasks from account analytic lines.
 
 

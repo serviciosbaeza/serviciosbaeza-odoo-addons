@@ -55,7 +55,6 @@ class AccountAnalyticLine(models.Model):
     def button_open_task(self):
         stage = self.env['project.task.type'].search(
             [('fold', '=', False)], limit=1)
-        print stage
         self.mapped('task_id').write({'stage_id': stage.id})
 
     @api.multi
