@@ -19,6 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import project_work
+from . import account_analytic_line
 from . import project_task
 from . import project_task_type

@@ -20,16 +20,16 @@
 
 {
     'name': 'Project task works time control',
-    'version': '1.0',
+    'version': '9.0.1.0.0',
     'category': 'Project management',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
               'Antiun Ingeniería S.L.',
     'website': 'http://www.serviciosbaeza.com',
-    'depends': ['project'],
+    'depends': ['project_timesheet'],
     'data': [
         'security/project_security.xml',
-        'view/project_work_view.xml',
         'view/project_task_type_view.xml',
+        'view/account_analytic_line_view.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

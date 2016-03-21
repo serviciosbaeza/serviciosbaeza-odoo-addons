@@ -25,38 +25,48 @@ from openerp import models, fields, api
 from datetime import datetime
 
 
-class ProjectWork(models.Model):
-    _inherit = 'project.task.work'
+class AccountAnalyticLine(models.Model):
+    _inherit = 'account.analytic.line'
 
-    project = fields.Many2one(
-        string='Project', related='task_id.project_id', store=True,
-        domain="[('state', 'not in', ('template', 'cancelled', 'close'))]")
+    date_time = fields.Datetime(default=fields.Datetime.now, string='Date')
     include_in_task_work_view = fields.Boolean(
         related='task_id.stage_id.include_in_task_work_view', readonly=True,
         store=True)
 
-    @api.onchange('project')
-    def onchange_project(self):
-        if not self.project:
+    @api.onchange('account_id')
+    def onchange_account_id(self):
+        if not self.account_id:
             return {'domain': {'task_id': []}}
+        self.task_id = False
+        project = self.env['project.project'].search(
+            [('analytic_account_id', '=', self.account_id.id)], limit=1)
         return {
             'domain': {
-                'task_id': [('project_id', '=', self.project.id),
+                'task_id': [('project_id', '=', project.id),
                             ('include_in_task_work_view', '=', True)]},
         }
 
     @api.onchange('task_id')
     def onchange_task_id(self):
-        if not self.task_id:
-            return {}
-        return {'value': {'project': self.task_id.project_id.id}}
+        if self.task_id:
+            self.account_id = self.task_id.project_id.analytic_account_id.id
+
+    def create(self, vals):
+        if 'date_time' in vals and 'date' not in vals:
+            vals['date'] = fields.Date.from_string(vals['date_time'])
+        return super(AccountAnalyticLine, self).create(vals)
+
+    def write(self, vals):
+        if 'date_time' in vals and 'date' not in vals:
+            vals['date'] = fields.Date.from_string(vals['date_time'])
+        return super(AccountAnalyticLine, self).write(vals)
 
     @api.multi
     def button_end_work(self):
         end_date = datetime.now()
         for work in self:
-            date = fields.Datetime.from_string(work.date)
-            work.hours = (end_date - date).total_seconds() / 3600
+            date = fields.Datetime.from_string(work.date_time)
+            work.unit_amount = (end_date - date).total_seconds() / 3600
         return True
 
     @api.multi
