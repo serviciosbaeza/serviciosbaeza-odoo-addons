@@ -2,7 +2,7 @@
 <openerp>
 <data noupdate="0">
 
-    <record id="task_work_visibility_rule" model="ir.rule">
+    <record id="account_analytic_line_visibility_rule" model="ir.rule">
         <field name="name">Account Analytic Line: employees: public or employee or following or assigned</field>
         <field name="model_id" ref="model_account_analytic_line"/>
         <field name="domain_force">['|',
