@@ -16,5 +16,6 @@
         'security/project_security.xml',
         'view/account_analytic_line_view.xml',
     ],
+    'license': 'AGPL-3',
     'installable': True,
 }
