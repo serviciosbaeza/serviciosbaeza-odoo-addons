@@ -37,9 +37,11 @@ class AccountAnalyticLine(models.Model):
             vals['date'] = fields.Date.from_string(vals['date_time'])
         return vals
 
+    @api.model
     def create(self, vals):
         return super(AccountAnalyticLine, self).create(self.eval_date(vals))
 
+    @api.multi
     def write(self, vals):
         return super(AccountAnalyticLine, self).write(self.eval_date(vals))
 
