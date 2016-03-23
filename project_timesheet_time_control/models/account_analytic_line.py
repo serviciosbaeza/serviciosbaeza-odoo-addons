@@ -48,9 +48,9 @@ class AccountAnalyticLine(models.Model):
     @api.multi
     def button_end_work(self):
         end_date = datetime.now()
-        for work in self:
-            date = fields.Datetime.from_string(work.date_time)
-            work.unit_amount = (end_date - date).total_seconds() / 3600
+        for line in self:
+            date = fields.Datetime.from_string(line.date_time)
+            line.unit_amount = (end_date - date).total_seconds() / 3600
         return True
 
     @api.multi
