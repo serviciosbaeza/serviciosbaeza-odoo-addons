@@ -18,7 +18,8 @@ class AccountAnalyticLine(models.Model):
     def onchange_account_id(self):
         if not self.account_id:
             return {'domain': {'task_id': []}}
-        self.task_id = False
+        if self.task_id.project_id.analytic_account_id != self.account_id:
+            self.task_id = False
         project = self.env['project.project'].search(
             [('analytic_account_id', '=', self.account_id.id)], limit=1)
         return {
