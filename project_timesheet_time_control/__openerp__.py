@@ -14,7 +14,8 @@
     'depends': ['project_timesheet'],
     'data': [
         'security/project_security.xml',
-        'view/account_analytic_line_view.xml',
+        'views/account_analytic_line_view.xml',
+        'views/project_task_view.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,
