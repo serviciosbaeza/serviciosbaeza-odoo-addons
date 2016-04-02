@@ -204,6 +204,14 @@
           <para style="P2">[[ o.planned_hours and (o.planned_hours - o.effective_hours or 0.0) or o.analytic_account_id.remaining_hours ]]</para>
         </td>
       </tr>
+      <tr>
+        <td>
+          <para style="P12a">Expiration date:</para>
+        </td>
+        <td>
+          <para style="P2">[[ formatLang(o.date, date=True)  or '' ]]</para>
+        </td>
+      </tr>
     </blockTable>
     <para style="P12a"></para>
     <para style="P12a"></para>

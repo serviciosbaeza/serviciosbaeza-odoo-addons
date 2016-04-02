@@ -76,3 +76,8 @@ msgstr "Horas totales:"
 msgid "Remaining hours:"
 msgstr "Horas restantes:"
 
+#. module: project_task_work_print
+#: report:project.task.work:0
+msgid "Expiration date:"
+msgstr "Fecha de expiración:"
+
