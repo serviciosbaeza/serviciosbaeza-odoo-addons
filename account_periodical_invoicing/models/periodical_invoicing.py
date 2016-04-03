@@ -69,6 +69,8 @@ class Agreement(models.Model):
             return date - relativedelta(years=interval)
 
     @api.multi
+    @api.depends('prolong', 'prolong_interval', 'prolong_unit', 'end_date', 
+                 'start_date', 'last_renovation_date')
     def _get_next_expiration_date(self):
         """Get next expiration date of the agreement. For unlimited agreements,
         get max date
