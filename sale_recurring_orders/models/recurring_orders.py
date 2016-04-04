@@ -196,11 +196,11 @@ class Agreement(models.Model):
 
     @api.model
     def revise_agreements_expirations_planned(self):
-        """Check each active agreement to see if the end is near."""
-        agreements = self.search(
-            [('next_expiration_date', '<=', fields.Date.today())])
-        # force recalculate next_expiration_date
-        agreements.write({'prolong': 'unlimited'})
+        """Check each active unlimited agreement to see if the end is near."""
+        for agreement in self.search([('prolong', '=', 'unlimited')]):
+            if agreement.next_expiration_date <= fields.Date.today():
+                # force recalculate next_expiration_date
+                agreement.write({'prolong': 'unlimited'})
         return True
 
     @api.model
