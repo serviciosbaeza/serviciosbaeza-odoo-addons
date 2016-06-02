@@ -21,8 +21,9 @@
 ##############################################################################
 {
     "name": "Project task works printing",
-    "version": "8.0.1.0.1",
-    "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    "version": "8.0.1.1.0",
+    "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Tecnativa",
     "category": "Generic Modules/Projects & Services",
     "website": "http://www.serviciosbaeza.com",
     "license": 'AGPL-3',

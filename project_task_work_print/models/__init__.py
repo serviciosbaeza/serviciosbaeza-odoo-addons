@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# (c) 2015 Pedro M. Baeza
-# License AGPL-3 - See LICENSE file on root folder for details
-##############################################################################
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from . import project_project
+from . import project_task

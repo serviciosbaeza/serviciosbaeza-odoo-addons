@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-# (c) 2015 Pedro M. Baeza
-# License AGPL-3 - See LICENSE file on root folder for details
-##############################################################################
+# © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from openerp import models, fields, api
 
 
