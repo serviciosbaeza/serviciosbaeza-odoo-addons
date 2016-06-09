@@ -24,7 +24,7 @@
 
 {
     "name": "Valued picking list",
-    "version": "1.0",
+    "version": "8.0.0.2.0",
     "author": "Serv. Tecnol. Avanzados - Pedro M. Baeza",
     "website": "www.serviciosbaeza.com",
     "category": "Warehouse Management",
@@ -36,6 +36,7 @@
         "sale",
         "delivery",
         "stock_picking_taxes",
+        "web_context_tunnel"
     ],
     "data": [
         'views/res_partner_view.xml',
