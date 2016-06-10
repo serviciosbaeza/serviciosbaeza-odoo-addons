@@ -5,11 +5,19 @@
             <xpath expr="//table[@t-if='not o.pack_operation_ids']//strong[.='Destination']/../.."
                    position="after">
                 <t t-if="o.partner_id.valued_picking">
+                    <th><strong>Unit Price</strong></th>
+                    <th groups="sale.group_discount_per_so_line">
+                        <strong>Discount</strong>
+                    </th>
                     <th><strong>Subtotal</strong></th>
                 </t>
             </xpath>
             <xpath expr="//span[@t-field='move.location_dest_id']/../.." position="after">
                 <t t-if="o.partner_id.valued_picking">
+                    <td><span t-field="move.sale_price_unit" /></td>
+                    <td groups="sale.group_discount_per_so_line">
+                        <span t-field="move.sale_discount" />
+                    </td>
                     <td><span t-field="move.sale_price_subtotal" /></td>
                 </t>
             </xpath>
