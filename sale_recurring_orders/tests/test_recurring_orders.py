@@ -30,6 +30,6 @@ class TestRecurringOrder(common.TransactionCase):
         self.assertEqual(len(self.agreement.order_line), 0)
 
     def test_order_cleanup_change_with_confirmed_and_order_line(self):
-        self.agreement.order_line[0].order_id.action_button_confirm()
+        self.agreement.order_line[0].action_button_confirm()
         self.agreement.prolong_interval = 2
         self.assertEqual(len(self.agreement.order_line), 1)

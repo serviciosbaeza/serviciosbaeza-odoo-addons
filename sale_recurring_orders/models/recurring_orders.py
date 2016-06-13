@@ -157,7 +157,7 @@ class Agreement(models.Model):
     @api.multi
     def write(self, vals):
         value = super(Agreement, self).write(vals)
-        if (any(vals.get(x, []) is not [] for x in
+        if (any(vals.get(x) is not None for x in
                 ['active', 'number', 'agreement_line', 'prolong', 'end_date',
                  'prolong_interval', 'prolong_unit', 'partner_id'])):
             # unlink all future orders
@@ -257,12 +257,10 @@ class Agreement(models.Model):
         @param agreement_lines: Lines that will generate order lines.
         """
         self.ensure_one()
-        order_obj = self.env['sale.order'].with_context(
-            company_id=self.company_id.id)
         order_line_obj = self.env['sale.order.line'].with_context(
             company_id=self.company_id.id)
         order_vals = self._prepare_sale_order_vals(self, date)
-        order = order_obj.create(order_vals)
+        order = self.env['sale.order'].create(order_vals)
         # Create order lines objects
         for agreement_line in agreement_lines:
             order_line_vals = self._prepare_sale_order_line_vals(
@@ -272,7 +270,7 @@ class Agreement(models.Model):
         agreement_lines.write({'last_order_date': fields.Date.today()})
         # Update agreement state
         if self.state != 'orders':
-            self.write({'state': 'orders'})
+            self.state = 'orders'
         return order
 
     @api.multi
@@ -321,7 +319,7 @@ class Agreement(models.Model):
         for date in dates:
             # Check if an order exists for that date
             order = self.order_line.filtered(
-                lambda x: x.date_order == fields.Date.to_string(date))
+                lambda x: x.date_order == fields.Datetime.to_string(date))
             if not order:
                 # create it if not exists
                 self.create_order(
