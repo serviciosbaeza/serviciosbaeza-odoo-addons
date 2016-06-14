@@ -349,9 +349,12 @@ class Agreement(models.Model):
         }
 
     @api.model
-    def generate_next_orders_planned(self, years=1):
+    def generate_next_orders_planned(self, years=1, start_date=None):
         """Launch the order generation of active agreements."""
-        self.search([]).generate_next_orders(years=years)
+        if start_date:
+            start_date = fields.Date.from_string(start_date)
+        self.search([]).generate_next_orders(
+            years=years, start_date=start_date)
 
     @api.multi
     def generate_next_year_orders(self):
