@@ -319,7 +319,10 @@ class Agreement(models.Model):
         for date in dates:
             # Check if an order exists for that date
             order = self.order_line.filtered(
-                lambda x: x.date_order == fields.Datetime.to_string(date))
+                lambda x: (
+                    fields.Date.to_string(
+                        fields.Datetime.from_string(x.date_order)) ==
+                    fields.Date.to_string(date)))
             if not order:
                 # create it if not exists
                 self.create_order(
