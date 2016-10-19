@@ -380,7 +380,7 @@ class Agreement(models.Model):
         tomorrow = fields.Date.to_string(
             fields.Date.from_string(fields.Date.today()) + timedelta(days=1))
         orders = self.env['sale.order'].search([
-            ('aggrement_id', '!=', False),
+            ('agreement_id', '!=', False),
             ('state', 'in', ('draft', 'sent')),
             ('date_order', '<', tomorrow)
         ])
