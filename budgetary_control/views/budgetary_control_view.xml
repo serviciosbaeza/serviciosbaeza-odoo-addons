@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+        <record id="view_budgetary_tree" model="ir.ui.view">
+            <field name="name">budgetary.control.tree</field>
+            <field name="model">budgetary.control</field>
+            <field name="arch" type="xml">
+                <tree string="Budgetary controls">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="total_amount" sum="Total"/>
+                    <field name="total_amount_allocated" sum="Allocated"/>
+                    <field name="company_id"
+                           groups="base.group_multi_company"
+                           widget="selection"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_budgetary_form" model="ir.ui.view">
+            <field name="name">budgetary.control.form</field>
+            <field name="model">budgetary.control</field>
+            <field name="arch" type="xml">
+                <form string="Budgetary control">
+                    <sheet>
+                        <h1 colspan="4">
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                                <field name="company_id"
+                                       groups="base.group_multi_company"
+                                       widget="selection"/>
+                            </group>
+                            <group col="4">
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+                        <field name="lines">
+                            <tree string="Budgetary control" editable="bottom" colors="green: amount_allocated &gt; 0 and amount_allocated &gt; amount; red: amount_allocated &lt; 0 and amount_allocated &lt; amount" >
+                                <field name="analytic_account"/>
+                                <field name="amount" sum="Total"/>
+                                <field name="amount_allocated" sum="Total allocated"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_budgetary" model="ir.actions.act_window">
+            <field name="name">Budgetary control</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budgetary.control</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem action="action_budgetary"
+                  id="menu_budgetary"
+                  parent="account.menu_analytic_accounting"
+                  sequence="20"/>
+
+  </data>
+</openerp>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_budgetary_control_user,access_budgetary_control_user,model_budgetary_control,account.group_account_user,1,0,0,0
+access_budgetary_control_manager,access_budgetary_control_manager,model_budgetary_control,account.group_account_manager,1,1,1,1
+access_budgetary_control_line_user,access_budgetary_control_line_user,model_budgetary_control_line,account.group_account_user,1,0,0,0
+access_budgetary_control_line_manager,access_budgetary_control_line_manager,model_budgetary_control_line,account.group_account_manager,1,1,1,1

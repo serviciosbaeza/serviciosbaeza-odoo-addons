@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* budgetary_control
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-01 07:16+0000\n"
+"PO-Revision-Date: 2014-10-01 07:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: budgetary_control
+#: field:budgetary.control.line,amount:0
+msgid "Amount allowed"
+msgstr "Importe permitido"
+
+#. module: budgetary_control
+#: field:budgetary.control.line,amount_allocated:0
+msgid "Amount allocated"
+msgstr "Importe ya asignado"
+
+#. module: budgetary_control
+#: model:ir.model,name:budgetary_control.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Cuenta analítica"
+
+#. module: budgetary_control
+#: field:budgetary.control.line,analytic_account:0
+msgid "Analytic account"
+msgstr "Cuenta analítica"
+
+#. module: budgetary_control
+#: field:account.analytic.account,analytic_lines:0
+msgid "Analytic lines"
+msgstr "Apuntes analíticos"
+
+#. module: budgetary_control
+#: view:budgetary.control:budgetary_control.view_budgetary_form
+#: model:ir.actions.act_window,name:budgetary_control.action_budgetary
+#: model:ir.ui.menu,name:budgetary_control.menu_budgetary
+msgid "Budgetary control"
+msgstr "Control presupuestario"
+
+#. module: budgetary_control
+#: field:budgetary.control,lines:0
+msgid "Budgetary control lines"
+msgstr "Líneas de control presupuestaria"
+
+#. module: budgetary_control
+#: view:budgetary.control:budgetary_control.view_budgetary_tree
+msgid "Budgetary controls"
+msgstr "Controles presupuestarios"
+
+#. module: budgetary_control
+#: field:budgetary.control,create_uid:0
+#: field:budgetary.control.line,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: budgetary_control
+#: field:budgetary.control,create_date:0
+#: field:budgetary.control.line,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: budgetary_control
+#: field:budgetary.control,date_end:0
+msgid "End date"
+msgstr "Fecha final"
+
+#. module: budgetary_control
+#: field:budgetary.control,id:0
+#: field:budgetary.control.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: budgetary_control
+#: field:budgetary.control,write_uid:0
+#: field:budgetary.control.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: budgetary_control
+#: field:budgetary.control,write_date:0
+#: field:budgetary.control.line,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: budgetary_control
+#: field:budgetary.control,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: budgetary_control
+#: field:budgetary.control.line,budgetary:0
+msgid "Parent budgetary control"
+msgstr "Control presupuestario padre"
+
+#. module: budgetary_control
+#: field:budgetary.control,date_start:0
+msgid "Start date"
+msgstr "Fecha inicial"
+
+#. module: budgetary_control
+#: sql_constraint:budgetary.control.line:0
+msgid "There must be only one line per analytic account"
+msgstr "Sólo debe haber una línea de control por cuenta analítica"
+
+#. module: budgetary_control
+#: field:budgetary.control,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: budgetary_control
+#: field:budgetary.control,currency_id:0
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: budgetary_control
+#: field:budgetary.control,total_amount:0
+msgid "Total amount"
+msgstr "Importe total"
+
+#. module: budgetary_control
+#: field:budgetary.control,total_amount_allocated:0
+msgid "Total amount allocated"
+msgstr "Importe total asignado"
+
+#. module: budgetary_control
+#: field:budgetary.control,user_id:0
+msgid "Responsible"
+msgstr "Responsable"
