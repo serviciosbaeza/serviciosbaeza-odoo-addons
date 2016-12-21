@@ -15,6 +15,7 @@ class TaskTaskWorkReport(report_sxw.rml_parse):
         })
         self.context = context
 
+
 report_sxw.report_sxw(
     'report.project.task.work.task', 'project.task',
     'addons/project_task_work_print/report/task_taskwork_report.rml',

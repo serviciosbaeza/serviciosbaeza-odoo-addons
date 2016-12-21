@@ -36,6 +36,7 @@ class TaskWorkReport(report_sxw.rml_parse):
                 deduced += ((line.unit_amount / factor) * factor_invoicing)
         return {'total': tot, 'deduced': deduced}
 
+
 report_sxw.report_sxw(
     'report.project.task.work', 'project.project',
     'addons/project_task_work_print/report/taskwork_report.rml',
