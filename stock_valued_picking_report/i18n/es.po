@@ -1,19 +1,25 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_valued_picking_report
+# 	* stock_valued_picking_report
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 10:01+0000\n"
-"PO-Revision-Date: 2015-04-20 10:01+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-02-08 08:43+0000\n"
+"PO-Revision-Date: 2017-02-08 09:45+0100\n"
+"Last-Translator: Esther Martín <esthermartin@avanzosc.es>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: stock_valued_picking_report
+#: view:website:stock.report_picking
+msgid "Discount"
+msgstr "Descuento"
 
 #. module: stock_valued_picking_report
 #: model:ir.model,name:stock_valued_picking_report.model_res_partner
@@ -36,6 +42,7 @@ msgid "Subtotal"
 msgstr "Subtotal"
 
 #. module: stock_valued_picking_report
+#: view:stock.picking:stock_valued_picking_report.view_picking_form_valued
 #: view:website:stock.report_picking
 msgid "Taxes"
 msgstr "Impuestos"
@@ -44,6 +51,11 @@ msgstr "Impuestos"
 #: view:website:stock.report_picking
 msgid "Total"
 msgstr "Total"
+
+#. module: stock_valued_picking_report
+#: view:website:stock.report_picking
+msgid "Unit Price"
+msgstr "Precio unidad"
 
 #. module: stock_valued_picking_report
 #: view:website:stock.report_picking

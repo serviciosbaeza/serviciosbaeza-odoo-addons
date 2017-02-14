@@ -22,29 +22,44 @@
                 </t>
             </xpath>
             <xpath expr="//table[@t-if='o.pack_operation_ids']" position="after">
-                <br />
-                <br />
-                <table>
-                    <tr>
-                        <td>Untaxed amount</td>
-                        <td><span t-field="o.amount_untaxed" /></td>
-                    </tr>
-                    <tr>
-                        <td>Taxes</td>
-                        <td><span t-field="o.amount_tax" />
-                            <table>
-                                <tr t-foreach="o.taxes" t-as="tax">
-                                    <td><span t-field="tax.name" /></td>
-                                    <td><span t-field="tax.amount" /></td>
+                <div class="row">
+                    <div class="col-xs-4 pull-right">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td><strong>Untaxed amount</strong></td>
+                                <td class="text-right"><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td class="text-right"><span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+                            </tr>
+                            <tr class="border-black">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right"><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" t-if="o.taxes">
+                    <div class="col-xs-6">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Tax</th>
+                                    <th class="text-right">Base</th>
+                                    <th class="text-right">Amount</th>
                                 </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td><span t-field="o.amount_total" /></td>
-                    </tr>
-                </table>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.taxes" t-as="t">
+                                    <td><span t-field="t.name"/></td>
+                                    <td class="text-right"><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+                                    <td class="text-right"><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </xpath>
         </template>
     </data>
