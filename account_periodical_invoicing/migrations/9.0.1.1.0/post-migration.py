@@ -149,7 +149,7 @@ def _fill_line_data(env):
         SET uom_id = pt.uom_id,
             name = CASE
                 WHEN pd.default_code IS NOT NULL THEN
-                    '[' || pd.default_code || '] ' || pt.name || ' ' || 
+                    '[' || pd.default_code || '] ' || pt.name || ' ' ||
                     aail.additional_description
                 ELSE pt.name || ' ' || aail.additional_description
             END
@@ -191,8 +191,8 @@ def migrate(env, version):
     if openupgrade.table_exists(env.cr, 'account_analytic_invoice_line'):
         env.cr.execute("DROP TABLE account_analytic_invoice_line")
         openupgrade.update_module_names(
-            env.cr,[('account_analytic_analysis',
-                     'account_periodical_invoicing')],
+            env.cr, [('account_analytic_analysis',
+                      'account_periodical_invoicing')],
             merge_modules=True,
         )
     else:
