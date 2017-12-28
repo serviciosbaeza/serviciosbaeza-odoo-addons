@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from openupgradelib import openupgrade
+from openerp import fields
 
 
 _column_copies = {
@@ -27,6 +28,33 @@ _model_renames = [
     ('account.periodical_invoicing.agreement.line',
      'account.analytic.invoice.line'),
 ]
+
+
+def _store_next_invoice_date(env):
+    """On this module, the next invoice date is computed each time, but
+    contract module has a field for that. We precompute it on a column now
+    for having it on SQL operations.
+
+    Made before table rename.
+    """
+    env.cr.execute("ALTER TABLE account_periodical_invoicing_agreement_line "
+                   "ADD recurring_next_date DATE")
+    Agreement = env['account.periodical_invoicing.agreement']
+    lines = env[
+        'account.periodical_invoicing.agreement.line'
+    ].search([])
+    for line in lines:
+        last_invoice_date = fields.Date.from_string(
+            line.last_invoice_date or fields.Date.today()
+        )
+        next_invoice_date = Agreement._get_next_invoice_date(
+            line.agreement_id, line, last_invoice_date,
+        )
+        env.cr.execute(
+            """UPDATE account_periodical_invoicing_agreement_line
+            SET recurring_next_date = %s""",
+            (fields.Date.to_string(next_invoice_date), )
+        )
 
 
 def _create_analytic_account_records(env):
@@ -63,14 +91,15 @@ def _create_analytic_account_records(env):
     query_insert = """
         INSERT INTO account_analytic_account
         (agreement_id, date_start, date_end, code, recurring_invoicing_type,
-         name, recurring_invoices, company_id, account_type)
+         name, recurring_invoices, company_id, partner_id, account_type)
         SELECT id, start_date, end_date, number, period_type, name, True,
-            company_id,
+            company_id, partner_id,
             CASE
                 WHEN active THEN 'normal'
                 ELSE 'closed'
             END
-        FROM account_periodical_invoicing_agreement"""
+        FROM account_periodical_invoicing_agreement
+        WHERE id IN %s"""
     query_split = """
         SELECT aail.id
         FROM account_analytic_invoice_line aail,
@@ -78,6 +107,24 @@ def _create_analytic_account_records(env):
         WHERE (aaa.recurring_rule_type != aail.invoicing_unit
             OR aaa.recurring_interval != aail.invoicing_interval)
             AND aail.analytic_account_id = aaa.id
+            AND aaa.id > %s"""
+    query_update = """
+        UPDATE account_analytic_account aaa
+        SET recurring_interval=sub.invoicing_interval,
+            recurring_rule_type=sub.invoicing_unit,
+            recurring_next_date=sub.recurring_next_date
+        FROM (
+            SELECT invoicing_interval, invoicing_unit, agreement_id,
+                recurring_next_date
+            FROM account_analytic_invoice_line
+            WHERE id IN (
+               SELECT min(id)
+               FROM account_analytic_invoice_line
+               WHERE id IN %s
+               GROUP BY agreement_id
+            )
+        ) AS sub
+        WHERE sub.agreement_id = aaa.agreement_id
             AND aaa.id > %s"""
     env.cr.execute("SELECT id FROM account_analytic_invoice_line")
     to_split_ids = [x[0] for x in env.cr.fetchall()]
@@ -95,10 +142,8 @@ def _create_analytic_account_records(env):
         )
         agreement_ids = [x[0] for x in env.cr.fetchall()]
         openupgrade.logged_query(
-            env.cr, query_insert + " WHERE id IN %s",
-            (tuple(agreement_ids), ),
+            env.cr, query_insert, (tuple(agreement_ids), ),
         )
-        openupgrade.logged_query(env.cr, query_insert, )
         # Assign analytic account to agreement lines
         openupgrade.logged_query(
             env.cr,
@@ -110,22 +155,7 @@ def _create_analytic_account_records(env):
         )
         # Set first line invoicing interval on the contract headers
         openupgrade.logged_query(
-            env.cr, """
-            UPDATE account_analytic_account aaa
-            SET recurring_interval=sub.invoicing_interval,
-                recurring_rule_type=sub.invoicing_unit
-            FROM (
-                SELECT invoicing_interval, invoicing_unit, agreement_id
-                FROM account_analytic_invoice_line
-                WHERE id IN (
-                   SELECT min(id)
-                   FROM account_analytic_invoice_line
-                   WHERE id IN %s
-                   GROUP BY agreement_id
-                )
-            ) AS sub
-            WHERE sub.agreement_id = aaa.agreement_id
-                AND aaa.id > %s""", (tuple(to_split_ids), max_aaa_id, ),
+            env.cr, query_update, (tuple(to_split_ids), max_aaa_id, ),
         )
         # Query again if there's something remaining
         env.cr.execute(query_split, (max_aaa_id,))
@@ -186,6 +216,7 @@ def _invoice_set_contract_reference(env):
 
 @openupgrade.migrate(use_env=True)
 def migrate(env, version):
+    _store_next_invoice_date(env)
     openupgrade.copy_columns(env.cr, _column_copies)
     # This exists in account_analytic_analysis
     if openupgrade.table_exists(env.cr, 'account_analytic_invoice_line'):
